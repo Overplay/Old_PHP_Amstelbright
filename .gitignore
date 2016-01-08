@@ -3,3 +3,4 @@
 !/logs/README.md
 #**/bower_components/
 public/api/**/data/
+*.sh
