@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="optvMainFrameApp">
+<head lang="en">
+  <meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Not needed as long as we don't use websockets -->
+  <!--<script src="/js/dependencies/sails.io.js"></script>-->
+
+  <!--<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>-->
+  <script src="assets/bower_components/angular/angular.js"></script>
+  <script src="assets/bower_components/angular-route/angular-route.js"></script>
+  <script src="assets/bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="assets/bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="assets/bower_components/lodash/lodash.js"></script>
+
+
+  <!-- App Main and AngularJS Routes -->
+  <script src="app/optvMainFrameApp.module.js"></script>
+
+  <script src="../../../../js/optvAPIPHP.js"></script>
+  <script src="app/OPTVOSService/OPTVOSServicePHP.js"></script>
+
+  <!-- Controllers -->
+  <script src="app/MainFrameController/MainFrameController.js"></script>
+  <script src="app/MainFrameController/StartAnim.directive.js"></script>
+
+  <!-- in here in case we need it -->
+
+  <!-- App Specific and Overridden CSS -->
+  <link href="assets/css/styles.css" rel="stylesheet">
+
+  <title>OPTV Amstel Mainframe</title>
+</head>
+
+<body ng-controller="mainFrameController" ng-keypress="keyPressed($event)" id="docbody" ng-click="keyPressed('center')">
+
+<!-- array of launched apps -->
+
+<div class="appholder hide-fade" ng-show="!launcher.show && ui.open">
+    <iframe ng-repeat="appSrc in runningAppSrc" src="{{ appSrc }}"
+            ng-style="runningAppPos[$index]"
+            ng-class="runningApps[$index].appType"></iframe>
+</div>
+
+
+
+<!-- Old version that limited to widgets and crawlers
+<iframe ng-repeat="app in widgetApps" src="{{app.src}}"
+        ng-style="{ 'top': app.currentFrame.top, 'left': app.currentFrame.left,
+      'width': app.currentFrame.width, 'height': app.currentFrame.height }"
+        class="app-iframe hide-fade" ng-show="app.show"></iframe>
+
+<iframe ng-repeat="app in crawlerApps" src="{{app.src}}"
+        ng-style="{ 'top': app.currentFrame.top, 'left': app.currentFrame.left,
+      'width': app.currentFrame.width, 'height': app.currentFrame.height }"
+        class="app-iframe hide-fade" ng-show="app.show"></iframe>
+-->
+<!-- Launcher -->
+
+
+<iframe src="{{launcher.app.src}}"
+        class="launcher-iframe" ng-class="{'launcher-offscreen': !launcher.show}" ng-show="ui.open"></iframe>
+
+<div class="debugbox" ng-show="ui.debug">{{os.windowDimension.text}}
+  <!-- <div class="hdmessage">1080p</div> -->
+  <!--<br><button ng-click="buttonPushed('down')">DOWN V</button>-->
+</div>
+
+<div class="popup" ng-class="{ 'outright': ui.hidemax }" ng-show="ui.open">
+    <img src="assets/img/max.gif"/>
+    <h2>John Z: Your Order's Up!</h2>
+</div>
+
+<!-- flickers bad on POS Chumby hardware -->
+<!-- <start-animation ui="ui"></start-animation> -->
+</body>
+</html>
