@@ -128,7 +128,40 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
 
     service.getApps = function () {
 
-        return $http.get( apiPath + '/api/v1/overplayos/index.php?command=running');
+        return $http.get( apiPath + '/api/v1/overplayos/index.php?command=screenmap')
+            .then( function(data){
+
+                var sm = data.data;
+                var rval = [];
+
+                sm.widgetAppMap.forEach( function(wa, slot){
+                    wa['location'] = service.getWidgetTopLeftForSlot(slot);
+                    wa['src'] = pathFor(wa.reverseDomainName);
+                    rval.push(wa);
+                });
+
+                sm.crawlerAppMap.forEach( function ( ca, slot ) {
+                    ca[ 'location' ] = service.getCrawlerTopLeftForSlot( slot );
+                    ca[ 'src' ] = pathFor( ca.reverseDomainName );
+                    rval.push( ca );
+                } );
+
+                sm.fullScreenAppMap.forEach( function ( fa ) {
+                    fa[ 'location' ] = { top: 0, left: 0 };
+                    fa[ 'src' ] = pathFor( fa.reverseDomainName );
+                    rval.push( fa );
+                } );
+
+                return rval;
+
+            })
+
+    }
+
+    //This was used when more shit was done on the server side
+    service.getAppsPreChewed = function () {
+
+        return $http.get( apiPath + '/api/v1/overplayos/index.php?command=running' );
 
     }
 
@@ -192,7 +225,7 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
         switch ( slot ) {
 
             case 0:
-                rval.top = Math.floor( .89 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.top = Math.floor( .79 * service.windowDimension.height ) + nudge.top + 'px';
                 break;
 
             case 1:

@@ -2,5 +2,5 @@
 /logs/*
 !/logs/README.md
 #**/bower_components/
-public/api/**/data/
+public/api/**/data/*.json
 *.sh

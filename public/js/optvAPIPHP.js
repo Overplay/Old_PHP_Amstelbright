@@ -288,7 +288,7 @@ angular.module( 'ngOpTVApi', [] )
 
             //Passing nothing moves the app this API service is attached to
             appid = appid || _appName;
-            return $http.post( apiPath +'/api/v1/overplayos/index.php?command=kill?appid=' + appid );
+            return $http.post( apiPath +'/api/v1/overplayos/index.php?command=kill&appid=' + appid );
 
         };
 

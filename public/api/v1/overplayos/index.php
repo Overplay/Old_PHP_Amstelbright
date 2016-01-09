@@ -8,27 +8,6 @@ require('../shared/shared.php');
 require('../shared/messaging.php');
 require('../shared/apps.php');
 
-function signalAppLaunch($app) {
-
-    //Not sure we really need to signal to mainframe that an app launch happened, a "layout" message should be enough
-    postAppMessage('io.overplay.overplayos','io.overplay.mainframe', array('launch'=>$app));
-    signalLayoutChange();
-
-}
-
-function signalLayoutChange()
-{
-    postAppMessage('io.overplay.overplayos', 'io.overplay.mainframe', array("layout"=>true));
-}
-
-/******************************************************/
-
-function moveApp($appid){
-
-    $runningApps = loadJSON('runningApps', array());
-    return 3;
-}
-
 
 /******************************************************/
 
@@ -59,22 +38,48 @@ if (isset($_REQUEST['command'])) {
             break;
 
         case 'screenmap':
+            header('Content-Type: application/json');
+            echo json_encode(screenMap());
+
             break;
 
         case 'running':
+            header('Content-Type: application/json');
+            echo json_encode(runningApps());
             break;
+
+        case 'kill':
+
+            if (isPOST() && isset($_REQUEST['appid'])) {
+
+                $kill = killApp($_REQUEST['appid']);
+
+                if ($kill["success"]) {
+                    jsonOut(json_encode(array("killed" => $_REQUEST['appid'])));
+                } else {
+                    badReq($kill["msg"]);
+                }
+            } else {
+                badReq('Wrong verb or no appid');
+            }
+
+            break;
+
 
         case 'launch':
 
             if (isPOST() && isset($_REQUEST['appid'])) {
 
-                if (runApp($_REQUEST['appid']) )
+                signalAppLaunch($_REQUEST['appid']);
+
+                $launch = runApp($_REQUEST['appid']);
+
+                if ($launch["success"] )
                 {
-                    signalAppLaunch($_REQUEST['appid']);
                     jsonOut(json_encode(array("launch" => $_REQUEST['appid'])));
                 }
                 else {
-                    badReq('App already running!');
+                    badReq($launch["msg"]);
                 }
             } else {
                 badReq('Wrong verb or no appid');

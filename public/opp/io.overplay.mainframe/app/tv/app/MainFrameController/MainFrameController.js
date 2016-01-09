@@ -109,8 +109,8 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
 
          function mergeApps(inboundData){
 
-            $scope.runningAppSrc = _.pluck(inboundData.data, 'src');
-            $scope.runningAppPos = _.pluck(inboundData.data, 'location');
+            $scope.runningAppSrc = _.pluck(inboundData, 'src');
+            $scope.runningAppPos = _.pluck(inboundData, 'location');
 
          }
 
@@ -125,7 +125,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
                 $log.info( logLead + "received LAYOUT message" );
                 osService.getApps()
                     .then( function ( data ) {
-                        $scope.runningApps = data.data;
+                        $scope.runningApps = data;
                         mergeApps(data);
                     }, function ( err ) {
                         $log.error( logLead + " error fetching AppMap. Error: "+ angular.toJson(err) );
