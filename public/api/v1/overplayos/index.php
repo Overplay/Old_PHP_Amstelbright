@@ -92,9 +92,9 @@ if (isset($_REQUEST['command'])) {
 
             if ( isPOST() && isset($_REQUEST['appid']))
             {
-                $newSlot = moveApp($_REQUEST['appid']);
+                $res = moveApp($_REQUEST['appid']);
                 header('Content-Type: application/json');
-                echo json_encode(array("slot" => $newSlot));
+                echo json_encode($res);
             } else
             {
                 badReq('Wrong verb or no appid');

@@ -15,7 +15,7 @@ angular.module( 'ngOpTVApi', [] )
     .factory( 'optvModel', function ( $http, $log, $interval, $rootScope, $q, $timeout ) {
 
         //For HTTP version
-        var POLL_INTERVAL_MS = 100;
+        var POLL_INTERVAL_MS = 500;
         var DEFAULT_METHOD = 'http';
         //var apiPath = '/overplay/amstelbright/public';
 
@@ -264,7 +264,7 @@ angular.module( 'ngOpTVApi', [] )
 
             //Passing nothing moves the app this API service is attached to
             appid = appid || _appName;
-            return $http.post( apiPath +'/api/v1/overplayos/index.php?command=move?appid=' + appid );
+            return $http.post( apiPath +'/api/v1/overplayos/index.php?command=move&appid=' + appid );
 
         };
 

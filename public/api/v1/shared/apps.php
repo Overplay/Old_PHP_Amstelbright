@@ -25,9 +25,61 @@ function signalLayoutChange()
 
 function moveApp($appid)
 {
+    $ra = loadJSON("runningApps", array());
 
-    $runningApps = loadJSON('runningApps', array());
-    return 3;
+    // Puke if not already running
+    if (!array_key_exists($appid, $ra)) {
+        return array("success" => false, "msg" => "No such app running");
+    }
+
+    $tomove = $ra[$appid];
+    $currentSlot = 0;
+
+    $sm = screenMap();
+
+    switch ($tomove['appType']){
+
+
+        case 'widget':
+            //find the app
+            for ($idx=0; $idx<4; $idx++){
+                if ($sm['widgetAppMap'][$idx]["reverseDomainName"]==$appid){
+                    //Null out the original slot
+                    $sm['widgetAppMap'][$idx] = null;
+                    $currentSlot = $idx;
+                    break;
+                }
+            }
+
+            //We've nulled the original slot, now lets find a new home.
+            // 0 start at 1 wrap back to 0
+            // 1 start at 2 wrap back to 1
+
+            $idx = ($currentSlot+1) % 4;
+            while ($idx!=$currentSlot){
+                if ( $sm['widgetAppMap'][$idx] == null ){
+                    $sm['widgetAppMap'][$idx] = $tomove;
+                    break;
+                }
+                $idx = ($idx+1)%4;
+            }
+            break;
+
+        case 'crawler':
+
+            $top = $sm['crawlerAppMap'][0];
+            $bottom = $sm['crawlerAppMap'][1];
+            $sm['crawlerAppMap'][0] = $bottom;
+            $sm['crawlerAppMap'][1] = $top;
+            break;
+
+
+    }
+
+    saveJSON("screenMap", $sm);
+    signalLayoutChange();
+    return array("success" => true, "msg" => "Moved or no way to move");
+
 }
 
 
@@ -96,26 +148,27 @@ function killApp($appid)
 
     foreach ($sm['widgetAppMap'] as $key=>$value){
         if ( $value['reverseDomainName']==$appid) {
-            unset($sm['widgetAppMap'][$key]);
+            $sm['widgetAppMap'][$key]=null;
             break;
         }
     }
 
     foreach ($sm['crawlerAppMap'] as $key => $value) {
         if ($value['reverseDomainName'] == $appid) {
-            unset($sm['crawlerAppMap'][$key]);
+            $sm['crawlerAppMap'][$key] = null;
             break;
         }
     }
 
     foreach ($sm['fullScreenAppMap'] as $key => $value) {
         if ($value['reverseDomainName'] == $appid) {
-            unset($sm['fullScreenAppMap'][$key]);
+            $sm['fullScreenAppMap'][$key] = null;
             break;
         }
     }
 
     saveJSON("screenMap", $sm);
+    signalLayoutChange();
     return array("success" => true, "msg" => "Killed sum shit");
 
 
@@ -145,9 +198,9 @@ function appsByState()
 function screenMap()
 {
 
-    $sm = loadJSON("screenMap", array("widgetAppMap" => array(),
-        "crawlerAppMap" => array(),
-        "fullScreenAppMap" => array()));
+    $sm = loadJSON("screenMap", array("widgetAppMap" => array(null,null,null,null),
+        "crawlerAppMap" => array(null, null),
+        "fullScreenAppMap" => array(null)));
 
     return $sm;
 
@@ -177,26 +230,30 @@ function placeAppOnDisplay($app)
 
         case 'widget':
 
-            array_push($sm['widgetAppMap'], $app);
-            if ( count($sm['widgetAppMap']) > 5 ){
-                $sm['widgetAppMap'] = array_slice($sm['widgetAppMap'], 1, 4);
+
+            for ($idx=0; $idx<4; $idx++){
+                if ($sm['widgetAppMap'][$idx]==null){
+                    $sm['widgetAppMap'][$idx] = $app;
+                    saveJSON("screenMap", $sm);
+                    return 1;
+                }
             }
 
-            saveJSON("screenMap", $sm);
-            return count($sm['widgetAppMap']) - 1;
+            return -1;
 
             break;
 
         case 'crawler':
 
-            array_push($sm['crawlerAppMap'], $app);
-            if (count($sm['crawlerAppMap']) > 2) {
-                $sm['crawlerAppMap'] = array_slice($sm['crawlerAppMap'], 1, 2);
+            for ($idx = 0; $idx < 2; $idx++) {
+                if ($sm['crawlerAppMap'][$idx] == null) {
+                    $sm['crawlerAppMap'][$idx] = $app;
+                    saveJSON("screenMap", $sm);
+                    return 1;
+                }
             }
 
-            saveJSON("screenMap", $sm);
-
-            return count($sm['crawlerAppMap']) - 1;
+            return -1;
 
             break;
 

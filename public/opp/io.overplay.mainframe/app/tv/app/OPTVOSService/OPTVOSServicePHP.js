@@ -19,7 +19,7 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
     var service = {};
     $log.debug( "Loading osService" );
 
-    service.name        = "osService";
+    service.name = "osService";
     service.appRootPath = "/opp/"; //must have trailing slash
     service.runningApps = [];
 
@@ -54,7 +54,7 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
         return $http.get( apiPath + '/api/v1/apps?command=getlauncher' )
             .then( function ( data ) {
                 var app = data.data;
-                app[ 'src' ] = apiPath+service.appRootPath + app.reverseDomainName + '/app/tv/index.html';
+                app[ 'src' ] = apiPath + service.appRootPath + app.reverseDomainName + '/app/tv/index.html';
                 return app
             } );
     };
@@ -87,7 +87,7 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
         }
 
         for ( var slot = 0; slot < 4; slot++ ) {
-            var app      = map.widgetAppMap[ slot ];
+            var app = map.widgetAppMap[ slot ];
             var location = service.getWidgetTopLeftForSlot( slot, app.nudge );
             if ( app.src != '' )
                 service.runningApps.push( {
@@ -99,7 +99,7 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
         }
 
         for ( var cslot = 0; cslot < 2; cslot++ ) {
-            var capp      = map.crawlerAppMap[ cslot ];
+            var capp = map.crawlerAppMap[ cslot ];
             var clocation = service.getCrawlerTopLeftForSlot( cslot, capp.nudge );
             if ( capp.src != '' )
                 service.runningApps.push( {
@@ -108,7 +108,6 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
                     type: capp.appType
                 } );
         }
-
 
 
         return service.runningApps;
@@ -128,33 +127,42 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
 
     service.getApps = function () {
 
-        return $http.get( apiPath + '/api/v1/overplayos/index.php?command=screenmap')
-            .then( function(data){
+        return $http.get( apiPath + '/api/v1/overplayos/index.php?command=screenmap' )
+            .then( function ( data ) {
 
                 var sm = data.data;
                 var rval = [];
 
-                sm.widgetAppMap.forEach( function(wa, slot){
-                    wa['location'] = service.getWidgetTopLeftForSlot(slot);
-                    wa['src'] = pathFor(wa.reverseDomainName);
-                    rval.push(wa);
-                });
+                sm.widgetAppMap.forEach( function ( wa, slot ) {
+                    if ( wa ) {
+                        wa[ 'location' ] = service.getWidgetTopLeftForSlot( slot );
+                        wa[ 'src' ] = pathFor( wa.reverseDomainName );
+                        rval.push( wa );
+                    }
+
+                } );
 
                 sm.crawlerAppMap.forEach( function ( ca, slot ) {
-                    ca[ 'location' ] = service.getCrawlerTopLeftForSlot( slot );
-                    ca[ 'src' ] = pathFor( ca.reverseDomainName );
-                    rval.push( ca );
+                    if ( ca ) {
+                        ca[ 'location' ] = service.getCrawlerTopLeftForSlot( slot );
+                        ca[ 'src' ] = pathFor( ca.reverseDomainName );
+                        rval.push( ca );
+                    }
+
                 } );
 
                 sm.fullScreenAppMap.forEach( function ( fa ) {
-                    fa[ 'location' ] = { top: 0, left: 0 };
-                    fa[ 'src' ] = pathFor( fa.reverseDomainName );
-                    rval.push( fa );
+                    if ( fa ) {
+                        fa[ 'location' ] = { top: 0, left: 0 };
+                        fa[ 'src' ] = pathFor( fa.reverseDomainName );
+                        rval.push( fa );
+                    }
+
                 } );
 
                 return rval;
 
-            })
+            } )
 
     }
 
@@ -182,28 +190,28 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
     service.getWidgetTopLeftForSlot = function ( slot, nudge ) {
 
         var rval = { top: 0, left: 0 };
-        nudge    = nudge || { top: 0, left: 0 };
+        nudge = nudge || { top: 0, left: 0 };
 
         //Left as switch vs. something more compact in case we add more zones
         switch ( slot ) {
 
             case 0:
-                rval.top  = Math.floor( .05 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.top = Math.floor( .05 * service.windowDimension.height ) + nudge.top + 'px';
                 rval.left = Math.floor( .03 * service.windowDimension.width ) + nudge.left + 'px';
                 break;
 
             case 1:
-                rval.top  = Math.floor( .05 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.top = Math.floor( .05 * service.windowDimension.height ) + nudge.top + 'px';
                 rval.left = Math.floor( .85 * service.windowDimension.width ) + nudge.left + 'px';
                 break;
 
             case 2:
-                rval.top  = Math.floor( .6 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.top = Math.floor( .6 * service.windowDimension.height ) + nudge.top + 'px';
                 rval.left = Math.floor( .85 * service.windowDimension.width ) + nudge.left + 'px';
                 break;
 
             case 3:
-                rval.top  = Math.floor( .6 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.top = Math.floor( .6 * service.windowDimension.height ) + nudge.top + 'px';
                 rval.left = Math.floor( .03 * service.windowDimension.width ) + nudge.left + 'px';
                 break;
 
@@ -217,7 +225,7 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
         var rval = { top: 0, left: 0 };
 
         widthPct = widthPct || 100;
-        nudge    = nudge || { top: 0, left: 0 };
+        nudge = nudge || { top: 0, left: 0 };
 
         //center frame
         rval.left = Math.floor( service.windowDimension.width - service.windowDimension.width * (widthPct / 100) ) / 2 + 'px';
@@ -225,7 +233,7 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
         switch ( slot ) {
 
             case 0:
-                rval.top = Math.floor( .79 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.top = Math.floor( .83 * service.windowDimension.height ) + nudge.top + 'px';
                 break;
 
             case 1:

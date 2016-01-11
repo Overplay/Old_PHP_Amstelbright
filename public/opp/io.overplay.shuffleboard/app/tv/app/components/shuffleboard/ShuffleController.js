@@ -60,7 +60,7 @@ app.controller("shuffleController",
                    function updateFromRemote() {
 
                        optvModel.init({
-                           appName: "io.overplay.shuffleboard",
+                           appName: "io.overplay.shuffleboard.tv",
                            dataCallback: modelUpdate,
                            messageCallback: inboundMessage,
                            initialValue: {red: 0, blue: 0, toTV: undefined},

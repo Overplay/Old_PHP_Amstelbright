@@ -49,6 +49,14 @@ if (isset($_REQUEST['command'])) {
             echo json_encode($msg);
             break;
 
+        case 'null':
+
+            $ar = array();
+            array_push($ar, null);
+            array_push($ar, "alpha");
+            array_push($ar, null);
+            array_push($ar, "beta");
+            jsonOut(json_encode($ar));
 
     }
 
