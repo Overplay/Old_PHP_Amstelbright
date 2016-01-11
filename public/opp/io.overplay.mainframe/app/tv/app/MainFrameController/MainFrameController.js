@@ -27,7 +27,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         $scope.runningAppSrc = [];
         $scope.runningAppPos = [];
 
-        $scope.ui = { hidemax: true, open: false, debug: false, fauxTV: false };
+        $scope.ui = { hidemax: true, open: false, debug: false, fauxTV: true };
 
         $interval( function(){
             $scope.ui.hidemax = false;
