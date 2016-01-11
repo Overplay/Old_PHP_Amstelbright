@@ -27,7 +27,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         $scope.runningAppSrc = [];
         $scope.runningAppPos = [];
 
-        $scope.ui = { hidemax: true, open: false, debug: false };
+        $scope.ui = { hidemax: true, open: false, debug: false, fauxTV: false };
 
         $interval( function(){
             $scope.ui.hidemax = false;
@@ -170,6 +170,18 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
 
                     case 'toggle':
                         $scope.ui.debug = !$scope.ui.debug;
+                        break;
+
+                }
+            }
+
+            //Show FauxTV
+            if ( m.message && m.message.fauxtv ) {
+
+                switch ( m.message.fauxtv ) {
+
+                    case 'toggle':
+                        $scope.ui.fauxTV = !$scope.ui.fauxTV;
                         break;
 
                 }

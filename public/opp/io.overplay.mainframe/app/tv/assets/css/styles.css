@@ -22,6 +22,14 @@ body {
 
 }
 
+
+.faux-tv {
+
+    width: 1920px;
+    height: 1080px;
+
+}
+
 .widget {
     position: fixed;
     border: 0;

@@ -47,6 +47,10 @@ app.controller( "mfConController",
             optvModel.postMessage( { to: "io.overplay.mainframe.tv", data: { debug: 'toggle' } } );
         }
 
+        $scope.fauxtv = function () {
+            optvModel.postMessage( { to: "io.overplay.mainframe.tv", data: { fauxtv: 'toggle' } } );
+        }
+
         $scope.cellAction = function ( action ) {
 
             $log.info( angular.toJson( action ) );
