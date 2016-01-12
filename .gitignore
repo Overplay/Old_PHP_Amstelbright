@@ -4,4 +4,4 @@
 #**/bower_components/
 public/api/**/data/*.json
 *.sh
-vids/
+vids/soccer.mp4
