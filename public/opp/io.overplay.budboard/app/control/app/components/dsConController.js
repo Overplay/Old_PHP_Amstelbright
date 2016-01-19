@@ -26,7 +26,8 @@ app.controller( "dsConController",
         function initialize() {
 
             optvModel.init( {
-                appName:         "io.overplay.budboard.control",
+                appName:         "io.overplay.budboard",
+                endpoint:        "control",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage
             } );

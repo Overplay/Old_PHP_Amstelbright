@@ -29,12 +29,12 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
 
         $scope.ui = { hidemax: true, open: false, debug: false, fauxTV: true };
 
-        $interval( function(){
+        $interval( function () {
             $scope.ui.hidemax = false;
-            $timeout( function(){
+            $timeout( function () {
                 $scope.ui.hidemax = true;
-            }, 3000);
-            }, 45000);
+            }, 3000 );
+        }, 45000 );
 
         var logLead = "MFController: ";
 
@@ -59,7 +59,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
 
         }
 
-        function showApps( shouldShow ){
+        function showApps( shouldShow ) {
 
             $scope.launcher.show = !shouldShow;
 
@@ -107,12 +107,12 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
          { "to":"io.overplay.mainframe", "from":"io.overplay.shuffleboard", "data":{ "move": { "spot" : "tl" }}}
          */
 
-         function mergeApps(inboundData){
+        function mergeApps( inboundData ) {
 
-            $scope.runningAppSrc = _.pluck(inboundData, 'src');
-            $scope.runningAppPos = _.pluck(inboundData, 'location');
+            $scope.runningAppSrc = _.pluck( inboundData, 'src' );
+            $scope.runningAppPos = _.pluck( inboundData, 'location' );
 
-         }
+        }
 
         function inboundMessageMain( m ) {
 
@@ -126,9 +126,9 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
                 osService.getApps()
                     .then( function ( data ) {
                         $scope.runningApps = data;
-                        mergeApps(data);
+                        mergeApps( data );
                     }, function ( err ) {
-                        $log.error( logLead + " error fetching AppMap. Error: "+ angular.toJson(err) );
+                        $log.error( logLead + " error fetching AppMap. Error: " + angular.toJson( err ) );
                     } );
 
                 //Give the app picker some time to hide
@@ -214,13 +214,14 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         }
 
         optvModel.init( {
-            appName:         "io.overplay.mainframe.tv",
+            appName:         "io.overplay.mainframe",
+            endpoint:        "tv",
             messageCallback: inboundMessageMain
         } );
 
         function setLauncher( app ) {
             $scope.launcher.app = app;
-            showAppPicker(true);
+            showAppPicker( true );
         }
 
         //CATCH specifically not used for older JS
@@ -231,7 +232,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
             } );
 
 
-        $timeout(function(){ $scope.ui.open = true; }, 3000);
+        $timeout( function () { $scope.ui.open = true; }, 3000 );
     }
 )
 ;

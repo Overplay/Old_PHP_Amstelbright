@@ -11,7 +11,9 @@ app.controller( "mfConController",
 
 
         optvModel.init( {
-            appName: "io.overplay.mainframe.control"
+            appName: "io.overplay.mainframe",
+            endpoint: "control"
+
         } );
 
 

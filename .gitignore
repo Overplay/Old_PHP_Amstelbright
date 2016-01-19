@@ -1,7 +1,9 @@
 /vendor/
 /logs/*
 !/logs/README.md
+# Normally you would exclude bower_components, but this way chumby will sync automatically
+# since we cannot install bower on Chumby (can't run node).
 #**/bower_components/
 public/api/**/data/*.json
 *.sh
-vids/soccer.mp4
+/public/vids/*.mp4

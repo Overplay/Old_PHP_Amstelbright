@@ -7,9 +7,9 @@ app.controller( "scrollerController",
 
         console.log( "Loading scrollerController" );
 
-        $scope.messageArray = [ "Budweiser Message Board",
-                "Change messages in Control App!",
-                "Enjoy Responsibly" ];
+        $scope.messageArray = [ "Budweiser Board",
+            "Change messages in Control App!",
+            "Enjoy Responsibly" ];
 
         function logLead() { return "scrollerController: "; }
 
@@ -33,7 +33,8 @@ app.controller( "scrollerController",
         function updateFromRemote() {
 
             optvModel.init( {
-                appName:         "io.overplay.budboard.tv",
+                appName:         "io.overplay.budboard",
+                endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,
                 initialValue:    { messages: $scope.messageArray }

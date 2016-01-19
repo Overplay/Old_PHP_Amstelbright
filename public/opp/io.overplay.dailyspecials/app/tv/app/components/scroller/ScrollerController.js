@@ -36,7 +36,8 @@ app.controller( "scrollerController",
         function updateFromRemote() {
 
             optvModel.init( {
-                appName:         "io.overplay.dailyspecials.tv",
+                appName:         "io.overplay.dailyspecials",
+                endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,
                 initialValue:    { messages: $scope.messageArray }
@@ -115,7 +116,7 @@ app.directive( 'cssScroller', [
 
                         //$log.info( "NEXT MESSAGE: " + scope.message.text + " width: " + messageWidth );
 
-                        leftPixel = $window.innerWidth+20;
+                        leftPixel = $window.innerWidth + 20;
                         setLeftPos();
                         $timeout( scroll, 10 );
                     }
@@ -128,7 +129,7 @@ app.directive( 'cssScroller', [
                             nextMsg();
 
                         } else {
-                            $timeout( scroll, 1000/FPS );
+                            $timeout( scroll, 1000 / FPS );
 
                         }
                     }

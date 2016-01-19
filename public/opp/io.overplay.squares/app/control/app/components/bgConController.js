@@ -25,6 +25,7 @@ app.controller( "bgConController",
 
             optvModel.init( {
                 appName:         "io.overplay.squares",
+                endpoint:        "control",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage
             } );

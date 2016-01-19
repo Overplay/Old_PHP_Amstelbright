@@ -17,6 +17,8 @@ require('../shared/shared.php');
 require('../shared/messaging.php');
 
 
+/*  MAIN ENTRY */
+
 $entityBody = file_get_contents('php://input');
 
 if (isPOST() || isPUT()) {
@@ -24,10 +26,10 @@ if (isPOST() || isPUT()) {
         //TODO reject if the format is wrong (no dest, etc.)cd
         $msg = json_decode($entityBody, true);
         $dest = $msg['dest'];
-        $from = $msg['from'];
+        $src = $msg['src'];
         $data = $msg['messageData'];
 
-        postAppMessage($from, $dest, $data);
+        postAppMessage($src, $dest, $data);
         echo $entityBody;
 
 

@@ -25,14 +25,15 @@ app.controller( "slideshowController",
 
 
         optvModel.init( {
-            appName:         "io.overplay.slideshow",
+            appName:  "io.overplay.slideshow",
+            endpoint: "tv",
             dataCallback:    modelUpdate,
             messageCallback: inboundMessage
         } );
 
         function nextSlide() {
-            $scope.slide = "assets/img/"+slides[++sidx%slides.length];
-            $timeout(nextSlide, 2000);
+            $scope.slide = "assets/img/" + slides[ ++sidx % slides.length ];
+            $timeout( nextSlide, 2000 );
         }
 
         nextSlide();

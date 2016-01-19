@@ -60,16 +60,13 @@ angular.module( 'ngOpTVApi', [] )
 
             service.model = _initialValue;
 
-            //Don't post up an undefined. We are probably in an app that doesn't set defaults.
-            if ( !_initialValue )
-                return;
-
-            $http.post( apiPath+ '/api/v1/appdata/index.php?appid', _initialValue )
+            $http.post( apiPath + '/api/v1/appdata/index.php?appid=' + _appName, _initialValue )
                 .then( function ( data ) {
                     $log.debug( logLead() + " initial value POSTed via HTTP." )
+                    startDataPolling();
                 },
                 function ( err ) {
-                    $log.debug( logLead() + " initial value POSTed via HTTP FAILED!!!!" )
+                    $log.error( logLead() + " initial value POSTed via HTTP FAILED!!!! [FATAL]" )
                 } );
 
         }
@@ -84,17 +81,33 @@ angular.module( 'ngOpTVApi', [] )
 
             function updateIfNewer( data ) {
 
-                //$log.info( logLead() + " Checking if inbound data is newer" );
-                //TODO this isn't work right on chumby
+                //Not checking time right now, just always updating. At 500ms per not much perf
+                //hit, I hope.
 
-                var mtime = new Date( parseInt(data.lastUpdated) );
-                var newer = mtime > _this.lastUpdated;
-
-                if ( newer ) {
-                    _this.lastUpdated = mtime;
-                    service.model = data.data.data;
+                //_this.lastUpdated = mtime;
+                if (! _.isEqual( service.model, data.payload ) ) {
+                    service.model = data.payload;
                     _dataCb( service.model );
                 }
+
+
+                /*
+
+                 //$log.info( logLead() + " Checking if inbound data is newer" );
+                 //TODO this isn't work right on chumby
+
+                 var mtime = new Date( parseInt(data.lastUpdated) );
+                 var newer = mtime > _this.lastUpdated;
+
+                 //TODO: This is a bit gross. The undefined check is because initial data isn't set right when the
+                 //app doesn't bother to set it.
+                 if ( newer || data.lastUpdated===undefined ) {
+                 _this.lastUpdated = mtime;
+                 service.model = data.payload;
+                 _dataCb( service.model );
+                 }
+
+                 */
 
             }
 
@@ -103,7 +116,7 @@ angular.module( 'ngOpTVApi', [] )
 
                 $timeout( function () {
 
-                    $http.get( apiPath +'/api/v1/appdata/index.php?appid=' + _appName )
+                    $http.get( apiPath + '/api/v1/appdata/index.php?appid=' + _appName )
                         .then( function ( data ) {
                             updateIfNewer( data.data );
                             if ( _this.running ) _this.poll();
@@ -127,21 +140,12 @@ angular.module( 'ngOpTVApi', [] )
 
             var _this = this;
 
-            function updateIfNewer( data ) {
-
-                if ( new Date( data.lastUpdated ) > _this.lastUpdated ) {
-                    service.model = data.data;
-                    _dataCb( service.model );
-                }
-
-            }
-
             this.poll = function () {
 
                 $timeout( function () {
 
 
-                    $http.get( apiPath +'/api/v1/appmessage/index.php?appid=' + _appName )
+                    $http.get( apiPath + '/api/v1/appmessage/index.php?appid=' + _msgAppId )
                         .then( function ( data ) {
                             var msgs = data.data;
                             //$log.info(logLead() + "received inbound messages: " + data.data);
@@ -163,6 +167,11 @@ angular.module( 'ngOpTVApi', [] )
             }
         }
 
+        function startDataPolling() {
+            $log.info( logLead() + " starting data polling." );
+            appWatcher = new AppDataWatcher();
+            appWatcher.poll();
+        }
 
         /**
          * Must be run after clock sync
@@ -172,13 +181,15 @@ angular.module( 'ngOpTVApi', [] )
 
             if ( _dataCb ) {
 
-                $http.get( apiPath +'/api/v1/appdata/index.php?appid=' + _appName )
+                $http.get( apiPath + '/api/v1/appdata/index.php?appid=' + _appName )
                     .then( function ( data ) {
                         $log.info( logLead() + " model data (appData) already existed via http." );
                         if ( data.data.length == 0 ) {
                             setInitialAppDataValueHTTP();
                         } else {
-                            service.model = data.data;
+                            service.model = data.data.payload;
+                            _dataCb(service.model);
+                            startDataPolling();
                         }
                     },
                     //Chumby browser doesn't seem to like "catch" in some places.
@@ -189,8 +200,7 @@ angular.module( 'ngOpTVApi', [] )
 
                 $log.debug( "optvAPI init app: " + _appName + " subscribing to data" );
 
-                appWatcher = new AppDataWatcher();
-                appWatcher.poll();
+
             }
 
             if ( _msgCb ) {
@@ -206,21 +216,22 @@ angular.module( 'ngOpTVApi', [] )
         service.init = function ( params ) {
 
             _appName = params.appName;
+            _msgAppId = _appName + '.' + ( params.endpoint || 'tv' );
             _dataCb = params.dataCallback;
             _msgCb = params.messageCallback;
-            _initialValue = params.initialValue || undefined;
+            _initialValue = params.initialValue || {};
             _netMethod = params.netMethod || DEFAULT_METHOD;
 
             $log.debug( "optvAPIPHP init for app: " + _appName );
 
             //Have to use the old then() signature for Chumby browser
             //Synching must be done before any other init...
-            $http.get( apiPath +'/api/v1/overplayos/index.php?command=ostime' )
+            $http.get( apiPath + '/api/v1/overplayos/index.php?command=ostime' )
                 .then( function ( data ) {
                     var myJson = angular.toJson( data );
                     $log.debug( logLead() + " got this for time from OS server " + myJson );
                     var localTime = new Date().getTime();
-                    var osTime = new Date( parseInt(data.data.msdate) );
+                    var osTime = new Date( parseInt( data.data.msdate ) );
                     _osTimeDifferential = osTime - localTime;
                     $log.debug( logLead() + " got new OS time diff of: " + _osTimeDifferential );
                     $log.debug( logLead() + " my local ms time is: " + new Date().getTime() );
@@ -239,7 +250,7 @@ angular.module( 'ngOpTVApi', [] )
 
         service.save = function () {
 
-            return $http.put( apiPath +'/api/v1/appdata/index.php?appid=' + _appName, { data: service.model } );
+            return $http.put( apiPath + '/api/v1/appdata/index.php?appid=' + _appName, service.model );
 
 
         };
@@ -247,11 +258,13 @@ angular.module( 'ngOpTVApi', [] )
 
         service.postMessage = function ( msg ) {
 
+            var dest = msg.dest || "io.overplay.mainframe.tv";
 
-            //TODO remove 'to' throughout all apps...for now just or it.
-            var dest = msg.dest || msg.to || "io.overplay.mainframe";
-
-            return $http.post( apiPath +'/api/v1/appmessage/index.php', { dest: dest, from: _appName, messageData: msg.data } );
+            return $http.post( apiPath + '/api/v1/appmessage/index.php', {
+                dest:        dest,
+                src:        _msgAppId,
+                messageData: msg.data
+            } );
 
 
         };
@@ -264,7 +277,7 @@ angular.module( 'ngOpTVApi', [] )
 
             //Passing nothing moves the app this API service is attached to
             appid = appid || _appName;
-            return $http.post( apiPath +'/api/v1/overplayos/index.php?command=move&appid=' + appid );
+            return $http.post( apiPath + '/api/v1/overplayos/index.php?command=move&appid=' + appid );
 
         };
 
@@ -276,7 +289,7 @@ angular.module( 'ngOpTVApi', [] )
 
             //Passing nothing moves the app this API service is attached to
             appid = appid || _appName;
-            return $http.post( apiPath +'/api/v1/overplayos/index.php?command=launch&appid=' + appid );
+            return $http.post( apiPath + '/api/v1/overplayos/index.php?command=launch&appid=' + appid );
 
         };
 
@@ -288,7 +301,7 @@ angular.module( 'ngOpTVApi', [] )
 
             //Passing nothing moves the app this API service is attached to
             appid = appid || _appName;
-            return $http.post( apiPath +'/api/v1/overplayos/index.php?command=kill&appid=' + appid );
+            return $http.post( apiPath + '/api/v1/overplayos/index.php?command=kill&appid=' + appid );
 
         };
 

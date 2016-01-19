@@ -2,48 +2,49 @@
 /**
  * Created by PhpStorm.
  * User: mkahn
- * Date: 1/5/16
- * Time: 1:51 PM
+ * Date: 1/18/16
+ * Time: 3:13 PM
  */
 
-
-function loadMessages()
+function loadMessages($forDest)
 {
-    $appMessages = loadJSON('appmessages',array());
+    $appMessages = loadJSON("messages/".$forDest, array());
     return $appMessages;
 }
 
-function saveMessages($appMessages)
+function saveMessages($forDest, $appMessages)
 {
-    saveJSON( 'appmessages', $appMessages );
+    saveJSON("messages/" .$forDest, $appMessages);
 }
 
-function createAppMessage($from, $dest, $messageData){
+function createAppMessage($src, $dest, $messageData)
+{
 
-    return array("from"=>$from, "dest"=>$dest, "messageData"=>$messageData, 'mstime'=> time() . '000');
+    return array("src" => $src, "dest" => $dest, "messageData" => $messageData, 'mstime' => time() . '000');
 }
 
-function postAppMessage($from, $dest, $messageData){
+function postAppMessage($src, $dest, $messageData)
+{
 
-    $appMessages = loadMessages();
-    array_push($appMessages, createAppMessage($from, $dest, $messageData));
-    saveMessages($appMessages);
+    $appMessages = loadMessages($dest);
+    array_push($appMessages, createAppMessage($src, $dest, $messageData));
+    saveMessages($dest, $appMessages);
 
 }
 
-function popAppMessage($dest){
+function popAppMessage($dest)
+{
 
-    $appMessages = loadMessages();
+    $appMessages = loadMessages($dest);
     $numMsgs = count($appMessages);
 
     $i = 0;
 
-    while ( $i < $numMsgs )
-    {
+    while ($i < $numMsgs) {
         $msg = $appMessages[$i];
-        if ( strcmp( $msg["dest"], $dest) == 0 ){
+        if (strcmp($msg["dest"], $dest) == 0) {
             $m = array_splice($appMessages, $i, 1);
-            saveMessages($appMessages);
+            saveMessages($dest, $appMessages);
             return $m;
         }
 

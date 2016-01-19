@@ -98,7 +98,8 @@ app.controller("rootController", function ($scope, $timeout, $location, $log, $r
     }
 
     optvModel.init({
-        appName: "io.overplay.apppicker.tv",
+        appName: "io.overplay.apppicker",
+        endpoint: "tv",
         messageCallback: inboundMessage,
     });
 

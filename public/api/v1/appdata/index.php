@@ -6,26 +6,34 @@
  * Time: 3:14 PM
  */
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//Uncomment these lines of code to echo PHP errors during debug.
+
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 require('../shared/shared.php');
 
+function dpathFor($appId){
+    return 'appdata/' . $appId;
+}
 
+//Get the JSON body
 $entityBody = file_get_contents('php://input');
 
 if (isPOST() || isPUT()) {
 
     if (isset($_REQUEST['appid'])) {
 
-        $appData = loadJSON('appdata', array());
-        $appData[$_REQUEST['appid']] = array(
-            "data" => json_decode($entityBody),
+        $appId = $_REQUEST['appid'];
+
+        $dataToSave = array(
+            "payload" => json_decode($entityBody),
             "lastUpdated" => getMSTime()
         );
-        saveJSON('appdata', $appData);
-        echo $entityBody;
+
+        saveJSON( dpathFor( $appId ), $dataToSave);
+        jsonOut($entityBody);
 
     } else {
         badReq('missing appid');
@@ -35,15 +43,14 @@ if (isPOST() || isPUT()) {
 } elseif (isDELETE()) {
 
     if (isset($_REQUEST['appid'])) {
-        $appData = loadJSON('appdata', array());
-        if (array_key_exists($_REQUEST['appid'], $appData)) {
-            unset( $appData[$_REQUEST['appid']] );
-            saveJSON('appdata', $appData);
-            echo 'ok';
-        } else {
-            badReq('No data for that app');;
-        }
 
+        $rmRes = rmJSON(dpathFor($_REQUEST['appid']));
+
+        if ($rmRes) {
+            echo 'deleted';
+        } else {
+            badReq('No data for that app');
+        }
     } else {
         badReq('missing appid');
     }
@@ -52,12 +59,24 @@ if (isPOST() || isPUT()) {
 } else {
 
     if (isset($_REQUEST['appid'])) {
-        $appData = loadJSON('appdata', array());
-        if (array_key_exists($_REQUEST['appid'], $appData)) {
-            $rval = $appData[$_REQUEST['appid']];
-            echo json_encode($rval);
+
+        //If the file does not exist, we will get FALSE as the $rval
+        $rval = loadJSON( dpathFor($_REQUEST['appid'] ), false);
+
+        if ($rval) {
+
+            if (count($rval['payload']) == 0) {
+                //empty object which PHP will incorrectly send down ad an array
+                echo jsonOut(json_encode($rval, JSON_FORCE_OBJECT));
+            } else {
+                echo jsonOut(json_encode($rval));
+            }
+
         } else {
-            echo json_encode(array());
+
+            http_response_code(404);
+            echo json_encode(array('error' => 'no data for that app'), JSON_FORCE_OBJECT);
+
         }
 
     } else {

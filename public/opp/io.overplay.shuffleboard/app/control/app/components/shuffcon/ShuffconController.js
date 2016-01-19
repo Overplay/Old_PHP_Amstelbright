@@ -21,13 +21,14 @@ app.controller( "shuffconController",
             $log.info( "ShuffleCon: got inbound message." );
         }
 
-        $scope.redScore  = function () { return optvModel.model.red; }
+        $scope.redScore = function () { return optvModel.model.red; }
         $scope.blueScore = function () { return optvModel.model.blue; }
 
         function initialize() {
 
             optvModel.init( {
-                appName:         "io.overplay.shuffleboard.control",
+                appName:         "io.overplay.shuffleboard",
+                endpoint:        "control",
                 initialValue:    { red: 0, blue: 0 },
                 dataCallback:    dataChanged,
                 messageCallback: inboundMessage
@@ -52,7 +53,7 @@ app.controller( "shuffconController",
 
 
         $scope.resetScores = function () {
-            optvModel.model.red  = 0;
+            optvModel.model.red = 0;
             optvModel.model.blue = 0;
             optvModel.save();
 

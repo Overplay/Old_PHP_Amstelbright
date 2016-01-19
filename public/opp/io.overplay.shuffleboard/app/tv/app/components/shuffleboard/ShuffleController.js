@@ -2,72 +2,73 @@
  * Created by mkahn on 4/28/15.
  */
 
-app.controller("shuffleController",
-               function ($scope, $timeout, $http, $interval, optvModel, $log, $window) {
+app.controller( "shuffleController",
+    function ( $scope, $timeout, $http, $interval, optvModel, $log, $window ) {
 
-                   console.log("Loading shuffleController");
+        console.log( "Loading shuffleController" );
 
-                   $scope.position = {corner: 0};
-                   $scope.score = {red: 0, blue: 0, redHighlight: false, blueHighlight: false};
+        $scope.position = { corner: 0 };
+        $scope.score = { red: 0, blue: 0, redHighlight: false, blueHighlight: false };
 
-                   var _remoteScore = {};
+        var _remoteScore = {};
 
-                   function logLead() { return "ShuffleController: "; }
+        function logLead() { return "ShuffleController: "; }
 
-                   $scope.$on('CPANEL', function () {
+        $scope.$on( 'CPANEL', function () {
 
-                       $scope.position.corner++;
-                       if ($scope.position.corner > 3) $scope.position.corner = 0;
+            $scope.position.corner++;
+            if ( $scope.position.corner > 3 ) $scope.position.corner = 0;
 
-                   });
+        } );
 
-                   function updateLocalScore() {
+        function updateLocalScore() {
 
-                       var animRed = $scope.score.red < _remoteScore.red;
-                       var animBlue = $scope.score.blue < _remoteScore.blue;
+            var animRed = $scope.score.red < _remoteScore.red;
+            var animBlue = $scope.score.blue < _remoteScore.blue;
 
-                       $scope.score.red = _remoteScore.red;
-                       $scope.score.blue = _remoteScore.blue;
+            $scope.score.red = _remoteScore.red;
+            $scope.score.blue = _remoteScore.blue;
 
 
-                       if (animRed) {
-                           $scope.score.redHighlight = true;
-                           $timeout(function () { $scope.score.redHighlight = false}, 500);
-                       }
+            if ( animRed ) {
+                $scope.score.redHighlight = true;
+                $timeout( function () { $scope.score.redHighlight = false}, 500 );
+            }
 
-                       if (animBlue) {
-                           $scope.score.blueHighlight = true;
-                           $timeout(function () { $scope.score.blueHighlight = false}, 500);
-                       }
-                   }
+            if ( animBlue ) {
+                $scope.score.blueHighlight = true;
+                $timeout( function () { $scope.score.blueHighlight = false}, 500 );
+            }
+        }
 
-                   function modelUpdate(data) {
-                       //$scope.$apply(function () {
-                            $log.info(logLead()+" got a model update: "+ angular.toJson(data));
-                           _remoteScore = data;
-                           updateLocalScore();
+        function modelUpdate( data ) {
+            //$scope.$apply(function () {
+            $log.info( logLead() + " got a model update: " + angular.toJson( data ) );
+            _remoteScore = data;
+            updateLocalScore();
 
-                       //});
+            //});
 
-                       $log.debug(logLead() + "Model update callback...")
+            $log.debug( logLead() + "Model update callback..." )
 
-                   }
+        }
 
-                   function inboundMessage(msg) {
-                       $log.debug(logLead() + "Inbound message...");
-                   }
+        function inboundMessage( msg ) {
+            $log.debug( logLead() + "Inbound message..." );
+        }
 
-                   function updateFromRemote() {
+        function updateFromRemote() {
 
-                       optvModel.init({
-                           appName: "io.overplay.shuffleboard.tv",
-                           dataCallback: modelUpdate,
-                           messageCallback: inboundMessage,
-                           initialValue: {red: 0, blue: 0, toTV: undefined},
-                       });
+            optvModel.init( {
+                appName:         "io.overplay.shuffleboard",
+                endpoint:        "tv",
+                dataCallback:    modelUpdate,
+                messageCallback: inboundMessage,
+                initialValue:    { red: 0, blue: 0, toTV: undefined },
+            } );
 
-                   }
+        }
 
-                   updateFromRemote();
+        updateFromRemote();
 
-               });
+    } );

@@ -116,7 +116,7 @@ if (isset($_REQUEST['command'])) {
 
 } else {
 
-    badReq('no command parameter');
+    badReq('no command parameter dipshit');
 
 }
 

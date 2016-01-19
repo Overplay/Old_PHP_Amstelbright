@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>App Mode: {{ mode }}</h1>
+            <uib-tabset>
+                <uib-tab heading="AppData Test">
+                    <div class="container">
+                        <div class="row gaptop">
+                            <div class="col-xs-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">TX App Data</div>
+                                    <div class="panel-body">
+                                        <span>Outbound Data</span><br>
+                                        <textarea ng-model="appdata.outboundJsonString" style="width: 100%"></textarea>
+                                        <!--<input ng-model="appdata.dest" placeholder="destination" style="width: 100%;"/>-->
+                                        <br><br>
+                                        <button class="btn btn-primary btn-sm" ng-click="sendData()">Save Data</button>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">RX App Data</div>
+                                    <div class="panel-body">
+                                        <span>Inbound Data</span><br>
+                                        <textarea ng-model="appdata.inboundJsonString" style="width: 100%"></textarea>
+                                        <p>Received at: {{ appdata.updateTime | date: 'medium' }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </uib-tab>
+
+            </uib-tabset>
+        </div>
+
+    </div>
+</div>

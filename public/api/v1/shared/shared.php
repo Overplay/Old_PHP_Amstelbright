@@ -84,3 +84,15 @@ function loadJSON($objName, $default)
     }
     return $decoded;
 }
+
+function rmJSON($path){
+
+    $fpath = '../data/' . $path . '.json';
+
+    if (!file_exists($fpath)) {
+        return unlink($fpath);
+    }
+
+    return false;
+
+}

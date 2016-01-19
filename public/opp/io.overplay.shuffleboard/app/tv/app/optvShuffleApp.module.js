@@ -17,13 +17,3 @@ var app = angular.module('optvShuffleApp', [
 ]);
 
 
-function fCheckAlive()
-{
-	console.log("fCheckAlive called, homey!");
-	return true;
-}
-
-function fButtonPress(button){
-    console.log("BUtton pushed: "+button);
-    angular.element(document.getElementById('docbody')).scope().buttonPushed(button);
-}

@@ -26,7 +26,8 @@ app.controller( "dsConController",
         function initialize() {
 
             optvModel.init( {
-                appName:         "io.overplay.dailyspecials.control",
+                appName:         "io.overplay.dailyspecials",
+                endpoint:        "control",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage
             } );
