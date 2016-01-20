@@ -72,9 +72,13 @@
     <!--<br><button ng-click="buttonPushed('down')">DOWN V</button>-->
 </div>
 
+<!-- Chumby cannot handle the CSS Spinner...fucker
 <div class='uil-ring-css' style='transform:scale(0.98);' ng-if="ui.loadingApp">
     <div></div>
 </div>
+-->
+
+<div class="loader"><img src="assets/img/ring.gif" ng-if="ui.loadingApp"/></div>
 
 </body>
 </html>
