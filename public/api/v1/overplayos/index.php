@@ -21,7 +21,7 @@ if (isset($_REQUEST['command'])) {
                 $mstime = time() . '000'; //dirty hack for scientific notation
                 $jsdate = date('D M d Y H:i:s O');
                 $rval = array("date" => $jsdate, "msdate" => $mstime);
-                echo json_encode($rval);
+                jsonOut(json_encode($rval));
             } else {
                 badReq('GET only');
             }
@@ -74,11 +74,9 @@ if (isset($_REQUEST['command'])) {
 
                 $launch = runApp($_REQUEST['appid']);
 
-                if ($launch["success"] )
-                {
+                if ($launch["success"]) {
                     jsonOut(json_encode(array("launch" => $_REQUEST['appid'])));
-                }
-                else {
+                } else {
                     badReq($launch["msg"]);
                 }
             } else {
@@ -90,13 +88,11 @@ if (isset($_REQUEST['command'])) {
         case 'move':
 
 
-            if ( isPOST() && isset($_REQUEST['appid']))
-            {
+            if (isPOST() && isset($_REQUEST['appid'])) {
                 $res = moveApp($_REQUEST['appid']);
                 header('Content-Type: application/json');
-                echo json_encode($res);
-            } else
-            {
+                jsonOut(json_encode($res));
+            } else {
                 badReq('Wrong verb or no appid');
             }
 
@@ -106,7 +102,7 @@ if (isset($_REQUEST['command'])) {
         case 'appsbystate':
 
             header('Content-Type: application/json');
-            echo json_encode(appsByState());
+            jsonOut(json_encode(appsByState()));
 
             break;
 
@@ -116,7 +112,7 @@ if (isset($_REQUEST['command'])) {
 
 } else {
 
-    badReq('no command parameter dipshit');
+    badReq('no command parameter, dipshit');
 
 }
 

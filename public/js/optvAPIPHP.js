@@ -12,12 +12,11 @@
 
 
 angular.module( 'ngOpTVApi', [] )
-    .factory( 'optvModel', function ( $http, $log, $interval, $rootScope, $q, $timeout ) {
+    .factory( 'optvModel', function ( $http, $log, $timeout ) {
 
         //For HTTP version
         var POLL_INTERVAL_MS = 500;
         var DEFAULT_METHOD = 'http';
-        //var apiPath = '/overplay/amstelbright/public';
 
         var apiPath = '';
 
@@ -32,7 +31,6 @@ angular.module( 'ngOpTVApi', [] )
         var _msgCb;
 
         var _appName;
-        var _dbId;
         var _initialValue;
         var _netMethod;
 
@@ -66,6 +64,7 @@ angular.module( 'ngOpTVApi', [] )
                     startDataPolling();
                 },
                 function ( err ) {
+                    //TODO add a callback for when shit is FUBAR
                     $log.error( logLead() + " initial value POSTed via HTTP FAILED!!!! [FATAL]" )
                 } );
 
@@ -81,33 +80,10 @@ angular.module( 'ngOpTVApi', [] )
 
             function updateIfNewer( data ) {
 
-                //Not checking time right now, just always updating. At 500ms per not much perf
-                //hit, I hope.
-
-                //_this.lastUpdated = mtime;
                 if (! _.isEqual( service.model, data.payload ) ) {
                     service.model = data.payload;
                     _dataCb( service.model );
                 }
-
-
-                /*
-
-                 //$log.info( logLead() + " Checking if inbound data is newer" );
-                 //TODO this isn't work right on chumby
-
-                 var mtime = new Date( parseInt(data.lastUpdated) );
-                 var newer = mtime > _this.lastUpdated;
-
-                 //TODO: This is a bit gross. The undefined check is because initial data isn't set right when the
-                 //app doesn't bother to set it.
-                 if ( newer || data.lastUpdated===undefined ) {
-                 _this.lastUpdated = mtime;
-                 service.model = data.payload;
-                 _dataCb( service.model );
-                 }
-
-                 */
 
             }
 
@@ -209,6 +185,7 @@ angular.module( 'ngOpTVApi', [] )
                 msgWatcher.poll();
             }
 
+            service.postMessage({ data: { launchComplete: true }});
 
         }
 

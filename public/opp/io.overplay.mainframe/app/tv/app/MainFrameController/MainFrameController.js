@@ -27,7 +27,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         $scope.runningAppSrc = [];
         $scope.runningAppPos = [];
 
-        $scope.ui = { hidemax: true, open: false, debug: false, fauxTV: true };
+        $scope.ui = { hidemax: true, open: false, debug: false, fauxTV: true, loadingApp: false };
 
         $interval( function () {
             $scope.ui.hidemax = false;
@@ -136,6 +136,20 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
                     $log.debug( "Delayed show of apps" );
                     showApps( true );
                 }, 250 );
+
+            }
+
+            if ( m.message && m.message.launch ) {
+
+                $log.info( logLead + "received LAUNCH message" );
+                $scope.ui.loadingApp = true;
+
+            }
+
+            if ( m.message && m.message.launchComplete ) {
+
+                $log.info( logLead + "received LAUNCH COMPLETE message" );
+                $scope.ui.loadingApp = false;
 
             }
 

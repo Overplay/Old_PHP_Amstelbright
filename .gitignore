@@ -6,4 +6,5 @@
 #**/bower_components/
 public/api/**/data/*.json
 *.sh
-/public/vids/*.mp4
+public/vids/*.mp4
+*.jar

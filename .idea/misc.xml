@@ -14,9 +14,5 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/public/api/v1/data/appdata.json" />
-    <file url="file://$PROJECT_DIR$/public/api/v1/data/appmessages.json" />
-  </component>
   <component name="ProjectRootManager" version="2" />
 </project>

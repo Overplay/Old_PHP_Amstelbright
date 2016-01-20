@@ -2,8 +2,7 @@
  * Created by mkahn on 4/28/15.
  */
 
-app.controller( "mainPageController",
-    function ( $scope, $timeout, $http, $log, optvModel, $window, $routeParams ) {
+app.controller( "mainPageController", function ( $scope,  $log, optvModel, $routeParams ) {
 
         $log.info( "Loading mainPageController" );
 
