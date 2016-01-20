@@ -74,7 +74,16 @@ if (isPOST() || isPUT()) {
 
         } else {
 
-            http_response_code(404);
+            //Of course the below does not work in PHP 5.2!
+            //http_response_code(404);
+
+            //THIS fucking hack should work on Chumbster
+            $sapi_type = php_sapi_name();
+            if (substr($sapi_type, 0, 3) == 'cgi')
+                header("Status: 404 Not Found");
+            else
+                header("HTTP/1.1 404 Not Found");
+
             echo json_encode(array('error' => 'no data for that app'), JSON_FORCE_OBJECT);
 
         }

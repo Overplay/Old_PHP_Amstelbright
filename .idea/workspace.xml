@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e641b1fa-c8ba-4e62-a3b6-2269c4608968" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/opp/io.overplay.budboard/app/tv/assets/css/styles.css" afterPath="$PROJECT_DIR$/public/opp/io.overplay.budboard/app/tv/assets/css/styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/api/v1/appdata/index.php" afterPath="$PROJECT_DIR$/public/api/v1/appdata/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="amstelbright.iws" />
@@ -37,11 +37,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/opp/io.overplay.budboard/app/tv/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2975048">
+            <state vertical-scroll-proportion="-6.4583335">
               <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/api/v1/appdata/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.65451056">
+              <caret line="79" column="56" selection-start-line="79" selection-start-column="56" selection-end-line="79" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -130,7 +140,6 @@
         <option value="$PROJECT_DIR$/public/api/v1/appmessage/index.php" />
         <option value="$PROJECT_DIR$/public/api/v1/shared/messaging.php" />
         <option value="$PROJECT_DIR$/public/api/v1/shared/shared.php" />
-        <option value="$PROJECT_DIR$/public/api/v1/appdata/index.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/public/vids/.gitignore" />
         <option value="$PROJECT_DIR$/public/api/v1/data/.gitignore" />
@@ -144,6 +153,7 @@
         <option value="$PROJECT_DIR$/public/opp/io.overplay.mainframe/app/tv/assets/css/styles.css" />
         <option value="$PROJECT_DIR$/public/opp/io.overplay.mainframe/app/tv/app/MainFrameController/MainFrameController.js" />
         <option value="$PROJECT_DIR$/public/opp/io.overplay.budboard/app/tv/assets/css/styles.css" />
+        <option value="$PROJECT_DIR$/public/api/v1/appdata/index.php" />
       </list>
     </option>
   </component>
@@ -505,6 +515,54 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amstelbright" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amstelbright" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="v1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amstelbright" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amstelbright" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="v1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="appdata" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -916,7 +974,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453257723755</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Changing budweiser logo PLACEMENT.">
+      <created>1453258295365</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1453258295365</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -987,7 +1051,8 @@
     <MESSAGE value="Spinner, this time chumbified." />
     <MESSAGE value="Spinner, this time chumbified...AGAIN." />
     <MESSAGE value="Changing budweiser logo." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changing budweiser logo." />
+    <MESSAGE value="Changing budweiser logo PLACEMENT." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changing budweiser logo PLACEMENT." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -995,11 +1060,6 @@
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/routes.php</url>
           <line>24</line>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/public/api/v1/appdata/index.php</url>
-          <line>44</line>
-          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="62" />
@@ -1245,14 +1305,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/api/v1/appdata/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.9583335">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/api/v1/data/appdata/io.overplay.adtest.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
@@ -1375,8 +1427,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/opp/io.overplay.budboard/app/tv/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2975048">
+        <state vertical-scroll-proportion="-6.4583335">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/api/v1/appdata/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65451056">
+          <caret line="79" column="56" selection-start-line="79" selection-start-column="56" selection-end-line="79" selection-end-column="56" />
           <folding />
         </state>
       </provider>
