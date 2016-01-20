@@ -16,8 +16,6 @@ angular.module( 'ngOpTVApi', [] )
 
         //For HTTP version
         var POLL_INTERVAL_MS = 500;
-        var DEFAULT_METHOD = 'http';
-
         var apiPath = '';
 
         var service = { model: {} };
@@ -32,53 +30,34 @@ angular.module( 'ngOpTVApi', [] )
 
         var _appName;
         var _initialValue;
-        var _netMethod;
 
         //HTTP Mode stuff
         var appWatcher;
         var msgWatcher;
-
-        //since NeTV can't tell time right and usually comes up in 2011
-        //This is ms ahead/behind for the local Chumby clock.
-        var _osTimeDifferential;
-
-        function getCurrentOSTime() {
-
-            return new Date().getTime() + _osTimeDifferential;
-
-        }
-
-        function logLead() {
-            var ll = "optvAPI (" + _appName + "): ";
-            return ll;
-        }
-
-
+        
+        var logLead= "optvAPI (" + _appName + "): ";
+            
         function setInitialAppDataValueHTTP() {
 
             service.model = _initialValue;
 
             $http.post( apiPath + '/api/v1/appdata/index.php?appid=' + _appName, _initialValue )
                 .then( function ( data ) {
-                    $log.debug( logLead() + " initial value POSTed via HTTP." )
+                    $log.debug( logLead + " initial value POSTed via HTTP." )
                     startDataPolling();
                 },
                 function ( err ) {
                     //TODO add a callback for when shit is FUBAR
-                    $log.error( logLead() + " initial value POSTed via HTTP FAILED!!!! [FATAL]" )
+                    $log.error( logLead + " initial value POSTed via HTTP FAILED!!!! [FATAL]" )
                 } );
-
         }
-
-
+        
         function AppDataWatcher() {
 
-            this.lastUpdated = new Date( 0 );
             this.running = true;
-
             var _this = this;
 
-            function updateIfNewer( data ) {
+            function updateIfChanged( data ) {
 
                 if (! _.isEqual( service.model, data.payload ) ) {
                     service.model = data.payload;
@@ -87,33 +66,29 @@ angular.module( 'ngOpTVApi', [] )
 
             }
 
-            //TODO this should run a query filter on modTime and not do it in code above
             this.poll = function () {
 
                 $timeout( function () {
 
                     $http.get( apiPath + '/api/v1/appdata/index.php?appid=' + _appName )
                         .then( function ( data ) {
-                            updateIfNewer( data.data );
+                            updateIfChanged( data.data );
                             if ( _this.running ) _this.poll();
                         },
                         function ( err ) {
-                            $log.error( logLead() + " couldn't poll model!" );
+                            $log.error( logLead + " couldn't poll model!" );
                             if ( _this.running ) _this.poll();
                         }
                     );
 
                 }, POLL_INTERVAL_MS );
-
             }
         }
 
         function MessageWatcher() {
 
             //start NOW, not in the past like Data
-            this.lastUpdated = getCurrentOSTime();
             this.running = true;
-
             var _this = this;
 
             this.poll = function () {
@@ -124,7 +99,7 @@ angular.module( 'ngOpTVApi', [] )
                     $http.get( apiPath + '/api/v1/appmessage/index.php?appid=' + _msgAppId )
                         .then( function ( data ) {
                             var msgs = data.data;
-                            //$log.info(logLead() + "received inbound messages: " + data.data);
+                            //$log.info(logLead + "received inbound messages: " + data.data);
                             msgs.forEach( function ( msg ) {
                                 //This dup should go away once we clean everything up
                                 msg.message = msg.messageData;
@@ -133,7 +108,7 @@ angular.module( 'ngOpTVApi', [] )
                             if ( _this.running ) _this.poll();
                         },
                         function ( err ) {
-                            $log.error( logLead() + " couldn't poll messages!" );
+                            $log.error( logLead + " couldn't poll messages!" );
                             if ( _this.running ) _this.poll();
                         }
                     );
@@ -144,7 +119,7 @@ angular.module( 'ngOpTVApi', [] )
         }
 
         function startDataPolling() {
-            $log.info( logLead() + " starting data polling." );
+            $log.info( logLead + " starting data polling." );
             appWatcher = new AppDataWatcher();
             appWatcher.poll();
         }
@@ -159,7 +134,7 @@ angular.module( 'ngOpTVApi', [] )
 
                 $http.get( apiPath + '/api/v1/appdata/index.php?appid=' + _appName )
                     .then( function ( data ) {
-                        $log.info( logLead() + " model data (appData) already existed via http." );
+                        $log.info( logLead + " model data (appData) already existed via http." );
                         if ( data.data.length == 0 ) {
                             setInitialAppDataValueHTTP();
                         } else {
@@ -170,7 +145,7 @@ angular.module( 'ngOpTVApi', [] )
                     },
                     //Chumby browser doesn't seem to like "catch" in some places.
                     function ( err ) {
-                        $log.info( logLead() + " model data not in DB, creating via http" );
+                        $log.info( logLead + " model data not in DB, creating via http" );
                         setInitialAppDataValueHTTP();
                     } );
 
@@ -197,38 +172,15 @@ angular.module( 'ngOpTVApi', [] )
             _dataCb = params.dataCallback;
             _msgCb = params.messageCallback;
             _initialValue = params.initialValue || {};
-            _netMethod = params.netMethod || DEFAULT_METHOD;
 
             $log.debug( "optvAPIPHP init for app: " + _appName );
-
-            //Have to use the old then() signature for Chumby browser
-            //Synching must be done before any other init...
-            $http.get( apiPath + '/api/v1/overplayos/index.php?command=ostime' )
-                .then( function ( data ) {
-                    var myJson = angular.toJson( data );
-                    $log.debug( logLead() + " got this for time from OS server " + myJson );
-                    var localTime = new Date().getTime();
-                    var osTime = new Date( parseInt( data.data.msdate ) );
-                    _osTimeDifferential = osTime - localTime;
-                    $log.debug( logLead() + " got new OS time diff of: " + _osTimeDifferential );
-                    $log.debug( logLead() + " my local ms time is: " + new Date().getTime() );
-                    initPhase2();
-
-                },
-                function ( err ) {
-                    _osTimeDifferential = new Date( '11-01-2015' ).getTime() - new Date().getTime();
-                    $log.debug( logLead() + " failed to get to OStime, setting to somthing close: " + _osTimeDifferential );
-                    initPhase2();
-
-                } );
-
+            initPhase2();
 
         }
 
         service.save = function () {
 
             return $http.put( apiPath + '/api/v1/appdata/index.php?appid=' + _appName, service.model );
-
 
         };
 
@@ -242,7 +194,6 @@ angular.module( 'ngOpTVApi', [] )
                 src:        _msgAppId,
                 messageData: msg.data
             } );
-
 
         };
 
@@ -281,7 +232,6 @@ angular.module( 'ngOpTVApi', [] )
             return $http.post( apiPath + '/api/v1/overplayos/index.php?command=kill&appid=' + appid );
 
         };
-
 
         return service;
 

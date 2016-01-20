@@ -8,3 +8,4 @@ public/api/**/data/*.json
 *.sh
 public/vids/*.mp4
 *.jar
+.idea/*
