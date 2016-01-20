@@ -17,9 +17,7 @@
   ],
   "dependencies": {
     "angular": "~1.4",
-    "angular-route": "*",
     "lodash": "*",
-    "angular-sanitize": "*",
-    "angular-animate": "*"
-  }
+    "angular-sanitize": "*"
+    }
 }
