@@ -100,8 +100,8 @@ body {
 .css-fader-parent img {
 
     position: absolute;
-    width: 280px;
-    top: 20px;
-    left: 20px;
+    width: 180px;
+    top: 50px;
+    left: 40px;
     z-index: 1000;
 }
