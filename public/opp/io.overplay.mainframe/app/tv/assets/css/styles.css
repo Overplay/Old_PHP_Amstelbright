@@ -248,3 +248,12 @@ body {
     display: block;
     margin: auto;
 }
+
+.loader > p {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    font-size: 50px;
+    font-weight: bold;
+    color: #ffc025;
+}
