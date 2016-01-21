@@ -32,13 +32,13 @@ body {
 }
 
 .red-sk {
-    background-image: url(../img/redsq.png);
+    background-image: url(../img/redbubble.png);
     background-size: contain;
     color: white;
 }
 
 .blue-sk {
-    background-image: url(../img/bluesq.png);
+    background-image: url(../img/bluebubble.png);
     background-size: contain;
     color: white;
 }

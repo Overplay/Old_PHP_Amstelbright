@@ -50,26 +50,10 @@
 </div>
 
 
-<!-- Old version that limited to widgets and crawlers
-<iframe ng-repeat="app in widgetApps" src="{{app.src}}"
-        ng-style="{ 'top': app.currentFrame.top, 'left': app.currentFrame.left,
-      'width': app.currentFrame.width, 'height': app.currentFrame.height }"
-        class="app-iframe hide-fade" ng-show="app.show"></iframe>
-
-<iframe ng-repeat="app in crawlerApps" src="{{app.src}}"
-        ng-style="{ 'top': app.currentFrame.top, 'left': app.currentFrame.left,
-      'width': app.currentFrame.width, 'height': app.currentFrame.height }"
-        class="app-iframe hide-fade" ng-show="app.show"></iframe>
--->
-<!-- Launcher -->
-
-
 <iframe src="{{launcher.app.src}}"
         class="launcher-iframe" ng-class="{'launcher-offscreen': !launcher.show}" ng-show="ui.open"></iframe>
 
 <div class="debugbox" ng-show="ui.debug">{{os.windowDimension.text}}
-    <!-- <div class="hdmessage">1080p</div> -->
-    <!--<br><button ng-click="buttonPushed('down')">DOWN V</button>-->
 </div>
 
 <!-- Chumby cannot handle the CSS Spinner...fucker
@@ -79,7 +63,7 @@
 -->
 
 <div class="loader" ng-if="ui.loadingApp">
-    <!--<img src="assets/img/ring.gif"/>-->
+    <!--<img src="assets/img/ring.gif"/> Yup, chumby couldn't deal with this etiher! -->
     <p>Loading app...</p>
 </div>
 
