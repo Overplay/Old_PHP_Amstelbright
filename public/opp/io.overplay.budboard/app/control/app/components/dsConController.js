@@ -14,8 +14,7 @@ app.controller( "dsConController",
         function modelUpdate( data ) {
 
             $log.info( logLead + " got a model update: " + angular.toJson( data ) );
-            $scope.messageArray = data.messages;
-
+            $scope.messageArray = data;
 
         }
 
@@ -40,7 +39,7 @@ app.controller( "dsConController",
         }
 
         $scope.done = function () {
-            optvModel.messages = $scope.messageArray;
+            optvModel.model = $scope.messageArray;
             optvModel.save();
         }
 

@@ -1,6 +1,6 @@
 /*********************************
 
- File:       optvUi.module
+ File:       optvMFConApp.module
  Function:   Base App
  Copyright:  OverplayTV
  Date:       4/10/15
@@ -10,8 +10,6 @@
 
 
 var app = angular.module('optvMFConApp', [
-    'ngAnimate',
-    'ngSanitize',
     'ngOpTVApi',
     'ui.bootstrap'
 ]);

@@ -1,15 +1,15 @@
 /*********************************
 
- File:       optvDSConApp.module
- Function:   Base App
+ File:       optvBudBordApp.module
+ Function:   ShuffleBoard App
  Copyright:  OverplayTV
- Date:       4/10/15
+ Date:       10.2.2015
  Author:     mkahn
 
  **********************************/
 
 
-var app = angular.module('optvDSConApp', [
+var app = angular.module('optvBudBoardApp', [
     'ngOpTVApi'
 ]);
 

@@ -7,32 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>-->
-
     <script src="assets/bower_components/angular/angular.js"></script>
-    <script src="assets/bower_components/angular-route/angular-route.js"></script>
-    <script src="assets/bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="assets/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="assets/bower_components/lodash/lodash.js"></script>
 
 
     <!-- App Main and AngularJS Routes -->
-
-
     <script src="app/optvDSConApp.module.js"></script>
     <script src="/js/optvAPIPHP.js"></script>
 
     <!-- Controllers -->
-
     <script src="app/components/dsConController.js"></script>
-
-
 
     <!--<link href="assets/css/style.css" rel="stylesheet">-->
     <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
 
 
     <!-- App Specific and Overridden CSS -->
+    <link href="assets/css/bootflat.css" rel="stylesheet">
     <link href="assets/css/styles.css" rel="stylesheet">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
@@ -43,22 +34,31 @@
 <body ng-controller="dsConController">
 
 <!-- Remote Control -->
+<h1>Bud Board</h1>
 
-<h1>Bud Board!</h1>
-
-<div class="form-group">
-    <div class="msg" ng-repeat="msg in messageArray track by $index">
-        {{ $index+1 }}
-        <input type="text" class="form-control" ng-model="messageArray[$index]">
-        <button class="btn-round btn-red" ng-click="del($index)"><i class="fa fa-trash">&nbsp;</i></button>
+<div class="container">
+    <div class="row" ng-repeat="msg in messageArray track by $index">
+        <div class="col-xs-1"> {{ $index+1 }} </div>
+        <div class="col-xs-10"><input type="text" class="form-control" ng-model="messageArray[$index]"> </div>
+        <div class="col-xs-1">
+            <i class="fa fa-trash" ng-click="del($index)">&nbsp;</i></div>
     </div>
-</div>
-<div class="msg">
-    <input type="text" ng-model="input.newMsg" placeholder="New Message"/>
-</div>
-<button class="btn btn-success" ng-click="add()">ADD</button>
-<button class="btn btn-default" ng-click="done()">DONE</button>
 
+    <div class="row">
+        <div class="col-xs-1">NEW</div>
+        <div class="col-xs-10"><input type="text" class="form-control" ng-model="messageArray[$index]"></div>
+        <div class="col-xs-1">
+        </div>
+    </div>
+
+</div>
+
+
+<div class="ctrl-holder bottom">
+    <div class="sq-button y" ng-click="add()"><i class="fa fa-plus-circle">&nbsp;ADD MESSAGE</i></div>
+    <div class="sq-button bl2" ng-click="done()"><i class="fa fa-upload"></i>&nbsp;UPDATE TV</div>
+
+</div>
 
 </body>
 </html>

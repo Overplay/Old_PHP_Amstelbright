@@ -1,5 +1,5 @@
 {
-  "name": "Shared Bower OPTV UI",
+  "name": "BudBoard Bower OPTV TV",
   "version": "0.0.1",
   "homepage": "",
   "authors": [
@@ -17,9 +17,6 @@
   ],
   "dependencies": {
     "angular": "~1.4",
-    "angular-route": "*",
-    "lodash": "*",
-    "angular-sanitize": "*",
-    "angular-animate": "*"
-  }
+    "lodash": "*"
+    }
 }

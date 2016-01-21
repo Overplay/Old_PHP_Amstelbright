@@ -46,7 +46,7 @@ function jsonOut($json)
 
 function getMSTime()
 {
-    return $mstime = time() . '000'; //dirty hack for scientific notation
+    return $mstime = time(); // . '000'; //dirty hack for scientific notation
 }
 
 /**

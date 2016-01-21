@@ -16,6 +16,7 @@ angular.module( 'ngOpTVApi', [] )
 
         //For HTTP version
         var POLL_INTERVAL_MS = 500;
+        var DATA_UPDATE_METHOD = "lastUpdated";
         var apiPath = '';
 
         var service = { model: {} };
@@ -55,15 +56,29 @@ angular.module( 'ngOpTVApi', [] )
         function AppDataWatcher() {
 
             this.running = true;
+            this.lastUpdated = 0;
             var _this = this;
 
             function updateIfChanged( data ) {
 
-                if (! _.isEqual( service.model, data.payload ) ) {
-                    service.model = data.payload;
-                    _dataCb( service.model );
-                }
+                switch (DATA_UPDATE_METHOD){
 
+                    case "lastUpdated":
+                        if ( data.lastUpdated > _this.lastUpdated ) {
+                            _this.lastUpdated = data.lastUpdated;
+                            service.model = data.payload;
+                            _dataCb( service.model );
+                        }
+                    break;
+
+                    case "objectEquality":
+                        if ( !_.isEqual( service.model, data.payload ) ) {
+                            service.model = data.payload;
+                            _dataCb( service.model );
+                        }
+                    break;
+
+                }
             }
 
             this.poll = function () {
@@ -80,7 +95,6 @@ angular.module( 'ngOpTVApi', [] )
                             if ( _this.running ) _this.poll();
                         }
                     );
-
                 }, POLL_INTERVAL_MS );
             }
         }
@@ -137,7 +151,10 @@ angular.module( 'ngOpTVApi', [] )
                         $log.info( logLead + " model data (appData) already existed via http." );
                         if ( data.data.length == 0 ) {
                             setInitialAppDataValueHTTP();
-                        } else {
+                        } else if ( _.isEmpty( data.data.payload ) && !_.isEmpty( _initialValue )){
+                            setInitialAppDataValueHTTP();
+                        }
+                        else {
                             service.model = data.data.payload;
                             _dataCb(service.model);
                             startDataPolling();
