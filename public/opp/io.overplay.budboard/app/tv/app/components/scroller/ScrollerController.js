@@ -25,7 +25,7 @@ app.controller( "scrollerController",
             appName:      "io.overplay.budboard",
             endpoint:     "tv",
             dataCallback: modelUpdate,
-            initialValue: { messages: $scope.messageArray }
+            initialValue: $scope.messageArray
         } );
 
     } );
