@@ -11,7 +11,7 @@ app.directive("appIcon", function () {
 
 
         },
-        templateUrl: 'app/components/UIDirectives/AppIcon/appicon.template.html'
+        templateUrl: 'app/components/AppIcon/appicon.template.html'
     }
 
 });

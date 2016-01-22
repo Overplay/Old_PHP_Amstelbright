@@ -37,20 +37,20 @@ app.controller( "mfConController",
         }
 
         $scope.menu = function () {
-            optvModel.postMessage( { to: "io.overplay.mainframe.tv", data: { dash: 'toggle' } } );
+            optvModel.postMessage( { dest: "io.overplay.mainframe.tv", data: { dash: 'toggle' } } );
         }
 
         $scope.remote = function ( button ) {
-            optvModel.postMessage( { to: "io.overplay.apppicker.tv", data: { remote: button } } );
+            optvModel.postMessage( { dest: "io.overplay.apppicker.tv", data: { remote: button } } );
 
         }
 
         $scope.debug = function () {
-            optvModel.postMessage( { to: "io.overplay.mainframe.tv", data: { debug: 'toggle' } } );
+            optvModel.postMessage( { dest: "io.overplay.mainframe.tv", data: { debug: 'toggle' } } );
         }
 
         $scope.fauxtv = function () {
-            optvModel.postMessage( { to: "io.overplay.mainframe.tv", data: { fauxtv: 'toggle' } } );
+            optvModel.postMessage( { dest: "io.overplay.mainframe.tv", data: { fauxtv: 'toggle' } } );
         }
 
         $scope.cellAction = function ( action ) {

@@ -55,3 +55,13 @@ function popAppMessage($dest)
 
 
 }
+
+function popAppMessages($dest)
+{
+
+    $appMessages = loadMessages($dest);
+    saveMessages($dest, array());
+    return $appMessages;
+
+
+}

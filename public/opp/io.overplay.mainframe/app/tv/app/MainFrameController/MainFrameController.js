@@ -92,7 +92,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
                 case 'up':
                 case 'down':
                     //Relay everything other than show/hide picker to the picker
-                    optvModel.postMessage( { to: "io.overplay.apppicker", data: { remote: netvButton } } );
+                    optvModel.postMessage( { dest: "io.overplay.apppicker.tv", data: { remote: netvButton } } );
                     break;
                 default:
                     break;
@@ -208,21 +208,18 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
                 switch ( m.message.remote ) {
 
                     case 'up':
-                        $scope.buttonPushed( 'up' );
+                        buttonPushed( 'up' );
                         break;
 
                     case 'down':
-                        $scope.buttonPushed( 'down' );
+                        buttonPushed( 'down' );
                         break;
 
                     case 'select':
-                        $scope.buttonPushed( 'center' );
+                        buttonPushed( 'center' );
                         break;
 
-
                 }
-
-
             }
 
         }

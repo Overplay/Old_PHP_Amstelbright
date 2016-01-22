@@ -6,14 +6,15 @@
  */
 
 
-app.controller("rootController", function ($scope, $timeout, $location, $log, $rootScope, $http, $window, optvModel) {
+app.controller("appPickerController", function ($scope, $log, $rootScope, $http, optvModel) {
 
-    console.log("Loading rootController");
+    console.log("appPickerController rootController");
 
     //On/off screen animations handled by Mainframe
     //$scope.ui = {onscreen: false};
 
     var _selectedIcon = 0;
+    var logLead = "appPickerController: ";
 
     $scope.keyPressed = function (event) {
 
@@ -100,7 +101,7 @@ app.controller("rootController", function ($scope, $timeout, $location, $log, $r
     optvModel.init({
         appName: "io.overplay.apppicker",
         endpoint: "tv",
-        messageCallback: inboundMessage,
+        messageCallback: inboundMessage
     });
 
 

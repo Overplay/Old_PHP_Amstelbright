@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="optvUIApp">
+<html ng-app="optvAppPicker">
 <head lang="en">
   <meta charset="UTF-8">
 
@@ -8,47 +8,37 @@
 
   <!--<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>-->
   <script src="assets/bower_components/angular/angular.js"></script>
-  <script src="assets/bower_components/angular-route/angular-route.js"></script>
-  <script src="assets/bower_components/angular-animate/angular-animate.min.js"></script>
-  <script src="assets/bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="assets/bower_components/lodash/lodash.js"></script>
 
 
   <!-- App Main and AngularJS Routes -->
-  <script src="app/optvUIApp.module.js"></script>
-  <script src="app/optvUIApp.routes.js"></script>
+  <script src="app/optvAppPicker.module.js"></script>
   <script src="/js/optvAPIPHP.js"></script>
 
   <!-- Controllers -->
-  <script src="app/shared/RootController/RootController.js"></script>
-
+  <script src="app/components/AppPicker/AppPickerController.js"></script>
 
   <!-- Directives -->
-  <script src="app/components/UIDirectives/AppIcon/appicon.directive.js"></script>
-
-  <!--<link href="assets/css/style.css" rel="stylesheet">-->
-  <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
-
+  <script src="app/components/AppIcon/appicon.directive.js"></script>
 
   <!-- App Specific and Overridden CSS -->
-  <!--<link href="assets/css/style.css" rel="stylesheet">-->
   <link href="assets/css/styles.css" rel="stylesheet">
 
 
   <title>OPTV App Picker</title>
 </head>
 
-<body ng-controller="rootController" ng-keypress="keyPressed($event)" id="docbody" ng-click="toggleUI()">
+<body ng-controller="appPickerController" ng-keypress="keyPressed($event)">
 
 
 <div class="icon-tray">
 
-  <div class="logo"><img class="pop-screen" src="assets/img/logo12-2015.png"/></div>
+  <div class="logo"><img src="assets/img/logo12-2015.png"/></div>
   <div class="icon-scroller">
     <app-icon ng-repeat="a in apps" icon-src="{{launcherIconPath(a)}}" app-name="{{a.name}}"
               selected="isSelected($index)"
-              ng-click="clicked(a)"
-              ></app-icon>
+              ng-click="clicked(a)">
+    </app-icon>
   </div>
 
 

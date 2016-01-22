@@ -61,7 +61,7 @@ app.controller( "shuffconController",
 
         $scope.home = function () {
 
-            optvModel.postMessage( { to: "io.overplay.mainframe", data: { dash: 'toggle' } } );
+            optvModel.postMessage( { dest: "io.overplay.mainframe", data: { dash: 'toggle' } } );
 
         }
 

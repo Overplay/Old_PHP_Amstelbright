@@ -49,7 +49,7 @@ if (isPOST() || isPUT()) {
 
     if (isset($_REQUEST['appid'])) {
 
-        $msg = popAppMessage($_REQUEST['appid']);
+        $msg = popAppMessages($_REQUEST['appid']);
         echo json_encode($msg);;
 
     } else {
