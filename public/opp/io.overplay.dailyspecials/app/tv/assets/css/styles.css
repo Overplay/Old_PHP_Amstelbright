@@ -38,8 +38,8 @@ body {
     width: 100%;
     height: 140px;
     position: relative;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .css-scroller-holder > .bar {
@@ -48,10 +48,10 @@ body {
     left: 0;
     width: 90%;
     height: 80px;
-    background: url(../img/frame2.png);
-    border-radius: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
+    background: url(../img/textured.png);
+    border-radius: 0;
+    margin-left: 0;
+    margin-right: 0;
 
 }
 

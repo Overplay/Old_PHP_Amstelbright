@@ -84,6 +84,8 @@ if (isPOST() || isPUT()) {
             else
                 header("HTTP/1.1 404 Not Found");
 
+            //TODO CHumby FUCK, of course JSON_FORCE_OBJECT is not PHP 5.2
+            
             echo json_encode(array('error' => 'no data for that app'), JSON_FORCE_OBJECT);
 
         }
