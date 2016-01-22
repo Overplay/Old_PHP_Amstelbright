@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="optvDSConApp">
+<html ng-app="optvBBConApp">
 
 <head>
     <meta charset="UTF-8">
@@ -12,15 +12,11 @@
 
 
     <!-- App Main and AngularJS Routes -->
-    <script src="app/optvDSConApp.module.js"></script>
+    <script src="app/optvBBConApp.module.js"></script>
     <script src="/js/optvAPIPHP.js"></script>
 
     <!-- Controllers -->
-    <script src="app/components/dsConController.js"></script>
-
-    <!--<link href="assets/css/style.css" rel="stylesheet">-->
-    <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
-
+    <script src="app/components/bbConController.js"></script>
 
     <!-- App Specific and Overridden CSS -->
     <link href="assets/css/bootflat.css" rel="stylesheet">
@@ -31,7 +27,7 @@
     <title>OPTV Daily Specials Control</title>
 </head>
 
-<body ng-controller="dsConController">
+<body ng-controller="bbConController">
 
 <!-- Remote Control -->
 <h1>Bud Board</h1>
@@ -53,6 +49,7 @@
 
 </div>
 
+<div>{{ ui.json }}</div>
 
 <div class="ctrl-holder bottom">
     <div class="sq-button y" ng-click="add()"><i class="fa fa-plus-circle">&nbsp;ADD MESSAGE</i></div>

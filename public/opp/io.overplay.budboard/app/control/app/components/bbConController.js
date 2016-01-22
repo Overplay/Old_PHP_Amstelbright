@@ -2,19 +2,22 @@
  * Created by mkahn on 4/28/15.
  */
 
-app.controller( "dsConController",
+app.controller( "bbConController",
     function ( $scope, $timeout, $http, $log, optvModel ) {
 
-        $log.info( "Loading dsConController" );
+        $log.info( "Loading bbConController" );
 
-        var logLead = "DS Control App: ";
+        var logLead = "BB Control App: ";
         $scope.inboundMessageArray = [];
         $scope.messageArray = [];
+
+        $scope.ui = { json: ""};
 
         function modelUpdate( data ) {
 
             $log.info( logLead + " got a model update: " + angular.toJson( data ) );
             $scope.messageArray = data;
+            $scope.ui.json = angular.toJson($scope.messageArray);
 
         }
 

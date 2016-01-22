@@ -1,6 +1,6 @@
 /*********************************
 
- File:       optvDSConApp.module
+ File:       optvBBConApp.module
  Function:   Base App
  Copyright:  OverplayTV
  Date:       4/10/15
@@ -9,7 +9,7 @@
  **********************************/
 
 
-var app = angular.module('optvDSConApp', [
+var app = angular.module('optvBBConApp', [
     'ngOpTVApi'
 ]);
 
