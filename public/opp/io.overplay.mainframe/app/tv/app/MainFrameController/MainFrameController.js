@@ -27,7 +27,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         $scope.runningAppSrc = [];
         $scope.runningAppPos = [];
 
-        $scope.ui = { hidemax: true, open: false, debug: false, fauxTV: false, loadingApp: false };
+        $scope.ui = { hidemax: true, open: true, debug: false, fauxTV: false, loadingApp: false };
 
         $interval( function () {
             $scope.ui.hidemax = false;
@@ -56,6 +56,9 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         function toggleAppPicker() {
 
             $scope.launcher.show = !$scope.launcher.show;
+            if (!$scope.launcher.show){
+                layoutAndShow();
+            }
 
         }
 
@@ -101,16 +104,32 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
 
         }
 
-
         /*
          Move messages need to be like this for now:
-         { "to":"io.overplay.mainframe", "from":"io.overplay.shuffleboard", "data":{ "move": { "spot" : "tl" }}}
+         { "dest":"io.overplay.mainframe", "from":"io.overplay.shuffleboard", "data":{ "move": { "spot" : "tl" }}}
          */
-
         function mergeApps( inboundData ) {
 
             $scope.runningAppSrc = _.pluck( inboundData, 'src' );
             $scope.runningAppPos = _.pluck( inboundData, 'location' );
+
+        }
+
+        function layoutAndShow() {
+
+            osService.getApps()
+                .then( function ( data ) {
+                    $scope.runningApps = data;
+                    mergeApps( data );
+                }, function ( err ) {
+                    $log.error( logLead + " error fetching AppMap. Error: " + angular.toJson( err ) );
+                } );
+
+            //Give the app picker some time to hide
+            $timeout( function () {
+                $log.debug( "Delayed show of apps" );
+                showApps( true );
+            }, 1250 );
 
         }
 
@@ -123,19 +142,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
             if ( m.message && m.message.layout ) {
 
                 $log.info( logLead + "received LAYOUT message" );
-                osService.getApps()
-                    .then( function ( data ) {
-                        $scope.runningApps = data;
-                        mergeApps( data );
-                    }, function ( err ) {
-                        $log.error( logLead + " error fetching AppMap. Error: " + angular.toJson( err ) );
-                    } );
-
-                //Give the app picker some time to hide
-                $timeout( function () {
-                    $log.debug( "Delayed show of apps" );
-                    showApps( true );
-                }, 250 );
+                layoutAndShow();
 
             }
 
@@ -153,7 +160,6 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
 
             }
 
-
             //Show Dash
             if ( m.message && m.message.dash ) {
 
@@ -165,8 +171,9 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
                         break;
 
                     case 'hide':
-                        showAppPicker( false );
-                        $timeout( function () { showApps( true ); }, 1500 );
+                        //showAppPicker( false );
+                        //$timeout( function () { showApps( true ); }, 1500 );
+                        layoutAndShow();
                         break;
 
                     case 'toggle':
