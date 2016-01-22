@@ -33,7 +33,6 @@ function reqMethod()
 
 function badReq($msg)
 {
-    http_response_code(400);
     retro_error_header(400, "Bad Request");
     echo $msg;
 }
