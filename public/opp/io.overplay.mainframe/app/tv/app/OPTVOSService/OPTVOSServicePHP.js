@@ -233,11 +233,11 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
         switch ( slot ) {
 
             case 0:
-                rval.top = Math.floor( .83 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.top = Math.floor( 0.95 * service.windowDimension.height ) + nudge.top + 'px';
                 break;
 
             case 1:
-                rval.top = Math.floor( 0 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.top = Math.floor( 0.05 * service.windowDimension.height ) + nudge.top + 'px';
                 break;
 
         }
