@@ -59,6 +59,12 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
             } );
     };
 
+    function hardReset(){
+
+        $log.info("PErforming hard reset");
+        return $http.post(apiPath+'/api/v1/overplayos/index.php?command=reset');
+    }
+
     function pathFor( appid ) {
 
         if ( appid != "" ) {
@@ -247,6 +253,10 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
     }
 
     //service.getAppMap();
+
+    hardReset();
+
+    service.hardReset = hardReset;
 
     return service;
 

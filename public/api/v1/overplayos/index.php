@@ -31,9 +31,32 @@ if (isset($_REQUEST['command'])) {
         case 'ipaddress':
             if (isGET()) {
                 $rval = array("ip" => $_SERVER['SERVER_ADDR']);
-                echo json_encode($rval);
+                jsonOut( json_encode($rval));
             } else {
                 badReq('GET only');
+            }
+            break;
+
+        //TODO implement post to set identity
+        case 'identify':
+            if (isGET()) {
+                $sysinfo = loadJSON('/system/sysinfo', array( "name"=>"Not Named", "location"=>"Not Set" ));
+                jsonOut(json_encode($sysinfo));
+            } else {
+                badReq('GET only');
+            }
+            break;
+
+        case 'reset':
+
+            if (isPOST()){
+
+                array_map('unlink', glob("../data/**/*.json"));
+                array_map('unlink', glob("../data/*.json"));
+                jsonOut(json_encode(array("cool"=>"beans")));
+
+            } else {
+                badReq('POST only');
             }
             break;
 
