@@ -82,7 +82,7 @@ body {
 .css-scroller-text {
     position: relative;
     left: 1000px;
-    font-size: 50px;
+    font-size: 25px;
     line-height: 80px;
     color: #d0d0d0;
     transition: left 0s linear;
