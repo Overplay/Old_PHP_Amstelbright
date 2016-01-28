@@ -386,7 +386,7 @@ function installedApps()
             "reverseDomainName" => "io.overplay.shuffleboard",
             "buildNumber" => 1,
             "onLauncher" => true,
-            "iconLauncher" => "shuffle320x180.png",
+            "iconLauncher" => "shuffle320x180s.png",
             "size" => array(
                 "width" => 25,
                 "height" => 40
@@ -400,7 +400,7 @@ function installedApps()
             "reverseDomainName" => "io.overplay.budboard",
             "buildNumber" => 1,
             "onLauncher" => true,
-            "iconLauncher" => "budboard16x9.png",
+            "iconLauncher" => "budboard16x9s.png",
             "size" => array(
                 "width" => 100,
                 "height" => 10
@@ -415,7 +415,7 @@ function installedApps()
             "reverseDomainName" => "io.overplay.dailyspecials",
             "buildNumber" => 1,
             "onLauncher" => true,
-            "iconLauncher" => "special16x9.png",
+            "iconLauncher" => "special16x9s.png",
             "size" => array(
                 "width" => 100,
                 "height" => 10
@@ -430,7 +430,7 @@ function installedApps()
             "reverseDomainName" => "io.overplay.squares",
             "buildNumber" => 1,
             "onLauncher" => true,
-            "iconLauncher" => "football16x9.png",
+            "iconLauncher" => "football16x9s.png",
             "size" => array(
                 "width" => 25,
                 "height" => 40

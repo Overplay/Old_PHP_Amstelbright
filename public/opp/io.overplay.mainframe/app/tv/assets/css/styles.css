@@ -43,7 +43,6 @@ body {
     position: fixed;
     border: 0;
     width: 100%;
-    aaheight: 200px;
     transition: all 1s;
     -webkit-transition: all 1s;
 }

@@ -1,48 +1,56 @@
 <!DOCTYPE html>
 <html ng-app="optvAppPicker">
 <head lang="en">
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!--<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>-->
-  <script src="assets/bower_components/angular/angular.js"></script>
-  <script src="assets/bower_components/lodash/lodash.js"></script>
-
-
-  <!-- App Main and AngularJS Routes -->
-  <script src="app/optvAppPicker.module.js"></script>
-  <script src="/js/optvAPIPHP.js"></script>
-
-  <!-- Controllers -->
-  <script src="app/components/AppPicker/AppPickerController.js"></script>
-
-  <!-- Directives -->
-  <script src="app/components/AppIcon/appicon.directive.js"></script>
-
-  <!-- App Specific and Overridden CSS -->
-  <link href="assets/css/styles.css" rel="stylesheet">
+    <!--<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>-->
+    <script src="assets/bower_components/angular/angular.js"></script>
+    <script src="assets/bower_components/lodash/lodash.js"></script>
 
 
-  <title>OPTV App Picker</title>
+    <!-- App Main and AngularJS Routes -->
+    <script src="app/optvAppPicker.module.js"></script>
+    <script src="/js/optvAPIPHP.js"></script>
+
+    <!-- Controllers -->
+    <script src="app/components/AppPicker/AppPickerController.js"></script>
+
+    <!-- Directives -->
+    <script src="app/components/AppIcon/appicon.directive.js"></script>
+
+    <!-- App Specific and Overridden CSS -->
+    <link href="assets/css/styles.css" rel="stylesheet">
+
+
+    <title>OPTV App Picker</title>
 </head>
 
 <body ng-controller="appPickerController" ng-keypress="keyPressed($event)">
 
 
-<div class="icon-tray">
+<div class="top-frame">
 
-  <div class="logo"><img src="assets/img/logo12-2015.png"/></div>
-  <div class="icon-scroller">
-    <app-icon ng-repeat="a in apps" icon-src="{{launcherIconPath(a)}}" app-name="{{a.name}}"
-              selected="isSelected($index)"
-              ng-click="clicked(a)">
-    </app-icon>
-  </div>
+    <div class="left-column">
+        <img src="assets/img/logo12-2015.png"/>
+        <h1>Applications</h1>
+        <button class="btn" ng-click="hidePicker()">Close</button><br>
+        <button class="btn" ng-click="hidePicker()">Settings</button>
+
+    </div>
+    <div class="right-column">
+        <app-icon ng-repeat="a in apps" icon-src="{{launcherIconPath(a)}}" app-name="{{a.name}}"
+                  selected="isSelected($index)"
+                  ng-click="clicked(a)">
+        </app-icon>
+
+    </div>
 
 
 </div>
+
 
 </body>
 </html>
