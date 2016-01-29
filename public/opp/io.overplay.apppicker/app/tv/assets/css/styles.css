@@ -39,18 +39,23 @@ body {
 
     /*border: 1px solid red;*/
     float: left;
-    width: 30%;
+    width: 25%;
     height: 1080px;
-    margin-top: 200px;
-    margin-left: 50px;
+    background-image: url('../img/bluetex.jpg');
 }
 
-.left-column > img {
+.inner-holder {
+    margin-top: 200px;
+    margin-left: 70px;
+
+}
+
+.inner-holder > img {
     width: 300px;
 
 }
 
-.left-column > h1 {
+.inner-holder > h1 {
 
     color: white;
     margin-top: 100px;
@@ -63,7 +68,7 @@ body {
 
     /*border: 1px solid red;*/
     float: right;
-    width: 60%;
+    width: 70%;
     margin-top: 100px;
 }
 
