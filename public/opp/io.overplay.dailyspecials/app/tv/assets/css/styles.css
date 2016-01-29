@@ -13,13 +13,29 @@
     src: url('../fonts/PermanentMarker.ttf');
 }
 
+@font-face {
+    font-family: "LED";
+    src: url('../fonts/DigitaldreamFat.ttf');
+}
+
+@font-face {
+    font-family: "COOL";
+    src: url('../fonts/coolvetica.ttf');
+}
+
+@font-face {
+    font-family: "THIN";
+    src: url('../fonts/thinfont.ttf');
+}
+
+
 html {
     margin: 0;
 }
 
 body {
     margin: 0;
-    font-family: 'PM', sans-serif;
+    font-family: 'LED', sans-serif;
 }
 
 .op0 {
@@ -39,7 +55,7 @@ body {
 }
 
 .css-scroller-holder {
-    font-family: PM, sans-serif;
+    font-family: THIN, sans-serif;
     width: 100%;
     position: relative;
     margin-left: 0;
