@@ -92,8 +92,8 @@ app.directive( 'cssScroller', [
                     var idx = 0;
                     var leftPixel = $window.innerWidth + 20;
                     var messageWidth = 0;
-                    var PIXELS_PER_FRAME = 5;
-                    var FPS = 24;
+                    var PIXELS_PER_FRAME = 10;
+                    var FPS = 30;
 
                     scope.message = { text: "", leftPos: leftPixel + 'px' };
 
@@ -134,7 +134,7 @@ app.directive( 'cssScroller', [
                         }
                     }
 
-                    $timeout( nextMsg, 200 );
+                    $timeout( nextMsg, 20 );
 
                 }
             }

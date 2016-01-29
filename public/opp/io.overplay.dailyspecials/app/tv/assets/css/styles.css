@@ -65,7 +65,7 @@ body {
     top: 0;
     left: 40px;
     overflow: hidden;
-    width: 78%;
+    width: 76%;
     line-height: 120px;
 
 }
@@ -74,7 +74,7 @@ body {
 
     position: absolute;
     top: 30px;
-    right: 20px;
+    right: 60px;
     width: 15%;
     max-height: 65px;
     line-height: 120px;
