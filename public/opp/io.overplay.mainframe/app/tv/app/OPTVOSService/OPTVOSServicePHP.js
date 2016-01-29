@@ -243,7 +243,7 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
                 break;
 
             case 1:
-                rval.top = Math.floor( 0 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.top = Math.floor( 0.03 * service.windowDimension.height ) + nudge.top + 'px';
                 break;
 
         }
