@@ -51,7 +51,8 @@ if (isset($_REQUEST['command'])) {
 
             if (isPOST()){
 
-                array_map('unlink', glob("../data/**/*.json"));
+                array_map('unlink', glob("../data/appdata/*.json"));
+                array_map('unlink', glob("../data/messages/*.json"));
                 array_map('unlink', glob("../data/*.json"));
                 jsonOut(json_encode(array("cool"=>"beans")));
 
