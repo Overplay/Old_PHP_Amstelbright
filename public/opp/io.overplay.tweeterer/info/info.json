@@ -1,0 +1,11 @@
+{
+  "appType": "crawler",
+  "name": "Tweet Board",
+  "reverseDomainName": "io.overplay.tweeterer",
+  "buildNumber": 1,
+  "signature": "",
+  "iconLabel": "Tweeterer",
+  "iconImageLarge": "tweet16x9.png",
+  "publisher": "Overplay TV, Inc.",
+  "show": true
+}

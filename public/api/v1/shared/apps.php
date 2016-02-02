@@ -440,6 +440,22 @@ function installedApps()
         ),
 
 
+        "io.overplay.tweeterer" => array(
+            "name" => "Tweets!",
+            "appType" => "crawler",
+            "reverseDomainName" => "io.overplay.tweeterer",
+            "buildNumber" => 1,
+            "onLauncher" => true,
+            "iconLauncher" => "tweeterer16x9.png",
+            "size" => array(
+                "width" => 100,
+                "height" => 10
+            ),
+            "publisher" => "overplay.io"
+
+        ),
+
+
     );
 
 
