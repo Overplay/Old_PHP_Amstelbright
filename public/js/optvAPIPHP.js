@@ -15,7 +15,7 @@ angular.module( 'ngOpTVApi', [] )
     .factory( 'optvModel', function ( $http, $log, $timeout ) {
 
         //For HTTP version
-        var POLL_INTERVAL_MS = 500;
+        var POLL_INTERVAL_MS = 800;
         var DATA_UPDATE_METHOD = "lastUpdated";
         var apiPath = '';
 

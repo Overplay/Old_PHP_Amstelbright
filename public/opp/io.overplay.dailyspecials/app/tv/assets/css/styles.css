@@ -13,13 +13,29 @@
     src: url('../fonts/PermanentMarker.ttf');
 }
 
+@font-face {
+    font-family: "LED";
+    src: url('../fonts/DigitaldreamFat.ttf');
+}
+
+@font-face {
+    font-family: "COOL";
+    src: url('../fonts/coolvetica.ttf');
+}
+
+@font-face {
+    font-family: "THIN";
+    src: url('../fonts/thinfont.ttf');
+}
+
+
 html {
     margin: 0;
 }
 
 body {
     margin: 0;
-    font-family: 'PM', sans-serif;
+    font-family: 'LED', sans-serif;
 }
 
 .op0 {
@@ -39,9 +55,8 @@ body {
 }
 
 .css-scroller-holder {
-    font-family: PM, sans-serif;
+    font-family: COOL, sans-serif;
     width: 100%;
-    height: 90px;
     position: relative;
     margin-left: 0;
     margin-right: 0;
@@ -52,11 +67,12 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: 120px;
     background: url(../img/textured.png);
     border-radius: 0;
     margin-left: 0;
     margin-right: 0;
+    ssborder: 1px solid yellow;
 
 }
 
@@ -65,25 +81,26 @@ body {
     top: 0;
     left: 40px;
     overflow: hidden;
-    width: 78%;
+    width: 76%;
+    line-height: 120px;
 
 }
 
 .bar > img {
 
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: 30px;
+    right: 60px;
     width: 15%;
     max-height: 65px;
-    line-height: 90px;
+    line-height: 120px;
 }
 
 .css-scroller-text {
     position: relative;
     left: 1000px;
-    font-size: 50px;
-    line-height: 80px;
+    font-size: 40px;
+    line-height: 120px;
     color: #d0d0d0;
     transition: left 0s linear;
     -webkit-transition: left 0s linear;
