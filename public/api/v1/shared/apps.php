@@ -455,6 +455,21 @@ function installedApps()
 
         ),
 
+        "io.overplay.darts" => array(
+            "name" => "Darts",
+            "appType" => "widget",
+            "reverseDomainName" => "io.overplay.darts",
+            "buildNumber" => 1,
+            "onLauncher" => true,
+            "iconLauncher" => "darts.jpg",
+            "size" => array(
+                "width" => 1000,
+                "height" => 10
+            ),
+            "publisher" => "overplay.io"
+
+        ),
+
 
     );
 

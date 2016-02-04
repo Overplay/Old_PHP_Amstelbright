@@ -52,14 +52,14 @@
 </div>
 <h1>Score for this turn</h1>
 <div class="ctrl-holder rounded-border">
-    <div class="img-button blue-sk lt" ng-click="changeBlueTemp(-1)">-</div>
+    <div class="img-button blue-sk lt" ng-mousedown="changeBlueTempBegin(-1)" ng-mouseup="changeBlueTempEnd()">-</div>
     <div class="score-button blue-sk">{{blueTempScore()}}</div>
-    <div class="img-button blue-sk rt" ng-click="changeBlueTemp(1)">+</div>
+    <div class="img-button blue-sk rt" ng-mousedown="changeBlueTempBegin(1)" ng-mouseup="changeBlueTempEnd()">+</div>
 </div>
 <div class="ctrl-holder rounded-border">
-    <div class="img-button red-sk lt" ng-click="changeRedTemp(-1)">-</div>
+    <div class="img-button red-sk lt" ng-mousedown="changeRedTempBegin(-1)" ng-mouseup="changeRedTempEnd()">-</div>
     <div class="score-button red-sk">{{redTempScore()}}</div>
-    <div class="img-button red-sk rt" ng-click="changeRedTemp(1)">+</div>
+    <div class="img-button red-sk rt" ng-mousedown="changeRedTempBegin(1)" ng-mouseup="changeRedTempEnd()">+</div>
 </div>
 <h1 style="background-color: white"><div class="sq-button" style="background-color: green" ng-click="finishTurn()">Finish Turn</div></h1>
 

@@ -21,8 +21,8 @@ app.controller( "dartsconController",
             $log.info( "ShuffleCon: got inbound message." );
         }
 
-        $scope.redScore = function () { return optvModel.model.red; }
-        $scope.blueScore = function () { return optvModel.model.blue; }
+        $scope.redScore = function () { return optvModel.model.scores ? optvModel.model.scores.red : undefined }
+        $scope.blueScore = function () {  return optvModel.model.scores ? optvModel.model.scores.blue : undefined }
 
         $scope.redTempScore = function () { return optvModel.model.redTemp; }
         $scope.blueTempScore = function () { return optvModel.model.blueTemp; }
@@ -32,31 +32,52 @@ app.controller( "dartsconController",
             optvModel.init( {
                 appName:         "io.overplay.darts",
                 endpoint:        "control",
-                initialValue:    { red: 501, blue: 501, redTemp: 0, blueTemp: 0 },
+                initialValue:    { scores: {red: 501, blue: 501}, turns: [], redTemp: 0, blueTemp: 0 },
                 dataCallback:    dataChanged,
                 messageCallback: inboundMessage
             } );
 
         }
 
-        $scope.changeBlueTemp = function ( by ) {
+        var changeBlueTempTimeout;
+
+        $scope.changeBlueTempBegin = function ( by ) {
 
             optvModel.model.blueTemp = optvModel.model.blueTemp + by;
             if ( optvModel.model.blueTemp < 0 ) optvModel.model.blueTemp = 0;
             optvModel.save();
-
+            changeBlueTempTimeout = $timeout(function(){ $scope.changeBlueTempBegin( by ) }, 100);
         }
 
-        $scope.changeRedTemp = function ( by ) {
+        $scope.changeBlueTempEnd = function(){
+            $timeout.cancel(changeBlueTempTimeout);
+        }
+
+        var changeRedTempTimeout;
+
+        $scope.changeRedTempBegin = function ( by ) {
+
             optvModel.model.redTemp = optvModel.model.redTemp + by;
             if ( optvModel.model.redTemp < 0 ) optvModel.model.redTemp = 0;
             optvModel.save();
+            changeRedTempTimeout = $timeout(function(){ $scope.changeRedTempBegin( by ) }, 100);
+        }
+
+        $scope.changeRedTempEnd = function(){
+            $timeout.cancel(changeRedTempTimeout);
         }
 
         $scope.finishTurn = function(){
 
-            optvModel.model.red = optvModel.model.redTemp > optvModel.model.red ? 0 : optvModel.model.red - optvModel.model.redTemp;
-            optvModel.model.blue = optvModel.model.blueTemp > optvModel.model.blue ? 0 : optvModel.model.blue - optvModel.model.blueTemp;
+            optvModel.model.turns.push({
+                red: optvModel.model.redTemp,
+                blue: optvModel.model.blueTemp
+            });
+
+            optvModel.model.scores.red = optvModel.model.scores.red - optvModel.model.redTemp;
+            if(optvModel.model.scores.red < 0) optvModel.model.scores.red = 0;
+            optvModel.model.scores.blue = optvModel.model.scores.blue - optvModel.model.blueTemp;
+            if(optvModel.model.scores.blue < 0) optvModel.model.scores.blue = 0;
 
             optvModel.model.redTemp = 0;
             optvModel.model.blueTemp = 0;
@@ -66,10 +87,10 @@ app.controller( "dartsconController",
 
 
         $scope.resetScores = function () {
-            optvModel.model.red = 501;
-            optvModel.model.blue = 501;
+            optvModel.model.scores = {red:501, blue: 501};
+            optvModel.model.turns = [];
             optvModel.model.blueTemp = 0;
-            optvModel.model.redTemp = 0;-
+            optvModel.model.redTemp = 0;
             optvModel.save();
 
         }

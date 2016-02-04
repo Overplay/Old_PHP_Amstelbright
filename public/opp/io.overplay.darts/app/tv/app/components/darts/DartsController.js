@@ -10,6 +10,9 @@ app.controller( "dartsController",
         $scope.position = { corner: 0 };
         $scope.score = { red: 0, blue: 0, redHighlight: false, blueHighlight: false };
 
+        $scope.turns = [];
+        $scope.turnsSkip = 0;
+
         var _remoteScore = {};
 
         function logLead() { return "DartsController: "; }
@@ -22,13 +25,17 @@ app.controller( "dartsController",
         } );
 
         function updateLocalScore() {
+            var animRed = false, animBlue = false;
 
-            var animRed = $scope.score.red < _remoteScore.red;
-            var animBlue = $scope.score.blue < _remoteScore.blue;
+            $scope.score.red = _remoteScore.scores.red;
+            $scope.score.blue = _remoteScore.scores.blue;
 
-            $scope.score.red = _remoteScore.red;
-            $scope.score.blue = _remoteScore.blue;
-
+            if($scope.turns.length != _remoteScore.turns.length){
+                $scope.turns = _remoteScore.turns;
+                animRed = true;
+                animBlue = true;
+            }
+            $scope.turnsSkip = $scope.turns.length > 9 ? $scope.turns.length - 9 : 0;
 
             if ( animRed ) {
                 $scope.score.redHighlight = true;

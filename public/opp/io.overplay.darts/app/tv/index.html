@@ -30,6 +30,7 @@
   <!--<link href="assets/css/style.css" rel="stylesheet">-->
   <link href="assets/css/styles.css" rel="stylesheet">
 
+  <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
 
   <title>OPTV Darts</title>
 </head>
@@ -37,14 +38,34 @@
 <body>
 
 <!-- semis skeuomorph look -->
-<div class="applet" ng-controller="dartsController">
-  <div class="applet-banner">Overplay</div>
-  <div class="score-box red-sk" ng-class="{ 'grow' : score.redHighlight }">
-    <div>{{score.red}}</div>
-  </div>
-  <div class="score-box blue-sk" ng-class="{ 'grow' : score.blueHighlight }">
-    <div>{{score.blue}}</div>
-  </div>
+<div class="applet" ng-controller="dartsController" style=" font-family: 'Architects Daughter'">
+  <div class="applet-banner">Overplay Darts</div>
+    <div style="width:80%; margin: auto; height: 250px;">
+        <div style="width: 50%; float: left; border-bottom: 3px solid white">
+            <div class="score-box red-sk" ng-class="{ 'grow' : score.redHighlight }">
+                <div style="color: rgba(242, 167, 167, .9)">{{score.red}}</div>
+            </div>
+        </div>
+        <div style="width: 50%; float: right; padding-bottom: 0; border-bottom: 3px solid white">
+            <div class="score-box blue-sk" ng-class="{ 'grow' : score.blueHighlight }">
+                <div style="color: rgba(167, 232, 242, .9)" style="margin: 0;">{{score.blue}}</div>
+            </div>
+        </div>
+        <wrapper style="overflow-y: scroll">
+            <wrapper ng-repeat="scoreObj in turns" ng-if="$index >= turnsSkip">
+                <div style="width: 49%; float: left;" >
+                    <div style="text-align: center; color: white;">
+                        <div>{{scoreObj.red}}</div>
+                    </div>
+                </div>
+                <div style="width: 49%; float: right;">
+                    <div style="text-align: center; color: white;">
+                        <div>{{scoreObj.blue}}</div>
+                    </div>
+                </div>
+            </wrapper>
+        </wrapper>
+    </div>
 </div>
 
 </body>
