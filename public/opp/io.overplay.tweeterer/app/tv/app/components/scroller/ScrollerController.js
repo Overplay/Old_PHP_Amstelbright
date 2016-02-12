@@ -17,6 +17,7 @@ app.controller( "scrollerController",
         var tweetAuth = false;
 
         $scope.tvinfo = undefined;
+        $scope.updated = 0;
 
         function fetchTwats() {
 
@@ -31,6 +32,8 @@ app.controller( "scrollerController",
 
                         $scope.messageArray.push( twat.text );
                     } );
+
+                    $scope.updated = new Date().getTime();
                     $scope.$apply();
                 }
             );
@@ -79,14 +82,16 @@ app.controller( "scrollerController",
                             $scope.tvinfo = data.data;
 
                             if ( $scope.tvinfo.callsign.indexOf( 'ESPN' ) > -1 ) {
-                                optvModel.moveAppToSlot( 0 );
-                            } else {
                                 optvModel.moveAppToSlot( 1 );
-
+                                tweetSearchTerm = "ESPN";
+                            } else {
+                                optvModel.moveAppToSlot( 0 );
+                                tweetSearchTerm = $scope.tvinfo.callsign;
                             }
 
                             $scope.messageArray = [ "Looks like you switched to " + $scope.tvinfo.callsign, "Hold on while I grab some tweetage!" ];
-                            tweetSearchTerm = $scope.tvinfo.callsign + " " + $scope.tvinfo.title;
+                            $scope.updated = new Date().getTime();
+
 
 
                             $timeout( fetchTwats, 15000 );
@@ -127,7 +132,8 @@ app.directive( 'cssScroller', [
         return {
             restrict:    'E',
             scope:       {
-                messageArray: '='
+                messageArray: '=',
+                updated: '='
             },
             templateUrl: 'app/components/scroller/cssscroller.template.html',
             link:        function ( scope, elem, attrs ) {
@@ -143,6 +149,12 @@ app.directive( 'cssScroller', [
 
                 scope.message.text = scope.messageArray[ idx ];
 
+                function init(){
+                    leftPixel = $window.innerWidth + 20;
+                    idx = 0;
+
+                }
+
 
                 function setLeftPos() {
                     scope.message.leftPos = leftPixel + 'px';
@@ -152,9 +164,12 @@ app.directive( 'cssScroller', [
 
                 function nextMsg() {
                     $log.info( "NEXT MESSAGE" );
-                    idx++;
                     if ( idx > (scope.messageArray.length-1) ) idx = 0;
                     scope.message.text = scope.messageArray[ idx ];
+
+                    if (!scope.message.text){
+                        scope.message.text = "Fetching up some tweets! Please stand by.....";
+                    }
 
                     messageWidth = scope.message.text.length * 40;
 
@@ -162,6 +177,8 @@ app.directive( 'cssScroller', [
 
                     leftPixel = $window.innerWidth + 20;
                     setLeftPos();
+                    idx++;
+
                     $timeout( scroll, 10 );
                 }
 
@@ -178,13 +195,15 @@ app.directive( 'cssScroller', [
                     }
                 }
 
-                $timeout( nextMsg, 20 );
 
-                scope.$watch('messageArray', function(newval){
+                scope.$watch('updated', function(newval){
 
-                    $log.debug("Scroller says messages changed to: "+newval);
+                    $log.debug("Scroller says messages updated at: "+newval);
+                    init();
+                    $timeout( nextMsg, 20 );
 
-                }, true);
+
+                });
 
 
 
