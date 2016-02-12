@@ -102,7 +102,7 @@ app.directive( 'cssScroller', [
 
                     function setLeftPos() {
                         scope.message.leftPos = leftPixel + 'px';
-                        //$log.info( "LEFT POS: " + scope.message.leftPos );
+                        $log.info( "LEFT POS: " + scope.message.leftPos );
 
                     }
 
@@ -125,7 +125,7 @@ app.directive( 'cssScroller', [
                     function scroll() {
                         leftPixel -= PIXELS_PER_FRAME;
                         setLeftPos();
-                        if ( leftPixel < (-messageWidth) ) {
+                        if ( leftPixel < 0 ) {
                             nextMsg();
 
                         } else {

@@ -227,6 +227,20 @@ angular.module( 'ngOpTVApi', [] )
         };
 
         /**
+         * Request crawler app be moved to slots
+         * @returns {promise that returns slot Id}
+         */
+        service.moveAppToSlot = function ( slot, appid ) {
+
+            //Passing nothing moves the app this API service is attached to
+            appid = appid || _appName;
+            slot = slot || 0;
+            //moveToSlot&slot=0&appid=io.overplay.budboard
+            return $http.post( apiPath + '/api/v1/overplayos/index.php?command=moveToSlot&appid=' + appid+"&slot="+slot );
+
+        };
+
+        /**
          * Request app be launched
          * @returns {promise}
          */
