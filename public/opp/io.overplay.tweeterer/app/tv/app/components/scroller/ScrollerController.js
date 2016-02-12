@@ -86,7 +86,7 @@ app.controller( "scrollerController",
                                 tweetSearchTerm = "ESPN";
                             } else {
                                 optvModel.moveAppToSlot( 0 );
-                                tweetSearchTerm = $scope.tvinfo.callsign;
+                                tweetSearchTerm = $scope.tvinfo.title;
                             }
 
                             $scope.messageArray = [ "Looks like you switched to " + $scope.tvinfo.callsign, "Hold on while I grab some tweetage!" ];
@@ -141,7 +141,7 @@ app.directive( 'cssScroller', [
                 var idx = 0;
                 var leftPixel = $window.innerWidth + 20;
                 var messageWidth = 0;
-                var PIXELS_PER_FRAME = 4;
+                var PIXELS_PER_FRAME = 2;
                 var FPS = 30;
 
 
