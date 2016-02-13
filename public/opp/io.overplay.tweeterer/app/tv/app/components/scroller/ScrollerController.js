@@ -23,7 +23,7 @@ app.controller( "scrollerController",
 
             cb.__call(
                 "search_tweets",
-                "q=" + tweetSearchTerm,
+                "q=" + tweetSearchTerm +" lang:en",
                 function ( reply, rate_limit_status ) {
                     console.log( rate_limit_status );
                     $scope.messageArray = [];
