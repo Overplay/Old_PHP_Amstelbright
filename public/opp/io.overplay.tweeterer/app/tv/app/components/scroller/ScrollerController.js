@@ -121,6 +121,8 @@ app.controller( "scrollerController",
 
         $interval(getTVInfo, 1000);
 
+        $interval(fetchTwats, 10000);
+
     } );
 
 /**
