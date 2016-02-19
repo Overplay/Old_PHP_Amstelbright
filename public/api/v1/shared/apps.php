@@ -431,10 +431,10 @@ function installedApps()
             "publisher" => "overplay.io"
         ),
 
-        "io.overplay.budboard" => array(
-            "name" => "Bud Board",
+        "io.overplay.budboard2" => array(
+            "name" => "Bud Board 2",
             "appType" => "crawler",
-            "reverseDomainName" => "io.overplay.budboard",
+            "reverseDomainName" => "io.overplay.budboard2",
             "buildNumber" => 1,
             "onLauncher" => true,
             "iconLauncher" => "budboard16x9s.png",

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="optvBBConApp">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="assets/bower_components/angular/angular.js"></script>
+    <script src="assets/bower_components/lodash/lodash.js"></script>
+
+
+    <!-- App Main and AngularJS Routes -->
+    <script src="app/optvBBConApp.module.js"></script>
+    <script src="/js/optvAPIPHP.js"></script>
+
+    <!-- Controllers -->
+    <script src="app/components/bbConController.js"></script>
+
+    <!-- App Specific and Overridden CSS -->
+    <link href="assets/css/bootflat.css" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <title>OPTV Daily Specials Control</title>
+</head>
+
+<body ng-controller="bbConController">
+
+<!-- Remote Control -->
+<h1>Bud Board</h1>
+
+<div class="container">
+    <div class="row" ng-repeat="msg in messageArray track by $index">
+        <div class="col-xs-1"> {{ $index+1 }} </div>
+        <div class="col-xs-10"><input type="text" class="form-control" ng-model="messageArray[$index]"> </div>
+        <div class="col-xs-1">
+            <i class="fa fa-trash" ng-click="del($index)">&nbsp;</i></div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-1">NEW</div>
+        <div class="col-xs-10"><input type="text" class="form-control" ng-model="messageArray[$index]"></div>
+        <div class="col-xs-1">
+        </div>
+    </div>
+
+</div>
+
+<div>{{ ui.json }}</div>
+
+<div class="ctrl-holder bottom">
+    <div class="sq-button y" ng-click="add()"><i class="fa fa-plus-circle">&nbsp;ADD MESSAGE</i></div>
+    <div class="sq-button bl2" ng-click="done()"><i class="fa fa-upload"></i>&nbsp;UPDATE TV</div>
+
+</div>
+
+</body>
+</html>

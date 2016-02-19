@@ -1,0 +1,135 @@
+@font-face {
+    font-family: "Dosis";
+    src: url('../fonts/Dosis-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Dosis-Bold";
+    src: url('../fonts/Dosis-ExtraBold.ttf');
+}
+
+html {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Dosis', sans-serif;
+}
+
+h1 {
+    width: 100%;
+    background-color: #001c20;
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 0;
+    padding: 5px;
+}
+
+.img-button {
+    display: inline-block;
+    height: 70px;
+    width: 250px;
+    border-radius: 70px;
+    margin: 1%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 80px;
+}
+
+.sq-button {
+    display: inline-block;
+    width: 50%;
+    height: 50px;
+    border-radius: 5px;
+    margin: 4px;;
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+}
+
+.rt {
+    margin-right: 15%;
+}
+
+.lt {
+    margin-left: 15%;
+}
+
+.red-sk {
+    border: 3px solid red;
+    color: white;
+    background-color: red;
+}
+
+.blue-sk {
+    border: 3px solid blue;
+    color: white;
+    background-color: blue;
+}
+
+.rd2 {
+    color: white;
+    background-color: #ea526f;
+}
+
+.bl2 {
+    color: white;
+    background-color: #1b9aaa;
+}
+
+.y {
+    color: #5a5d5b;
+    background-color: #ffc025;
+}
+
+
+.rounded-border {
+    border: 2px solid #eee;
+    border-radius: 15px;
+    margin-top: 5px;
+}
+
+.bottom {
+    position: absolute;
+    left: 0;
+    bottom: 50px;
+    width: 95%;
+}
+
+
+
+.msg {
+    width: 100%;
+    padding: 10px;
+}
+
+.msg input {
+    width: 90%;
+    padding: 5px;
+    font-size: 1.0rem;
+}
+
+
+.ctrl-holder {
+
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+
+}
+
+
+.msgnum {
+    background-color: #404040;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    width: 30px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+}
