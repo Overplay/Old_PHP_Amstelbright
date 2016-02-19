@@ -43,6 +43,7 @@ body {
     height: 1080px;
     background-image: url('../img/sideswoop.png');
     background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .inner-holder {
