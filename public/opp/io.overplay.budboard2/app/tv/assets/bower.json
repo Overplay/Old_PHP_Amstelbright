@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "angular": "~1.4",
-    "lodash": "*"
-    }
+    "lodash": "*",
+    "codebird-js": "codebird#~2.6.0"
+  }
 }

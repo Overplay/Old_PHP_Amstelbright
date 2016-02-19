@@ -19,7 +19,7 @@ app.controller( "scrollerController",
         $scope.tvinfo = undefined;
         $scope.updated = 0;
 
-        function fetchTwats() {
+        function fetchTweets() {
 
             cb.__call(
                 "search_tweets",
@@ -28,9 +28,9 @@ app.controller( "scrollerController",
                     console.log( rate_limit_status );
                     $scope.messageArray = [];
 
-                    reply.statuses.forEach( function ( twat ) {
+                    reply.statuses.forEach( function ( tweet ) {
 
-                        $scope.messageArray.push( twat.text );
+                        $scope.messageArray.push( tweet.text );
                     } );
 
                     $scope.updated = new Date().getTime();
@@ -55,7 +55,7 @@ app.controller( "scrollerController",
                     bearer_token = reply.access_token;
                     cb.setBearerToken( bearer_token );
                     tweetAuth = true;
-                    fetchTwats();
+                    fetchTweets();
                 }
             }
         );
@@ -94,7 +94,7 @@ app.controller( "scrollerController",
 
 
 
-                            $timeout( fetchTwats, 15000 );
+                            $timeout( fetchTweets, 15000 );
 
 
                         }
@@ -121,7 +121,7 @@ app.controller( "scrollerController",
 
         $interval(getTVInfo, 1000);
 
-        $interval(fetchTwats, 10000);
+        $interval( fetchTweets, 10000);
 
     } );
 

@@ -14,9 +14,9 @@
 .text-holder {
     /*border: 1px solid mediumpurple;*/
     height: 100px;
-    width: 80%;
+    width: 100%;
     overflow: hidden;
-    margin-left: 300px;
+    margin-left: 50px;
 
 }
 
