@@ -35,7 +35,7 @@
     <title>OPTV Amstel Mainframe</title>
 </head>
 
-<body ng-controller="mainFrameController" ng-keypress="keyPressed($event)" id="docbody" ng-click="keyPressed('center')">
+<body ng-controller="mainFrameController" ng-keypress="keyPressed($event)" id="docbody" ng-click="keyPressed('center')" ng-hide="ui.hideall">
 
 <!-- array of launched apps -->
 
@@ -43,7 +43,7 @@
     <video src="/vids/UCLA_Clip_Web.mp4" autoplay loop style="width: 100%; height: 100%;"></video>
 </div>
 
-<div class="appholder hide-fade" ng-show="!launcher.show && ui.open">
+<div class="appholder" ng-show="!launcher.show">
     <iframe ng-repeat="appSrc in runningAppSrc" src="{{ appSrc }}"
             ng-style="runningAppPos[$index]"
             ng-class="runningApps[$index].appType"></iframe>
@@ -51,7 +51,7 @@
 
 
 <iframe src="{{launcher.app.src}}"
-        class="launcher-iframe" ng-class="{'launcher-offscreen': !launcher.show}" ng-show="ui.open"></iframe>
+        class="launcher-iframe" ng-class="{'launcher-offscreen': !launcher.show }"></iframe>
 
 <div class="debugbox" ng-show="ui.debug">{{os.windowDimension.text}}
 </div>

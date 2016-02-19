@@ -60,25 +60,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    transition: top 1s linear;
-    -webkit-transition: top 0.5s linear;
     border: 0;
-    aaborder: 2px solid orange;
+    /*border: 2px solid orange;*/
 
 }
 
-.hide-fade {
-    -webkit-transition: opacity linear .3s;
-    -moz-transition: opacity linear .3s;
-    -o-transition: opacity linear .3s;
-    transition: opacity linear .3s;
-    display: block !important;
-    opacity: 1;
-}
 
-.hide-fade.ng-hide-add {
-    opacity: 0;
-}
 
 .debugbox {
     position: absolute;

@@ -41,7 +41,8 @@ body {
     float: left;
     width: 25%;
     height: 1080px;
-    background-image: url('../img/bluetex.jpg');
+    background-image: url('../img/sideswoop.png');
+    background-size: contain;
 }
 
 .inner-holder {
@@ -161,7 +162,7 @@ body {
 
     .not-selected {
 
-        border: 2px solid transparent;
+        border: 10px solid transparent;
 
     }
 
@@ -173,7 +174,7 @@ body {
         font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
         background-color: #484848;
         line-height: 50px;
-        border-radius: 5px;
+        border-radius: 2px;
     }
 
 }
