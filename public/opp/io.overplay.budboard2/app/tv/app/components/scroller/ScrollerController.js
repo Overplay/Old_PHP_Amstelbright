@@ -12,7 +12,7 @@ app.controller( "scrollerController",
             "2-for-1 Long Island Ice Teas",
             "Coming Up at 1:25 - 49ers @ AZ Cardinals" ];
 
-        $scope.messageArray = [ "Daily Specials from Overplay", "Change your messages via Control App" ];
+        $scope.messageArray = [ "BudBoard from Budweiser", "The King of Beers", "Change your messages via Control App" ];
 
         function logLead() { return "scrollerController: "; }
 
@@ -36,7 +36,7 @@ app.controller( "scrollerController",
         function updateFromRemote() {
 
             optvModel.init( {
-                appName:         "io.overplay.dailyspecials",
+                appName:         "io.overplay.budboard2",
                 endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,

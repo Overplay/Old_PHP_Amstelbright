@@ -28,7 +28,7 @@ app.controller( "bbConController",
         function initialize() {
 
             optvModel.init( {
-                appName:         "io.overplay.budboard",
+                appName:         "io.overplay.budboard2",
                 endpoint:        "control",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage
