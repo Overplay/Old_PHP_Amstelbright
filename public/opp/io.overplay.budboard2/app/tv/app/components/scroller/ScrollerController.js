@@ -161,7 +161,7 @@ app.controller( "scrollerController",
 
         $interval( getTVInfo, 1000 );
 
-        $interval( fetchTweets, 12000 );
+        $interval( fetchTweets, 5*60*1000 );
 
     } );
 
