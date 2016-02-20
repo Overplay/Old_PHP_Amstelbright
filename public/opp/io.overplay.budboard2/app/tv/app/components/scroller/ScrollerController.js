@@ -89,7 +89,7 @@ app.controller( "scrollerController",
                 "search_tweets",
                 "q=" + tweetSearchTerm + " lang:en",
                 function ( reply, rate_limit_status ) {
-                    console.log( "RL Status: " + rate_limit_status );
+                    console.log( "RL Status: " + angular.toJson(rate_limit_status, true) );
                     tweets = [];
 
                     if ( reply.statuses ) {
