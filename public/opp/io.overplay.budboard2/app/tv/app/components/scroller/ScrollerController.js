@@ -73,13 +73,13 @@ app.controller( "scrollerController",
         }
 
 
-        function interleave(){
+        function interleave() {
 
             $scope.messageArray = [];
             //lodash concat not working for some whacky reason
-            tweets.forEach(function(t){ $scope.messageArray.push(t)});
-            localMessages.forEach( function ( t ) { $scope.messageArray.push( t )});
-            shuffle($scope.messageArray);
+            tweets.forEach( function ( t ) { $scope.messageArray.push( t )} );
+            localMessages.forEach( function ( t ) { $scope.messageArray.push( t )} );
+            shuffle( $scope.messageArray );
 
         }
 
@@ -89,26 +89,30 @@ app.controller( "scrollerController",
                 "search_tweets",
                 "q=" + tweetSearchTerm + " lang:en",
                 function ( reply, rate_limit_status ) {
-                    console.log( rate_limit_status );
+                    console.log( "RL Status: " + rate_limit_status );
                     tweets = [];
 
-                    var statuses = reply.statuses.slice(0, 5);
+                    if ( reply.statuses ) {
 
-                    statuses.forEach( function ( tweet ) {
+                        var statuses = reply.statuses.slice( 0, 5 );
 
-                        tweets.push( tweet.text );
-                    } );
+                        statuses.forEach( function ( tweet ) {
+                            tweets.push( tweet.text );
+                        } );
 
-                    $scope.updated = new Date().getTime();
-                    interleave();
-                    $scope.$apply();
+                        $scope.updated = new Date().getTime();
+                        interleave();
+                        $scope.$apply();
+
+                    }
+
                 }
             );
 
         }
 
 
-        if (TWITTER){
+        if ( TWITTER ) {
 
             var cb = new Codebird;
             cb.setConsumerKey( API_KEY, API_SECRET );
@@ -161,73 +165,72 @@ app.controller( "scrollerController",
 
         $interval( getTVInfo, 1000 );
 
-        $interval( fetchTweets, 5*60*1000 );
+        $interval( fetchTweets, 5 * 60 * 1000 );
 
     } );
 
 app.directive( 'marqueeScroller', [
-        '$log',
-        function ( $log ) {
-            return {
-                restrict:    'E',
-                scope:       {
-                    messageArray: '='
-                },
-                templateUrl: 'app/components/scroller/marqueescroller.template.html',
-                link:        function ( scope, elem, attrs ) {
-                    "use strict";
-                    var idx = 0;
+    '$log',
+    function ( $log ) {
+        return {
+            restrict:    'E',
+            scope:       {
+                messageArray: '='
+            },
+            templateUrl: 'app/components/scroller/marqueescroller.template.html',
+            link:        function ( scope, elem, attrs ) {
+                "use strict";
+                var idx = 0;
+                scope.currentScroller = scope.messageArray[ idx ];
+
+                elem.bind( 'onfinish', function ( ev ) {
+                    idx++;
+                    if ( idx >= scope.messageArray.length ) idx = 0;
                     scope.currentScroller = scope.messageArray[ idx ];
+                } );
 
-                    elem.bind( 'onfinish', function ( ev ) {
-                        idx++;
-                        if ( idx >= scope.messageArray.length ) idx = 0;
-                        scope.currentScroller = scope.messageArray[ idx ];
-                    } );
-
-                }
             }
-        } ]
+        }
+    } ]
 );
 
 
-
 app.directive( 'cssFader', [
-        '$log', '$timeout',
-        function ( $log, $timeout ) {
-            return {
-                restrict:    'E',
-                scope:       {
-                    messageArray: '='
-                },
-                templateUrl: 'app/components/scroller/cssfader.template.html',
-                link:        function ( scope, elem, attrs ) {
-                    "use strict";
-                    var idx = 0;
+    '$log', '$timeout',
+    function ( $log, $timeout ) {
+        return {
+            restrict:    'E',
+            scope:       {
+                messageArray: '='
+            },
+            templateUrl: 'app/components/scroller/cssfader.template.html',
+            link:        function ( scope, elem, attrs ) {
+                "use strict";
+                var idx = 0;
 
-                    scope.message = { text: "", fadein: false };
-                    scope.message.text = scope.messageArray[ idx ];
-
-
-                    function nextMsg() {
-                        idx++;
-                        if ( idx == scope.messageArray.length ) idx = 0;
-                        scope.message.fadein = false;
-                        $timeout( scroll, 2000 );
-                    }
+                scope.message = { text: "", fadein: false };
+                scope.message.text = scope.messageArray[ idx ];
 
 
-                    function scroll() {
-                        scope.message.fadein = true;
-                        scope.message.text = scope.messageArray[ idx ];
-                        $timeout( nextMsg, 8000 );
-                    }
-
+                function nextMsg() {
+                    idx++;
+                    if ( idx == scope.messageArray.length ) idx = 0;
+                    scope.message.fadein = false;
                     $timeout( scroll, 2000 );
-
                 }
+
+
+                function scroll() {
+                    scope.message.fadein = true;
+                    scope.message.text = scope.messageArray[ idx ];
+                    $timeout( nextMsg, 8000 );
+                }
+
+                $timeout( scroll, 2000 );
+
             }
-        } ]
+        }
+    } ]
 );
 
 app.directive( 'leftScroller', [
@@ -251,49 +254,49 @@ app.directive( 'leftScroller', [
                 var clen = 0;
                 var lastLeft;
 
-                function restart(){
-                    scope.slider = { leftPos: $window.innerWidth};
+                function restart() {
+                    scope.slider = { leftPos: $window.innerWidth };
                 }
 
-                function slide(){
+                function slide() {
 
-                    scope.slider.leftPos-=PIXELS_PER_FRAME;
+                    scope.slider.leftPos -= PIXELS_PER_FRAME;
                     //$log.info( "leftScroller: position " + scope.slider.leftPos );
 
-                    if ( scope.slider.leftPos < ( -1*lastLeft)){
+                    if ( scope.slider.leftPos < ( -1 * lastLeft) ) {
                         restart();
                     }
 
-                    $timeout( slide, 1000/FPS );
+                    $timeout( slide, 1000 / FPS );
 
                 }
 
-                function getWidth(){
+                function getWidth() {
                     var sliderWidth = document.getElementById( 'slider' ).clientWidth;
-                    $log.debug("Slider div width: "+sliderWidth);
+                    $log.debug( "Slider div width: " + sliderWidth );
 
                     clen = 0;
 
-                    scope.messageArray.forEach( function(m){
-                        clen+=m.length;
-                    })
+                    scope.messageArray.forEach( function ( m ) {
+                        clen += m.length;
+                    } )
 
                     lastLeft = clen * PIXELS_PER_CHAR;
-                    $log.debug("Char len: "+clen);
+                    $log.debug( "Char len: " + clen );
 
 
                 }
 
                 restart();
-                $log.info("leftScroller: position "+scope.slider.leftPos);
+                $log.info( "leftScroller: position " + scope.slider.leftPos );
 
 
-                scope.$watch('messageArray', function(nval){
+                scope.$watch( 'messageArray', function ( nval ) {
 
-                    $log.debug("Message Array changed: "+nval);
+                    $log.debug( "Message Array changed: " + nval );
                     getWidth();
 
-                })
+                } )
 
                 slide();
 
