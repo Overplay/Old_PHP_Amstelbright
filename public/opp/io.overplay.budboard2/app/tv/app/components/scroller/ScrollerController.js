@@ -272,6 +272,8 @@ app.directive( 'leftScroller', [
                     var sliderWidth = document.getElementById( 'slider' ).clientWidth;
                     $log.debug("Slider div width: "+sliderWidth);
 
+                    clen = 0;
+
                     scope.messageArray.forEach( function(m){
                         clen+=m.length;
                     })
