@@ -10,8 +10,6 @@
 
 
 var app = angular.module('optvMainFrameApp', [
-    'ngAnimate',
-    'ngSanitize',
     'ngOpTVApi'
 ]);
 
@@ -23,7 +21,7 @@ var app = angular.module('optvMainFrameApp', [
  */
 function fCheckAlive()
 {
-	console.log("fCheckAlive called.");
+	//console.log("fCheckAlive called.");
 	return true;
 }
 

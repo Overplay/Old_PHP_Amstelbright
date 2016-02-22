@@ -82,6 +82,43 @@ function moveApp($appid)
 
 }
 
+function moveAppToSlot($appid, $slot){
+
+    $ra = loadJSON("runningApps", array());
+
+    // Puke if not already running
+    if (!array_key_exists($appid, $ra)) {
+        return array("success" => false, "msg" => "No such app running");
+    }
+
+    $tomove = $ra[$appid];
+    $slotInt = intval($slot);
+
+        $sm = screenMap();
+
+    switch ($slotInt){
+
+        case 0:
+            $sm['crawlerAppMap'][0]=$tomove;
+            $sm['crawlerAppMap'][1] = null;
+            $ans = array("success" => true, "msg" => "Moved or slot 0");
+            break;
+
+        case 1:
+            $sm['crawlerAppMap'][1] = $tomove;
+            $sm['crawlerAppMap'][0] = null;
+            $ans = array("success" => true, "msg" => "Moved or slot 1");
+
+            break;
+
+    }
+
+    saveJSON("screenMap", $sm);
+    signalLayoutChange();
+    return $ans;
+
+}
+
 
 function isAppRunning($appid)
 {
@@ -394,10 +431,10 @@ function installedApps()
             "publisher" => "overplay.io"
         ),
 
-        "io.overplay.budboard" => array(
-            "name" => "Bud Board",
+        "io.overplay.budboard2" => array(
+            "name" => "Bud Board 2",
             "appType" => "crawler",
-            "reverseDomainName" => "io.overplay.budboard",
+            "reverseDomainName" => "io.overplay.budboard2",
             "buildNumber" => 1,
             "onLauncher" => true,
             "iconLauncher" => "budboard16x9s.png",
@@ -463,8 +500,8 @@ function installedApps()
             "onLauncher" => true,
             "iconLauncher" => "darts.jpg",
             "size" => array(
-                "width" => 1000,
-                "height" => 10
+                "width" => 25,
+                "height" => 40
             ),
             "publisher" => "overplay.io"
 

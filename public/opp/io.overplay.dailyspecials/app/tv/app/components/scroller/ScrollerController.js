@@ -102,7 +102,7 @@ app.directive( 'cssScroller', [
 
                     function setLeftPos() {
                         scope.message.leftPos = leftPixel + 'px';
-                        //$log.info( "LEFT POS: " + scope.message.leftPos );
+                        $log.info( "LEFT POS: " + scope.message.leftPos );
 
                     }
 
@@ -125,7 +125,7 @@ app.directive( 'cssScroller', [
                     function scroll() {
                         leftPixel -= PIXELS_PER_FRAME;
                         setLeftPos();
-                        if ( leftPixel < (-messageWidth) ) {
+                        if ( leftPixel < 0 ) {
                             nextMsg();
 
                         } else {
@@ -177,4 +177,76 @@ app.directive( 'cssFader', [
                 }
             }
         } ]
+);
+
+app.directive( 'leftScroller', [
+    '$log', '$timeout', '$window',
+    function ( $log, $timeout, $window ) {
+        return {
+            restrict:    'E',
+            scope:       {
+                messageArray: '='
+            },
+            templateUrl: 'app/components/scroller/leftscroller.template.html',
+            link:        function ( scope, elem, attrs ) {
+
+                var idx = 0;
+                var leftPixel = $window.innerWidth + 20;
+                var messageWidth = 0;
+                var PIXELS_PER_FRAME = 4;
+                var FPS = 30;
+                var PIXELS_PER_CHAR = 7;
+
+                var clen = 0;
+                var lastLeft;
+
+                function restart(){
+                    scope.slider = { leftPos: $window.innerWidth};
+                }
+
+                function slide(){
+
+                    scope.slider.leftPos-=PIXELS_PER_FRAME;
+                    $log.info( "leftScroller: position " + scope.slider.leftPos );
+
+                    if ( scope.slider.leftPos < ( -1*lastLeft)){
+                        restart();
+                    }
+
+                    $timeout( slide, 1000/FPS );
+
+                }
+
+                function getWidth(){
+                    var sliderWidth = document.getElementById( 'slider' ).clientWidth;
+                    $log.debug("Slider div width: "+sliderWidth);
+                    clen = 0;
+
+                    scope.messageArray.forEach( function(m){
+                        clen+=m.length;
+                    })
+
+                    lastLeft = clen * PIXELS_PER_CHAR;
+                    $log.debug("Char len: "+clen);
+
+
+                }
+
+                restart();
+                $log.info("leftScroller: position "+scope.slider.leftPos);
+
+
+                scope.$watch('messageArray', function(nval){
+
+                    $log.debug("Message Array changed: "+nval);
+                    getWidth();
+
+                })
+
+                slide();
+
+
+            }
+        }
+    } ]
 );

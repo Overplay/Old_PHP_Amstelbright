@@ -122,6 +122,19 @@ if (isset($_REQUEST['command'])) {
 
             break;
 
+        case 'moveToSlot':
+
+
+            if (isPOST() && isset($_REQUEST['appid']) && isset($_REQUEST['slot'])) {
+                $res = moveAppToSlot( $_REQUEST['appid'], $_REQUEST['slot'] );
+                header('Content-Type: application/json');
+                jsonOut(json_encode($res));
+            } else {
+                badReq('Wrong verb or no appid or no slot, dick '.$_REQUEST['appid']);
+            }
+
+            break;
+
 
         case 'appsbystate':
 

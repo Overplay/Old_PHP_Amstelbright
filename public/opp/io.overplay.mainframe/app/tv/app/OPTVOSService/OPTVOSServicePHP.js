@@ -12,7 +12,6 @@
  **********************************/
 
 app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function ( $log, $http, $rootScope, $window ) {
-    "use strict";
 
     var apiPath = '';
 

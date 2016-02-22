@@ -13,7 +13,7 @@
 
 app.controller( "mainFrameController", function ( $scope, $timeout, $location, $log, $rootScope, $http, $window, optvModel, osService, $interval ) {
 
-        console.log( "Loading mainFrameController" );
+        $log.info( "Loading mainFrameController" );
         $log.info( "osService SERVICE: " + osService.name );
 
         $scope.launcher = { app: undefined, show: false };
@@ -27,14 +27,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         $scope.runningAppSrc = [];
         $scope.runningAppPos = [];
 
-        $scope.ui = { hidemax: true, open: true, debug: false, fauxTV: false, loadingApp: false };
-
-        $interval( function () {
-            $scope.ui.hidemax = false;
-            $timeout( function () {
-                $scope.ui.hidemax = true;
-            }, 3000 );
-        }, 45000 );
+        $scope.ui = { open: true, debug: false, fauxTV: false, loadingApp: false, hideall: true };
 
         var logLead = "MFController: ";
 
@@ -250,7 +243,9 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
             } );
 
 
-        $timeout( function () { $scope.ui.open = true; }, 3000 );
+        $timeout( function () { $scope.ui.hideall = false; }, 5000 );
+
+
     }
 )
 ;
