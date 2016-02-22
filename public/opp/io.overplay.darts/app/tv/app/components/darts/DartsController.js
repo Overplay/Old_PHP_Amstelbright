@@ -27,8 +27,8 @@ app.controller( "dartsController",
         function updateLocalScore() {
             var animRed = false, animBlue = false;
 
-            $scope.score.red = _remoteScore.scores.red;
-            $scope.score.blue = _remoteScore.scores.blue;
+            $scope.score.red = _remoteScore.red;
+            $scope.score.blue = _remoteScore.blue;
 
             if($scope.turns.length != _remoteScore.turns.length){
                 $scope.turns = _remoteScore.turns;
@@ -71,7 +71,7 @@ app.controller( "dartsController",
                 endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,
-                initialValue:    { red: 0, blue: 0, toTV: undefined },
+                initialValue:    { red: 501, blue: 501, redTemp: 0, blueTemp: 0, turns: [], toTV: undefined },
             } );
 
         }

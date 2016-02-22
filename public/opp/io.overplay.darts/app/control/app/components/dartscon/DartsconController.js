@@ -21,8 +21,8 @@ app.controller( "dartsconController",
             $log.info( "ShuffleCon: got inbound message." );
         }
 
-        $scope.redScore = function () { return optvModel.model.scores ? optvModel.model.scores.red : undefined }
-        $scope.blueScore = function () {  return optvModel.model.scores ? optvModel.model.scores.blue : undefined }
+        $scope.redScore = function () { return optvModel.model ? optvModel.model.red : undefined }
+        $scope.blueScore = function () {  return optvModel.model ? optvModel.model.blue : undefined }
 
         $scope.redTempScore = function () { return optvModel.model.redTemp; }
         $scope.blueTempScore = function () { return optvModel.model.blueTemp; }
@@ -32,7 +32,7 @@ app.controller( "dartsconController",
             optvModel.init( {
                 appName:         "io.overplay.darts",
                 endpoint:        "control",
-                initialValue:    { scores: {red: 501, blue: 501}, turns: [], redTemp: 0, blueTemp: 0 },
+                initialValue:    { red: 501, blue: 501, turns: [], redTemp: 0, blueTemp: 0 },
                 dataCallback:    dataChanged,
                 messageCallback: inboundMessage
             } );
@@ -69,25 +69,32 @@ app.controller( "dartsconController",
 
         $scope.finishTurn = function(){
 
+            console.log(optvModel);
+
+            if(!optvModel.model.turns){
+                optvModel.model.turns = [];
+            }
             optvModel.model.turns.push({
                 red: optvModel.model.redTemp,
                 blue: optvModel.model.blueTemp
             });
 
-            optvModel.model.scores.red = optvModel.model.scores.red - optvModel.model.redTemp;
-            if(optvModel.model.scores.red < 0) optvModel.model.scores.red = 0;
-            optvModel.model.scores.blue = optvModel.model.scores.blue - optvModel.model.blueTemp;
-            if(optvModel.model.scores.blue < 0) optvModel.model.scores.blue = 0;
+            optvModel.model.red = optvModel.model.red - optvModel.model.redTemp;
+            if(optvModel.model.red < 0) optvModel.model.red = 0;
+            optvModel.model.blue = optvModel.model.blue - optvModel.model.blueTemp;
+            if(optvModel.model.blue < 0) optvModel.model.blue = 0;
 
             optvModel.model.redTemp = 0;
             optvModel.model.blueTemp = 0;
 
             optvModel.save();
+
+            console.log("FINISHING TURN");
         }
 
 
         $scope.resetScores = function () {
-            optvModel.model.scores = {red:501, blue: 501};
+            optvModel.model = {red:501, blue: 501};
             optvModel.model.turns = [];
             optvModel.model.blueTemp = 0;
             optvModel.model.redTemp = 0;
