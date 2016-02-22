@@ -243,3 +243,31 @@ body {
     font-weight: bold;
     color: #ffc025;
 }
+
+.proof-of-life {
+    position: absolute;
+    top: 45%;
+    transition: all 250ms;
+    -webkit-transition: all 250ms;
+
+}
+
+.proof-of-life>img{
+    height: 100%;
+}
+
+.hide-proof {
+    right: -50px;
+    height: 10px;
+    transition: all 250ms;
+    -webkit-transition: all 250ms;
+
+}
+
+.show-proof {
+    right: 200px;
+    height: 50px;
+    transition: all 250ms;
+    -webkit-transition: all 250ms;
+
+}

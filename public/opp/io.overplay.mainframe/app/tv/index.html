@@ -35,7 +35,7 @@
     <title>OPTV Amstel Mainframe</title>
 </head>
 
-<body ng-controller="mainFrameController" ng-keypress="keyPressed($event)" id="docbody" ng-click="keyPressed('center')" ng-hide="ui.hideall">
+<body ng-controller="mainFrameController" ng-keypress="keyPressed($event)" id="docbody" ng-click="keyPressed('center')" >
 
 <!-- array of launched apps -->
 
@@ -67,5 +67,8 @@
     <p>Loading app...</p>
 </div>
 
+<div class="proof-of-life" ng-class="{ 'show-proof': ui.showPOL, 'hide-proof': !ui.showPOL }" >
+    <img src="assets/img/logobug.png"/>
+</div>
 </body>
 </html>

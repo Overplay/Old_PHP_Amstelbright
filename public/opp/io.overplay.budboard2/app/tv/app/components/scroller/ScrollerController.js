@@ -3,16 +3,19 @@
  */
 
 app.controller( "scrollerController",
-    function ( $scope, $timeout, $http, $interval, optvModel, $log, $window ) {
+    function ( $scope, $timeout, $http, $interval, optvModel, $log, tweetScrape ) {
 
-        console.log( "Loading scrollerController" );
+        $log.info( "Loading scrollerController (BudBoard2)" );
 
-        var API_KEY = "ZKGjeMcDZT3BwyhAtCgYtvrb5";
-        var API_SECRET = "iXnv6zwFfvHzZr0Y8pvnEJM9hPT0mYV1HquNCzbPrGb5aHUAtk";
-        var API_CONCAT = API_KEY + ':' + API_SECRET;
-        var API_B64 = Base64.encode( API_CONCAT );
-        var tweetSearchTerm = "Overplay";
-        var tweetAuth = false;
+        tweetScrape.init( {
+
+            apiKey: "ZKGjeMcDZT3BwyhAtCgYtvrb5",
+            apiSecret: "iXnv6zwFfvHzZr0Y8pvnEJM9hPT0mYV1HquNCzbPrGb5aHUAtk"
+
+        });
+
+        tweetScrape.authorize();
+
         var TWITTER = true;
 
         $scope.tvinfo = undefined;
@@ -112,29 +115,6 @@ app.controller( "scrollerController",
         }
 
 
-        if ( TWITTER ) {
-
-            var cb = new Codebird;
-            cb.setConsumerKey( API_KEY, API_SECRET );
-
-            cb.__call(
-                "oauth2_token",
-                {},
-                function ( reply, err ) {
-                    var bearer_token;
-                    if ( err ) {
-                        console.log( "error response or timeout exceeded" + err.error );
-                    }
-                    if ( reply ) {
-                        bearer_token = reply.access_token;
-                        cb.setBearerToken( bearer_token );
-                        tweetAuth = true;
-                        fetchTweets();
-                    }
-                }
-            );
-
-        }
 
         function modelUpdate( data ) {
 
