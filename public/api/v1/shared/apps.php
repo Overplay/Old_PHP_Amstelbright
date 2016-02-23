@@ -507,7 +507,20 @@ function installedApps()
 
         ),
 
+        "io.overplay.cricket" => array(
+            "name" => "Cricket",
+            "appType" => "widget",
+            "reverseDomainName" => "io.overplay.cricket",
+            "buildNumber" => 1,
+            "onLauncher" => true,
+            "iconLauncher" => "cricket.jpg",
+            "size" => array(
+                "width" => 30,
+                "height" => 40
+            ),
+            "publisher" => "overplay.io"
 
+        ),
     );
 
 
