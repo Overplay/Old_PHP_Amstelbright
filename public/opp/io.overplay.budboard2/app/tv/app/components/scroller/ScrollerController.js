@@ -7,16 +7,64 @@ app.controller( "scrollerController",
 
         $log.info( "Loading scrollerController (BudBoard2)" );
 
+        var TWITTER = true;
+        var _twitterAuthorized = false;
+        var _tweetSearchTerm = "ESPN";
+        var _latestTweets = [];
+        var _tweetScrapePromise;
+
         tweetScrape.init( {
 
-            apiKey: "ZKGjeMcDZT3BwyhAtCgYtvrb5",
+            apiKey:    "ZKGjeMcDZT3BwyhAtCgYtvrb5",
             apiSecret: "iXnv6zwFfvHzZr0Y8pvnEJM9hPT0mYV1HquNCzbPrGb5aHUAtk"
 
-        });
+        } );
 
-        tweetScrape.authorize();
 
-        var TWITTER = true;
+        function authorizeTwitter() {
+
+            tweetScrape.authorize()
+                .then( function ( res ) {
+                    $log.debug( "Callback from Auth OK!" );
+                    _twitterAuthorized = true;
+                    startScraping();
+
+                }, function ( err ) {
+                    $log.debug( "Callback from Auth FAIL!" );
+                    _twitterAuthorized = true;
+
+                } );
+
+        }
+
+        function startScraping() {
+
+            if ( _twitterAuthorized ) {
+
+                tweetScrape.searchTweets( { q: _tweetSearchTerm, count: 5, lang: 'en', result_type: "popular" } )
+                    .then( function ( tweets ) {
+
+                            _latestTweets = tweets;
+                            $log.debug( "Scroller controller, got some tweets! " + tweets );
+                            _tweetScrapePromise = $timeout( startScraping, 60000 );
+                            interleave();
+
+                        },
+                        function ( err ) {
+
+                            _latestTweets = [ "Error getting tweets :(" ];
+                            $log.error( "ScrollerController trouble getting tweets" );
+
+                        } )
+
+            } else {
+
+                $timeout( authorizeTwitter, 60000 );
+
+            }
+
+        }
+
 
         $scope.tvinfo = undefined;
         $scope.updated = 0;
@@ -40,16 +88,19 @@ app.controller( "scrollerController",
 
                             if ( $scope.tvinfo.callsign.indexOf( 'ES' ) > -1 ) {
                                 optvModel.moveAppToSlot( 1 );
-                                tweetSearchTerm = "ESPN";
+                                _tweetSearchTerm = "ESPN";
                             } else {
                                 optvModel.moveAppToSlot( 0 );
-                                tweetSearchTerm = $scope.tvinfo.title;
+                                _tweetSearchTerm = $scope.tvinfo.title;
                             }
 
                             $scope.messageArray = [ "Looks like you switched to " + $scope.tvinfo.callsign, "Hold on while I grab some tweetage!" ];
                             $scope.updated = new Date().getTime();
 
-                            $timeout( fetchTweets, 15000 );
+                            //Kill anything pending
+                            $timeout.cancel(_tweetScrapePromise);
+
+                            startScraping();
 
                         }
 
@@ -80,40 +131,11 @@ app.controller( "scrollerController",
 
             $scope.messageArray = [];
             //lodash concat not working for some whacky reason
-            tweets.forEach( function ( t ) { $scope.messageArray.push( t )} );
+            _latestTweets.forEach( function ( t ) { $scope.messageArray.push( t )} );
             localMessages.forEach( function ( t ) { $scope.messageArray.push( t )} );
             shuffle( $scope.messageArray );
 
         }
-
-        function fetchTweets() {
-
-            cb.__call(
-                "search_tweets",
-                "q=" + tweetSearchTerm + " lang:en",
-                function ( reply, rate_limit_status ) {
-                    console.log( "RL Status: " + angular.toJson(rate_limit_status, true) );
-                    tweets = [];
-
-                    if ( reply.statuses ) {
-
-                        var statuses = reply.statuses.slice( 0, 5 );
-
-                        statuses.forEach( function ( tweet ) {
-                            tweets.push( tweet.text );
-                        } );
-
-                        $scope.updated = new Date().getTime();
-                        interleave();
-                        $scope.$apply();
-
-                    }
-
-                }
-            );
-
-        }
-
 
 
         function modelUpdate( data ) {
@@ -143,9 +165,10 @@ app.controller( "scrollerController",
 
         updateFromRemote();
 
-        $interval( getTVInfo, 1000 );
+        $interval( getTVInfo, 2500 );
 
-        $interval( fetchTweets, 5 * 60 * 1000 );
+        authorizeTwitter();
+
 
     } );
 
