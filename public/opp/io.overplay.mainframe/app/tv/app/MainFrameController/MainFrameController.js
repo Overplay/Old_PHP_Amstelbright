@@ -27,7 +27,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         $scope.runningAppSrc = [];
         $scope.runningAppPos = [];
 
-        $scope.ui = { open: true, debug: false, fauxTV: false, loadingApp: false, hideall: true };
+        $scope.ui = { open: true, debug: false, fauxTV: false, loadingApp: false, hideall: true, showPOL: false };
 
         var logLead = "MFController: ";
 
@@ -49,6 +49,15 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         function toggleAppPicker() {
 
             $scope.launcher.show = !$scope.launcher.show;
+            $log.debug(logLead+" toggleing app picker");
+            $interval(function(){
+                showPOL( true );
+                $timeout( function(){
+                    showPOL(false);
+                }, 500);
+
+            }, 30000);
+
             if (!$scope.launcher.show){
                 layoutAndShow();
             }
@@ -59,6 +68,18 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
 
             $scope.launcher.show = !shouldShow;
 
+        }
+
+        //Proof of life popup...
+        function showPOL( shouldShow ){
+
+            $log.debug(logLead+" showingPOL: "+shouldShow);
+
+           if ( shouldShow ){
+                $scope.ui.showPOL = true;
+            } else {
+                $scope.ui.showPOL = false;
+            }
         }
 
         // This call is used from outside Angular, requires $apply
@@ -243,7 +264,10 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
             } );
 
 
-        $timeout( function () { $scope.ui.hideall = false; }, 5000 );
+        //Harmless, but also did not get rid of black box on boot
+        $timeout( function () { $scope.ui.hideall = false; }, 3000 );
+
+        $timeout( function () { toggleAppPicker(); }, 15000 );
 
 
     }
