@@ -267,7 +267,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         //Harmless, but also did not get rid of black box on boot
         $timeout( function () { $scope.ui.hideall = false; }, 3000 );
 
-        $timeout( function () { toggleAppPicker(); }, 15000 );
+        $timeout( function () { toggleAppPicker(); }, 25000 );
 
 
     }
