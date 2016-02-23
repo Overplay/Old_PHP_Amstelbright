@@ -73,6 +73,9 @@ app.controller("dartsconController",
                 dataCallback: dataChanged,
                 messageCallback: inboundMessage
             });
+            if(!optvModel.turns){
+                optvModel.turns = [];
+            }
         }
 
         $scope.finishTurn = function () {
