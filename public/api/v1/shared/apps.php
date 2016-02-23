@@ -461,6 +461,7 @@ function installedApps()
 
         ),
 
+
         "io.overplay.squares" => array(
             "name" => "Squares",
             "appType" => "widget",
@@ -477,6 +478,7 @@ function installedApps()
         ),
 
 
+        /*
         "io.overplay.tweeterer" => array(
             "name" => "Tweets!",
             "appType" => "crawler",
@@ -491,14 +493,15 @@ function installedApps()
             "publisher" => "overplay.io"
 
         ),
+        */
 
         "io.overplay.darts" => array(
-            "name" => "Darts",
+            "name" => "501 Darts",
             "appType" => "widget",
             "reverseDomainName" => "io.overplay.darts",
             "buildNumber" => 1,
             "onLauncher" => true,
-            "iconLauncher" => "darts.jpg",
+            "iconLauncher" => "501darts16x9.png",
             "size" => array(
                 "width" => 25,
                 "height" => 40
@@ -513,9 +516,9 @@ function installedApps()
             "reverseDomainName" => "io.overplay.cricket",
             "buildNumber" => 1,
             "onLauncher" => true,
-            "iconLauncher" => "cricket.jpg",
+            "iconLauncher" => "darts16x9.png",
             "size" => array(
-                "width" => 30,
+                "width" => 25,
                 "height" => 40
             ),
             "publisher" => "overplay.io"
