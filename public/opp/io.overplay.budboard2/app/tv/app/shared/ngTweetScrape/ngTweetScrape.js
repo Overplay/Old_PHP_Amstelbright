@@ -74,6 +74,10 @@ angular.module( 'ngTweetScrape', [] )
                             params,
                             function ( reply, rate, err ) {
 
+                                $log.debug('Inbound tweet struct: ');
+                                $log.debug( angular.toJson(reply, true));
+
+
                                 if (!err){
                                     if (!reply.statuses || reply.statuses.length == 0){
                                         res([]);
