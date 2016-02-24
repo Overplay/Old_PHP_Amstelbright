@@ -45,8 +45,26 @@ app.controller( "scrollerController",
 
         }
 
+        var logos = [
+            //"assets/img/logo2016.png",
+            "assets/img/Overplay_Logo_361_WHT.png",
+            "assets/img/Overplay_Logo_368_WHT.png",
+            "assets/img/Overplay_Logo_376_WHT.png",
+            "assets/img/Overplay_Logo_7488_WHT.png",
+
+        ];
+
+        var lidx = 0;
+        $scope.logo = logos[0];
+
         updateFromRemote();
 
+        $interval( function(){
+            lidx++;
+            if (lidx==logos.length) lidx=0;
+            $scope.logo = logos[lidx];
+
+        }, 3000);
 
     } );
 
@@ -185,7 +203,8 @@ app.directive( 'leftScroller', [
         return {
             restrict:    'E',
             scope:       {
-                messageArray: '='
+                messageArray: '=',
+                logo: '='
             },
             templateUrl: 'app/components/scroller/leftscroller.template.html',
             link:        function ( scope, elem, attrs ) {
