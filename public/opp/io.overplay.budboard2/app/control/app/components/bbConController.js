@@ -55,6 +55,9 @@ app.controller( "bbConController",
             optvModel.save();
         }
 
+        $scope.del = function(index){
+            $scope.messageArray.splice(index, 1);
+        }
 
         initialize();
 
