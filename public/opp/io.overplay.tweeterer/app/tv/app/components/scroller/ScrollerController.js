@@ -13,7 +13,8 @@ app.controller( "scrollerController",
         var API_SECRET = "iXnv6zwFfvHzZr0Y8pvnEJM9hPT0mYV1HquNCzbPrGb5aHUAtk";
         var API_CONCAT = API_KEY + ':' + API_SECRET;
         var API_B64 = Base64.encode( API_CONCAT );
-        var tweetSearchTerm = "Overplay";
+        var tweetSearchTerm = "future&q=pizza";
+        var tweetSearchTerms = ["money", "kanye", "christmas"];
         var tweetAuth = false;
 
         $scope.tvinfo = undefined;
@@ -21,9 +22,16 @@ app.controller( "scrollerController",
 
         function fetchTweets() {
 
+            var query = "";
+            for(var i = 0; i < tweetSearchTerms.length; i++){
+                query += "q=" + tweetSearchTerms[i];
+                if((i + 1) < tweetSearchTerms.length) query += "&";
+            }
+            query += " lang:en";
+
             cb.__call(
                 "search_tweets",
-                "q=" + tweetSearchTerm +" lang:en",
+                query,
                 function ( reply, rate_limit_status ) {
                     console.log( rate_limit_status );
                     $scope.messageArray = [];
@@ -69,6 +77,9 @@ app.controller( "scrollerController",
 
             $log.info( logLead + " got a model update: " + angular.toJson( data ) );
 
+            if(Array.isArray(data)) {
+                tweetSearchTerms = data;
+            }
         }
 
         function getTVInfo() {
@@ -129,89 +140,76 @@ app.controller( "scrollerController",
  * Chumby does a shittly job of CSS transition scrolling, so we do it manually
  */
 app.directive( 'cssScroller', [
-    '$log', '$timeout', '$window',
-    function ( $log, $timeout, $window ) {
-        return {
-            restrict:    'E',
-            scope:       {
-                messageArray: '=',
-                updated: '='
-            },
-            templateUrl: 'app/components/scroller/cssscroller.template.html',
-            link:        function ( scope, elem, attrs ) {
-                "use strict";
-                var idx = 0;
-                var leftPixel = $window.innerWidth + 20;
-                var messageWidth = 0;
-                var PIXELS_PER_FRAME = 2;
-                var FPS = 30;
+        '$log', '$timeout', '$window',
+        function ( $log, $timeout, $window ) {
+            return {
+                restrict:    'E',
+                scope:       {
+                    messageArray: '='
+                },
+                templateUrl: 'app/components/scroller/leftscroller.bud.template.html',
+                link:        function ( scope, elem, attrs ) {
 
+                    var idx = 0;
+                    var leftPixel = $window.innerWidth + 20;
+                    var messageWidth = 0;
+                    var PIXELS_PER_FRAME = 4;
+                    var FPS = 30;
+                    var PIXELS_PER_CHAR = 7;
 
-                scope.message = { text: "", leftPos: leftPixel + 'px' };
+                    var clen = 0;
+                    var lastLeft;
 
-                scope.message.text = scope.messageArray[ idx ];
-
-                function init(){
-                    leftPixel = $window.innerWidth + 20;
-                    idx = 0;
-
-                }
-
-
-                function setLeftPos() {
-                    scope.message.leftPos = leftPixel + 'px';
-                    //$log.info( "LEFT POS: " + scope.message.leftPos );
-
-                }
-
-                function nextMsg() {
-                    $log.info( "NEXT MESSAGE" );
-                    if ( idx > (scope.messageArray.length-1) ) idx = 0;
-                    scope.message.text = scope.messageArray[ idx ];
-
-                    if (!scope.message.text){
-                        scope.message.text = "Fetching up some tweets! Please stand by.....";
+                    function restart() {
+                        scope.slider = { leftPos: $window.innerWidth };
                     }
 
-                    messageWidth = scope.message.text.length * 40;
+                    function slide() {
 
-                    //$log.info( "NEXT MESSAGE: " + scope.message.text + " width: " + messageWidth );
+                        scope.slider.leftPos -= PIXELS_PER_FRAME;
+                        //$log.info( "leftScroller: position " + scope.slider.leftPos );
 
-                    leftPixel = $window.innerWidth + 20;
-                    setLeftPos();
-                    idx++;
+                        if ( scope.slider.leftPos < ( -1 * lastLeft) ) {
+                            restart();
+                        }
 
-                    $timeout( scroll, 10 );
-                }
-
-
-                function scroll() {
-                    leftPixel -= PIXELS_PER_FRAME;
-                    setLeftPos();
-                    if ( leftPixel < (-messageWidth) ) {
-                        nextMsg();
-
-                    } else {
-                        $timeout( scroll, 1000 / FPS );
+                        $timeout( slide, 1000 / FPS );
 
                     }
+
+                    function getWidth() {
+                        var sliderWidth = document.getElementById( 'slider' ).clientWidth;
+                        $log.debug( "Slider div width: " + sliderWidth );
+
+                        clen = 0;
+
+                        scope.messageArray.forEach( function ( m ) {
+                            clen += m.length;
+                        } )
+
+                        lastLeft = clen * PIXELS_PER_CHAR;
+                        $log.debug( "Char len: " + clen );
+
+
+                    }
+
+                    restart();
+                    $log.info( "leftScroller: position " + scope.slider.leftPos );
+
+
+                    scope.$watch( 'messageArray', function ( nval ) {
+
+                        $log.debug( "Message Array changed: " + nval );
+                        getWidth();
+
+                    } )
+
+                    slide();
+
+
                 }
-
-
-                scope.$watch('updated', function(newval){
-
-                    $log.debug("Scroller says messages updated at: "+newval);
-                    init();
-                    $timeout( nextMsg, 20 );
-
-
-                });
-
-
-
             }
-        }
-    } ]
+        } ]
 );
 
 app.directive( 'cssFader', [

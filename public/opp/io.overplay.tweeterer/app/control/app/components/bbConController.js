@@ -12,12 +12,16 @@ app.controller( "bbConController",
         $scope.messageArray = [];
 
         $scope.ui = { json: ""};
-
+        $scope.tvTerms = [];
         function modelUpdate( data ) {
 
             $log.info( logLead + " got a model update: " + angular.toJson( data ) );
             $scope.messageArray = data;
-            $scope.ui.json = angular.toJson($scope.messageArray);
+            $scope.tvTerms = [];
+            data.forEach(function(term){
+                $scope.tvTerms.push(term);
+
+            })
 
         }
 
@@ -28,7 +32,7 @@ app.controller( "bbConController",
         function initialize() {
 
             optvModel.init( {
-                appName:         "io.overplay.budboard",
+                appName:         "io.overplay.tweeterer",
                 endpoint:        "control",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage
@@ -37,6 +41,12 @@ app.controller( "bbConController",
         }
 
         $scope.add = function () {
+            if(!$scope.input.newMsg.length){
+                return;
+            }
+            if(!(Array.isArray($scope.messageArray))){
+                $scope.messageArray = [];
+            }
             $scope.messageArray.push( $scope.input.newMsg );
             $scope.input.newMsg = '';
         }
@@ -44,8 +54,15 @@ app.controller( "bbConController",
         $scope.done = function () {
             optvModel.model = $scope.messageArray;
             optvModel.save();
+            $scope.tvTerms = [];
+            optvModel.model.forEach(function(term){
+                $scope.tvTerms.push(term);
+            })
         }
 
+        $scope.del = function(index){
+            $scope.messageArray.splice(index, 1);
+        }
 
         initialize();
 
