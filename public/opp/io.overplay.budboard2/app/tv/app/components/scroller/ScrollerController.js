@@ -141,7 +141,7 @@ app.controller( "scrollerController",
         function modelUpdate( data ) {
 
             $log.info( logLead() + " got a model update: " + angular.toJson( data ) );
-            localMessages = data.messages;
+            localMessages = data;
             interleave();
 
 
