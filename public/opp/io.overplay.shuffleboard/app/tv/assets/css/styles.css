@@ -44,10 +44,17 @@ body {
 }
 
 .applet {
-    width: 40%;
-    height: 60%;
-    padding: 10px;
-    border-radius: 50px;
+    width: 200px;
+}
+
+.logo-holder {
+    width: 100%;
+}
+
+.logo-holder > img {
+    width: 160px;
+    display: block;
+    margin: auto;
 }
 
 .applet-banner {

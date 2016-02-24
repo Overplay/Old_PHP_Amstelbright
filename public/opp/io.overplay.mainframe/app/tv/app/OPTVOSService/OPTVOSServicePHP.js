@@ -201,18 +201,18 @@ app.factory( 'osService', [ '$log', '$http', '$rootScope', '$window', function (
         switch ( slot ) {
 
             case 0:
-                rval.top = Math.floor( .10 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.top = Math.floor( .15 * service.windowDimension.height ) + nudge.top + 'px';
                 rval.left = Math.floor( .02 * service.windowDimension.width ) + nudge.left + 'px';
                 break;
 
             case 1:
-                rval.top = Math.floor( .10 * service.windowDimension.height ) + nudge.top + 'px';
-                rval.left = Math.floor( .91 * service.windowDimension.width ) + nudge.left + 'px';
+                rval.top = Math.floor( .15 * service.windowDimension.height ) + nudge.top + 'px';
+                rval.left = Math.floor( .87 * service.windowDimension.width ) + nudge.left + 'px';
                 break;
 
             case 2:
                 rval.top = Math.floor( .65 * service.windowDimension.height ) + nudge.top + 'px';
-                rval.left = Math.floor( .91 * service.windowDimension.width ) + nudge.left + 'px';
+                rval.left = Math.floor( .87 * service.windowDimension.width ) + nudge.left + 'px';
                 break;
 
             case 3:

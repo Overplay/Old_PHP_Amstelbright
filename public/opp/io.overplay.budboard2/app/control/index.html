@@ -35,7 +35,7 @@
 <div class="container">
     <div class="row" ng-repeat="msg in messageArray track by $index">
         <div class="col-xs-1"> {{ $index+1 }} </div>
-        <div class="col-xs-10"><input type="text" class="form-control" ng-model="messageArray[$index]"> </div>
+        <div class="col-xs-6"><input type="text" class="form-control" ng-model="msg"> </div>
         <div class="col-xs-1">
             <i class="fa fa-trash" ng-click="del($index)">&nbsp;</i></div>
     </div>
@@ -49,7 +49,7 @@
 
 </div>
 
-<div>{{ ui.json }}</div>
+<!--<div>{{ ui.json }}</div>-->
 
 <div class="ctrl-holder bottom">
     <div class="sq-button y" ng-click="add()"><i class="fa fa-plus-circle">&nbsp;ADD MESSAGE</i></div>
