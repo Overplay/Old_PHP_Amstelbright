@@ -7,6 +7,8 @@ app.controller( "scrollerController",
 
         console.log( "Loading scrollerController" );
 
+        $scope.customColor = {'background-color': 'black', 'color': 'white'};
+        console.log($scope.customColor);
         $scope.messageArrayTest = [
             "$5.99 hot wings until 10:30",
             "2-for-1 Long Island Ice Teas",
@@ -22,10 +24,10 @@ app.controller( "scrollerController",
         }
 
         function modelUpdate( data ) {
-
+            console.log(data);
             $log.info( logLead() + " got a model update: " + angular.toJson( data ) );
             $scope.messageArray = data.messages;
-
+            $scope.customColor = data.customColor;
 
         }
 
@@ -40,11 +42,11 @@ app.controller( "scrollerController",
                 endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,
-                initialValue:    { messages: $scope.messageArray }
+                initialValue:    { messages: $scope.messageArray, customColor: $scope.customColor }
             } );
 
         }
-
+        $interval(function(){console.log($scope.customColor);}, 5000);
         updateFromRemote();
 
 
@@ -185,7 +187,8 @@ app.directive( 'leftScroller', [
         return {
             restrict:    'E',
             scope:       {
-                messageArray: '='
+                messageArray: '=',
+                customColor: "="
             },
             templateUrl: 'app/components/scroller/leftscroller.template.html',
             link:        function ( scope, elem, attrs ) {
@@ -207,7 +210,7 @@ app.directive( 'leftScroller', [
                 function slide(){
 
                     scope.slider.leftPos-=PIXELS_PER_FRAME;
-                    $log.info( "leftScroller: position " + scope.slider.leftPos );
+                    //$log.info( "leftScroller: position " + scope.slider.leftPos );
 
                     if ( scope.slider.leftPos < ( -1*lastLeft)){
                         restart();
@@ -235,6 +238,7 @@ app.directive( 'leftScroller', [
                 restart();
                 $log.info("leftScroller: position "+scope.slider.leftPos);
 
+                console.log(scope.customColor);
 
                 scope.$watch('messageArray', function(nval){
 
