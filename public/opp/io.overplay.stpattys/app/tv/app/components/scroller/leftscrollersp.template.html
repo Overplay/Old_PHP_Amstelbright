@@ -1,0 +1,24 @@
+<div class="left-scroller-holder">
+
+        <div class="text-holder">
+            <!--<div class="css-scroller-text" ng-class="{ 'scroll-left': message.scrolling }">{{message.text}}</div>-->
+            <div id="slider" class="text-slider" ng-style="{ 'left': slider.leftPos+'px' }">
+                <span ng-repeat="m in messageArray">
+                     <div class="fl msg">{{ m }}</div>
+                     <div class="fl msg-img"><img src="assets/img/guinness.png"/></div>
+                     <div class="fl msg">22 Days to St. Patty's Day</div>
+                     <div class="fl msg-img"><img src="assets/img/guinness.png"/></div>
+                     <div class="fl msg">Ask about our Jameson specials</div>
+                </span>
+
+                <!--<span class="msg">Message One</span>
+                <span class="msg">Message Two</span>
+                <span class="msg">Message Three, if You Could Not Guess</span>
+                <span class="msg">Message Four</span>
+                <span class="msg">Message Five</span>-->
+            </div>
+
+        </div>
+        <img class="logo" ng-src="{{ logo }}" />
+
+</div>

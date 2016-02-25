@@ -461,7 +461,22 @@ function installedApps()
 
         ),
 
+        "io.overplay.stpattys" => array(
+            "name" => "St. Pattys Countdown",
+            "appType" => "crawler",
+            "reverseDomainName" => "io.overplay.stpattys",
+            "buildNumber" => 1,
+            "onLauncher" => true,
+            "iconLauncher" => "special16x9s.png",
+            "size" => array(
+                "width" => 100,
+                "height" => 10
+            ),
+            "publisher" => "overplay.io"
 
+        ),
+
+        /*
         "io.overplay.squares" => array(
             "name" => "Squares",
             "appType" => "widget",
@@ -476,7 +491,7 @@ function installedApps()
             "publisher" => "overplay.io"
 
         ),
-
+        */
 
         /*
         "io.overplay.tweeterer" => array(
