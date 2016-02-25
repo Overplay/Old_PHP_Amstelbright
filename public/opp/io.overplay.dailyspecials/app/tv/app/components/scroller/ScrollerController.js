@@ -46,7 +46,6 @@ app.controller( "scrollerController",
             } );
 
         }
-        $interval(function(){console.log($scope.customColor);}, 5000);
         updateFromRemote();
 
 
