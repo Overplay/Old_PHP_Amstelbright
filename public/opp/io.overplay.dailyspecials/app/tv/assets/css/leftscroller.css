@@ -38,8 +38,8 @@
 
 .msg-img > img {
     height: 60px;
-    margin-top: 0;
-    border: 1px dashed beige;
+    margin-top: 20px;
+    /*border: 1px dashed beige;*/
 }
 
 .left-scroller-holder .logo {
