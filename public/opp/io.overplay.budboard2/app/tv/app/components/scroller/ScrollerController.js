@@ -158,7 +158,7 @@ app.controller( "scrollerController",
                 endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,
-                initialValue:    { messages: $scope.messageArray }
+                initialValue:    $scope.messageArray
             } );
 
         }

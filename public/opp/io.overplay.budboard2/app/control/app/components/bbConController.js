@@ -20,7 +20,7 @@ app.controller( "bbConController",
             console.log(data);
             $scope.messageArray = data;
             $scope.ui.json = angular.toJson($scope.messageArray);
-
+            console.log(data);
         }
 
         function inboundMessage( msg ) {
