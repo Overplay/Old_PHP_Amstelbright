@@ -55,16 +55,18 @@ app.controller( "scrollerController",
         ];
 
         var lidx = 0;
-        $scope.logo = logos[0];
+        $scope.logo = "assets/img/Overplay_Logo_361_WHT.png";
 
         updateFromRemote();
 
+        /*
         $interval( function(){
             lidx++;
             if (lidx==logos.length) lidx=0;
             $scope.logo = logos[lidx];
 
         }, 3000);
+        */
 
     } );
 
