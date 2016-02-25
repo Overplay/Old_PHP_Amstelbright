@@ -211,7 +211,7 @@ app.directive( 'leftScrollerSp', [
                 var messageWidth = 0;
                 var PIXELS_PER_FRAME = 4;
                 var FPS = 30;
-                var PIXELS_PER_CHAR = 14;
+                var PIXELS_PER_CHAR = 30;
 
                 var clen = 0;
                 var lastLeft;
