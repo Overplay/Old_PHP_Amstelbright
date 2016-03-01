@@ -461,13 +461,13 @@ function installedApps()
 
         ),
 
-        "io.overplay.stpattys" => array(
-            "name" => "St. Pattys Countdown",
+        "io.overplay.bubbleslider" => array(
+            "name" => "What's Up",
             "appType" => "crawler",
-            "reverseDomainName" => "io.overplay.stpattys",
+            "reverseDomainName" => "io.overplay.bubbleslider",
             "buildNumber" => 1,
             "onLauncher" => true,
-            "iconLauncher" => "special16x9s.png",
+            "iconLauncher" => "bubbles16x9s.png",
             "size" => array(
                 "width" => 100,
                 "height" => 10

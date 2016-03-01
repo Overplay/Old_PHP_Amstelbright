@@ -16,6 +16,8 @@ app.controller("appPickerController", function ($scope, $log, $rootScope, $http,
     var _selectedIcon = 0;
     var logLead = "appPickerController: ";
 
+    $scope.logoColor = "#62B946";
+
     $scope.keyPressed = function (event) {
 
         console.log("Key pressed: " + event.which);

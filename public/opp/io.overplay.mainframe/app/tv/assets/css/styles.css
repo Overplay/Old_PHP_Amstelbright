@@ -19,9 +19,17 @@ html {
 body {
     margin: 0;
     font-family: 'Clean', sans-serif;
+    max-width: 1920px;
 
 }
 
+iframe {
+    max-width: 1920px;
+}
+
+body > div {
+    max-width: 1920px;
+}
 
 .faux-tv {
 

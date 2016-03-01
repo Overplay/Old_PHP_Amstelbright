@@ -31,7 +31,7 @@ app.controller( "scrollerController",
         function updateFromRemote() {
 
             optvModel.init( {
-                appName:         "io.overplay.stpattys",
+                appName:         "io.overplay.bubbleslider",
                 endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,
@@ -50,7 +50,7 @@ app.controller( "scrollerController",
         ];
 
         var lidx = 0;
-        $scope.logo = "assets/img/oflahertys_logo2.png";
+        $scope.logo = "assets/img/Overplay_Logo_361_WHT.png";
 
         updateFromRemote();
 

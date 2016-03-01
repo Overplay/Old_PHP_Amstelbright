@@ -4,8 +4,7 @@
     position: relative;
     margin-left: 0;
     margin-right: 0;
-    height: 100px;
-    background: url(../img/textured.png);
+    height: 70px;
     /*border: 1px dashed indianred;*/
 
 }
@@ -13,7 +12,7 @@
 
 .text-holder {
     /*border: 1px solid mediumpurple;*/
-    height: 100px;
+    height: 70px;
     width: 80%;
     overflow: hidden;
 
@@ -27,25 +26,29 @@
 
 .msg {
     /*border: 1px dashed dodgerblue;*/
-    font-size: 40px;
+    font-size: 30px;
     color: white;
-    margin-right: 40px;
-    margin-left: 40px;
-    height: 100px;
-    line-height: 100px;
+    margin-right: 200px;
+    margin-left: 200px;
+    height: 70px;
+    line-height: 70px;
+    padding: 0 40px 0 40px;
+    background: url(../img/bubble-black-blue.png);
+    background-size: contain;
+    border-radius: 20px;
 
 }
 
 .msg-img > img {
     height: 60px;
-    margin-top: 20px;
+    margin-top: 10px;
     /*border: 1px dashed beige;*/
 }
 
 .left-scroller-holder .logo {
     /*border: 1px solid lightslategray;*/
     position: absolute;
-    top: 10px;
+    top: 0;
     right: 50px;
     width: 200px;
 }

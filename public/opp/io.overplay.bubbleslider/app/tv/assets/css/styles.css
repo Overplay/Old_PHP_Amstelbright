@@ -68,11 +68,11 @@ body {
     left: 0;
     width: 100%;
     height: 120px;
-    background: url(../img/textured.png);
+    background: url(../img/bubble-black-blue.png);
     border-radius: 0;
     margin-left: 0;
     margin-right: 0;
-    ssborder: 1px solid yellow;
+    border: 1px solid yellow;
 
 }
 
