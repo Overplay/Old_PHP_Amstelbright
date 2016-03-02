@@ -69,16 +69,23 @@ body > div {
     width: 100%;
     height: 100%;
     border: 0;
-    -webkit-transition: all 350ms;
-    -moz-transition: all 350ms;
-    -ms-transition: all 350ms;
-    -o-transition: all 350ms;
-    transition: all 350ms;
+    -webkit-transition: all 500ms;
+    -moz-transition: all 500ms;
+    -ms-transition: all 500ms;
+    -o-transition: all 500ms;
+    transition: all 500ms;
     /*border: 2px solid orange;*/
 
 }
 
-
+.launcher-offscreen {
+    top: 1200px !important;
+    -webkit-transition: all 500ms;
+    -moz-transition: all 500ms;
+    -ms-transition: all 500ms;
+    -o-transition: all 500ms;
+    transition: all 500ms;
+}
 
 .debugbox {
     position: absolute;
@@ -96,9 +103,7 @@ body > div {
 /* 4:3 SDTV should just print "BUY A NEW FUCKING TV */
 @media screen and (max-width: 720px) and (max-height: 480px) {
 
-    .launcher-offscreen {
-        top: 1200px !important;
-    }
+
 }
 
 /* 1080i and 1080p */
