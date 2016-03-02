@@ -54,7 +54,7 @@ app.directive( 'leftScrollerSp', [
                 messageArray: '=',
                 logo: '='
             },
-            templateUrl: 'app/components/scroller/leftscrollersp.template.html',
+            templateUrl: 'app/components/scroller/leftscrollerguinness.template.html',
             link:        function ( scope, elem, attrs ) {
 
                 var idx = 0;
