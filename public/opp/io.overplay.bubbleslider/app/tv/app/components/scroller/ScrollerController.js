@@ -60,7 +60,7 @@ app.directive( 'leftScrollerSp', [
                 var idx = 0;
                 var leftPixel = $window.innerWidth + 20;
                 var messageWidth = 0;
-                var PIXELS_PER_FRAME = 7;
+                var PIXELS_PER_FRAME = 5;
                 var FPS = 30;
                 var PIXELS_PER_CHAR = 30;
 

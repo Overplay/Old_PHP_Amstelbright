@@ -6,6 +6,11 @@ body {
     margin:0;
 }
 
+@font-face {
+    font-family: "Cinzel";
+    src: url('../fonts/Cinzel-Bold.ttf');
+}
+
 .left-scroller-holder {
     font-family: COOL, sans-serif;
     width: 100%;
@@ -62,6 +67,7 @@ body {
     border: 5px solid #c3a24f;
     border-left-width: 0px;
     margin-right: 400px;
+    font-family: "Cinzel", monospace;
 
 }
 
@@ -76,7 +82,7 @@ body {
     top: 0;
     right: 0;
     padding: 5px;
-    padding-right: 15px;
+    padding-right: 45px;
 }
 
 .logo {

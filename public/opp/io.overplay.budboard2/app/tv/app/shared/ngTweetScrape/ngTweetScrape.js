@@ -19,7 +19,7 @@ angular.module( 'ngTweetScrape', [] )
             var _bearerToken;
             var _authorized = false;
 
-            var service = { name: 'tweetScrape' };
+            var service = { name: 'tweetScrape', delink: true };
 
             service.init = function ( initObj ) {
 
@@ -84,7 +84,11 @@ angular.module( 'ngTweetScrape', [] )
                                     } else {
                                         var rval = [];
                                         reply.statuses.forEach( function(t){
-                                            rval.push(t.text.replace( /&amp;/g, '&' ));
+                                            var cleaned = t.text.replace( /&amp;/g, '&' );
+                                            if (service.delink){
+                                                cleaned = cleaned.replace( /(?:https?|ftp):\/\/[\n\S]+/g, '');
+                                            }
+                                            rval.push(cleaned);
                                         });
                                         res(rval);
                                     }
