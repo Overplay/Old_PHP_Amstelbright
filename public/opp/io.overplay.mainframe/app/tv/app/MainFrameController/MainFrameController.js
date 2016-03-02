@@ -163,6 +163,7 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
             if ( m.message && m.message.launch ) {
 
                 $log.info( logLead + "received LAUNCH message" );
+                $scope.launcher.show = false;
                 $scope.ui.loadingApp = true;
 
             }
@@ -170,7 +171,10 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
             if ( m.message && m.message.launchComplete ) {
 
                 $log.info( logLead + "received LAUNCH COMPLETE message" );
-                $scope.ui.loadingApp = false;
+                $timeout(function(){
+                    $scope.ui.loadingApp = false;
+
+                }, 1000);
 
             }
 

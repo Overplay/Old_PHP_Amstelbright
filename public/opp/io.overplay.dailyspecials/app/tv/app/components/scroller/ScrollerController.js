@@ -188,7 +188,7 @@ app.directive( 'leftScroller', [
             restrict:    'E',
             scope:       {
                 messageArray: '=',
-                logo: '='
+                logo: '=',
                 customColor: "="
             },
             templateUrl: 'app/components/scroller/leftscroller.template.html',
