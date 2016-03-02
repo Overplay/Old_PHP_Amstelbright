@@ -121,7 +121,7 @@ angular.module( 'ngTweetScrape', [] )
                     return $http( req )
                         .then( function ( data ) {
 
-                                $log.info( "TweetScrape authorized ok" );
+                                $log.debug( "TweetScrape authorized ok" );
                                 _authorized = true;
                                 return true;
                             },

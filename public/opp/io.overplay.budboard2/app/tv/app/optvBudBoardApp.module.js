@@ -13,4 +13,6 @@ var app = angular.module('optvBudBoardApp', [
     'ngOpTVApi', 'ngTweetScrape'
 ]);
 
-
+app.config( [ '$logProvider', function ( $logProvider ) {
+    $logProvider.debugEnabled( false );
+} ] )
