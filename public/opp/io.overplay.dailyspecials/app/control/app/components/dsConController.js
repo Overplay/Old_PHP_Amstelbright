@@ -10,12 +10,13 @@ app.controller( "dsConController",
         var logLead = "DS Control App: ";
         $scope.inboundMessageArray = [];
         $scope.messageArray = [];
+        $scope.customColor = {'background-color': 'black', 'color': 'white'};
 
         function modelUpdate( data ) {
 
             $log.info( logLead + " got a model update: " + angular.toJson( data ) );
             $scope.messageArray = data.messages;
-
+            $scope.customColor = data.customColor;
 
         }
 
@@ -40,8 +41,14 @@ app.controller( "dsConController",
         }
 
         $scope.done = function () {
-            optvModel.messages = $scope.messageArray;
+
+            optvModel.model.messages = $scope.messageArray;
+            optvModel.model.customColor = $scope.customColor;
             optvModel.save();
+        }
+
+        $scope.del = function(index) {
+            $scope.messageArray.splice(index, 1);
         }
 
 

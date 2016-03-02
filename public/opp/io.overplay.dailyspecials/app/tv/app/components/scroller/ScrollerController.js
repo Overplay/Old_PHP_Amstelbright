@@ -7,6 +7,8 @@ app.controller( "scrollerController",
 
         console.log( "Loading scrollerController" );
 
+        $scope.customColor = {'background-color': 'black', 'color': 'white'};
+        console.log($scope.customColor);
         $scope.messageArrayTest = [
             "$5.99 hot wings until 10:30",
             "2-for-1 Long Island Ice Teas",
@@ -25,7 +27,7 @@ app.controller( "scrollerController",
 
             $log.info( logLead() + " got a model update: " + angular.toJson( data ) );
             $scope.messageArray = data.messages;
-
+            $scope.customColor = data.customColor;
 
         }
 
@@ -40,33 +42,13 @@ app.controller( "scrollerController",
                 endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,
-                initialValue:    { messages: $scope.messageArray }
+                initialValue:    { messages: $scope.messageArray, customColor: $scope.customColor }
             } );
 
         }
 
-        var logos = [
-            //"assets/img/logo2016.png",
-            "assets/img/Overplay_Logo_361_WHT.png",
-            "assets/img/Overplay_Logo_368_WHT.png",
-            "assets/img/Overplay_Logo_376_WHT.png",
-            "assets/img/Overplay_Logo_7488_WHT.png",
-
-        ];
-
-        var lidx = 0;
-        $scope.logo = "assets/img/Overplay_Logo_361_WHT.png";
-
         updateFromRemote();
 
-        /*
-        $interval( function(){
-            lidx++;
-            if (lidx==logos.length) lidx=0;
-            $scope.logo = logos[lidx];
-
-        }, 3000);
-        */
 
     } );
 
@@ -207,6 +189,7 @@ app.directive( 'leftScroller', [
             scope:       {
                 messageArray: '=',
                 logo: '='
+                customColor: "="
             },
             templateUrl: 'app/components/scroller/leftscroller.template.html',
             link:        function ( scope, elem, attrs ) {
@@ -228,7 +211,7 @@ app.directive( 'leftScroller', [
                 function slide(){
 
                     scope.slider.leftPos-=PIXELS_PER_FRAME;
-                    $log.info( "leftScroller: position " + scope.slider.leftPos );
+                    //$log.info( "leftScroller: position " + scope.slider.leftPos );
 
                     if ( scope.slider.leftPos < ( -1*lastLeft)){
                         restart();

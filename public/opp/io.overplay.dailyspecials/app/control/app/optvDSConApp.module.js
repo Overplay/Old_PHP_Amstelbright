@@ -12,7 +12,8 @@
 var app = angular.module('optvDSConApp', [
     'ngAnimate',
     'ngSanitize',
-    'ngOpTVApi'
+    'ngOpTVApi',
+    'color.picker'
 ]);
 
 

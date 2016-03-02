@@ -12,13 +12,15 @@ app.controller( "bbConController",
         $scope.messageArray = [];
 
         $scope.ui = { json: ""};
+        $scope.input = {newMsg: ""};
 
         function modelUpdate( data ) {
 
             $log.info( logLead + " got a model update: " + angular.toJson( data ) );
-            $scope.messageArray = data.messages;
+            console.log(data);
+            $scope.messageArray = data;
             $scope.ui.json = angular.toJson($scope.messageArray);
-
+            console.log(data);
         }
 
         function inboundMessage( msg ) {
@@ -37,6 +39,13 @@ app.controller( "bbConController",
         }
 
         $scope.add = function () {
+            console.log($scope.messageArray);
+            if(!$scope.input.newMsg.length){
+                return;
+            }
+            if(!Array.isArray($scope.messageArray)){
+                $scope.messageArray = [];
+            }
             $scope.messageArray.push( $scope.input.newMsg );
             $scope.input.newMsg = '';
         }
@@ -46,6 +55,9 @@ app.controller( "bbConController",
             optvModel.save();
         }
 
+        $scope.del = function(index){
+            $scope.messageArray.splice(index, 1);
+        }
 
         initialize();
 
