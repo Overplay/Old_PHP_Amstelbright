@@ -16,11 +16,16 @@ body {
 
 }
 
+.bubble {
+
+    margin-right: 100px;
+}
 
 .text-holder {
     /*border: 1px solid mediumpurple;*/
     height: 90px;
     overflow: hidden;
+    width: 10000px;
 
 }
 
@@ -56,6 +61,7 @@ body {
     padding-right: 40px;
     border: 5px solid #c3a24f;
     border-left-width: 0px;
+    margin-right: 400px;
 
 }
 
