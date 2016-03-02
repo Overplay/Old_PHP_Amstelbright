@@ -7,14 +7,9 @@ app.controller( "scrollerController",
 
         console.log( "Loading scrollerController" );
 
-        $scope.messageArray = [ "Don't forget St. Patrick's at O'Flaherty's" ];
+        $scope.messageArray = [ "Don't forget St. Patrick's at O'Flaherty's", "2 for 1 shots of Jameson from 3 to 6", "Try our Bangers and Mash" ];
 
         function logLead() { return "scrollerController: "; }
-
-        function updateLocalData() {
-
-
-        }
 
         function modelUpdate( data ) {
 
@@ -40,159 +35,15 @@ app.controller( "scrollerController",
 
         }
 
-        var logos = [
-            //"assets/img/logo2016.png",
-            "assets/img/Overplay_Logo_361_WHT.png",
-            "assets/img/Overplay_Logo_368_WHT.png",
-            "assets/img/Overplay_Logo_376_WHT.png",
-            "assets/img/Overplay_Logo_7488_WHT.png",
 
-        ];
-
-        var lidx = 0;
         $scope.logo = "assets/img/Overplay_Logo_361_WHT.png";
 
         updateFromRemote();
 
-        /*
-        $interval( function(){
-            lidx++;
-            if (lidx==logos.length) lidx=0;
-            $scope.logo = logos[lidx];
-
-        }, 3000);
-        */
 
     } );
 
-app.directive( 'marqueeScroller', [
-        '$log',
-        function ( $log ) {
-            return {
-                restrict:    'E',
-                scope:       {
-                    messageArray: '='
-                },
-                templateUrl: 'app/components/scroller/marqueescroller.template.html',
-                link:        function ( scope, elem, attrs ) {
-                    "use strict";
-                    var idx = 0;
-                    scope.currentScroller = scope.messageArray[ idx ];
 
-                    elem.bind( 'onfinish', function ( ev ) {
-                        idx++;
-                        if ( idx >= scope.messageArray.length ) idx = 0;
-                        scope.currentScroller = scope.messageArray[ idx ];
-                    } );
-
-                }
-            }
-        } ]
-);
-
-/**
- * Chumby does a shittly job of CSS transition scrolling, so we do it manually
- */
-app.directive( 'cssScroller', [
-        '$log', '$timeout', '$window',
-        function ( $log, $timeout, $window ) {
-            return {
-                restrict:    'E',
-                scope:       {
-                    messageArray: '='
-                },
-                templateUrl: 'app/components/scroller/cssscroller.template.html',
-                link:        function ( scope, elem, attrs ) {
-                    "use strict";
-                    var idx = 0;
-                    var leftPixel = $window.innerWidth + 20;
-                    var messageWidth = 0;
-                    var PIXELS_PER_FRAME = 4;
-                    var FPS = 30;
-
-                    scope.message = { text: "", leftPos: leftPixel + 'px' };
-
-                    scope.message.text = scope.messageArray[ idx ];
-
-
-                    function setLeftPos() {
-                        scope.message.leftPos = leftPixel + 'px';
-                        $log.info( "LEFT POS: " + scope.message.leftPos );
-
-                    }
-
-                    function nextMsg() {
-                        $log.info( "NEXT MESSAGE" );
-                        idx++;
-                        if ( idx == scope.messageArray.length ) idx = 0;
-                        scope.message.text = scope.messageArray[ idx ];
-
-                        messageWidth = scope.message.text.length * 40;
-
-                        //$log.info( "NEXT MESSAGE: " + scope.message.text + " width: " + messageWidth );
-
-                        leftPixel = $window.innerWidth + 20;
-                        setLeftPos();
-                        $timeout( scroll, 10 );
-                    }
-
-
-                    function scroll() {
-                        leftPixel -= PIXELS_PER_FRAME;
-                        setLeftPos();
-                        if ( leftPixel < 0 ) {
-                            nextMsg();
-
-                        } else {
-                            $timeout( scroll, 1000 / FPS );
-
-                        }
-                    }
-
-                    $timeout( nextMsg, 20 );
-
-                }
-            }
-        } ]
-);
-
-app.directive( 'cssFader', [
-        '$log', '$timeout',
-        function ( $log, $timeout ) {
-            return {
-                restrict:    'E',
-                scope:       {
-                    messageArray: '='
-                },
-                templateUrl: 'app/components/scroller/cssfader.template.html',
-                link:        function ( scope, elem, attrs ) {
-                    "use strict";
-                    var idx = 0;
-
-                    scope.message = { text: "", fadein: false };
-                    scope.message.text = scope.messageArray[ idx ];
-
-
-                    function nextMsg() {
-                        idx++;
-                        if ( idx == scope.messageArray.length ) idx = 0;
-                        scope.message.fadein = false;
-                        $timeout( scroll, 2000 );
-                    }
-
-
-                    function scroll() {
-                        scope.message.fadein = true;
-                        scope.message.text = scope.messageArray[ idx ];
-                        $timeout( nextMsg, 8000 );
-                    }
-
-                    $timeout( scroll, 2000 );
-
-                }
-            }
-        } ]
-);
 
 app.directive( 'leftScrollerSp', [
     '$log', '$timeout', '$window',
@@ -209,7 +60,7 @@ app.directive( 'leftScrollerSp', [
                 var idx = 0;
                 var leftPixel = $window.innerWidth + 20;
                 var messageWidth = 0;
-                var PIXELS_PER_FRAME = 4;
+                var PIXELS_PER_FRAME = 10;
                 var FPS = 30;
                 var PIXELS_PER_CHAR = 30;
 
