@@ -84,7 +84,7 @@ angular.module( 'ngTweetScrape', [] )
                                     } else {
                                         var rval = [];
                                         reply.statuses.forEach( function(t){
-                                            rval.push(t.text);
+                                            rval.push(t.text.replace( /&amp;/g, '&' ));
                                         });
                                         res(rval);
                                     }

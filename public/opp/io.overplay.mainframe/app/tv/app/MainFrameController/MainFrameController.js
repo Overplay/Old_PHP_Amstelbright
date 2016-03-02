@@ -49,14 +49,14 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         function toggleAppPicker() {
 
             $scope.launcher.show = !$scope.launcher.show;
-            $log.debug(logLead+" toggleing app picker");
+            $log.debug(logLead+" toggling app picker");
             $interval(function(){
                 showPOL( true );
                 $timeout( function(){
                     showPOL(false);
                 }, 500);
 
-            }, 30000);
+            }, 60000);
 
             if (!$scope.launcher.show){
                 layoutAndShow();
