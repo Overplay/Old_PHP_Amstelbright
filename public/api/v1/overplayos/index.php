@@ -16,6 +16,12 @@ if (isset($_REQUEST['command'])) {
     $cmd = $_REQUEST['command'];
     switch ($cmd) {
 
+        case "hostip":
+            $ip = getHostByName(php_uname('n'));
+            $rval = array("ip" => $ip);
+            jsonOut(json_encode($rval));
+            break;
+
         case "ostime":
             if (isGET()) {
                 $mstime = time() . '000'; //dirty hack for scientific notation
