@@ -16,15 +16,17 @@ app.controller("appPickerController", function ($scope, $log, $rootScope, $http,
     var _selectedIcon = 0;
     var logLead = "appPickerController: ";
 
-    $scope.system = { ip: 'unknown'};
+    $scope.system = { ip: 'Alpha'};
 
-    $http.get('/api/v1/overplayos/index.php?command=hostip')
+    /*$http.get('/api/v1/overplayos/index.php?command=hostip')
         .then( function(data){
 
             $scope.system.ip = data.data.ip;
 
+        }, function(err){
+            $scope.system.ip = "error";
         });
-
+    */
     $scope.logoColor = "#62B946";
 
     $scope.keyPressed = function (event) {
