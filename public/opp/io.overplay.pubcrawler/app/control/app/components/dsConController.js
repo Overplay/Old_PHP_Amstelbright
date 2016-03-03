@@ -26,7 +26,7 @@ app.controller( "dsConController",
         function initialize() {
 
             optvModel.init( {
-                appName:         "io.overplay.bubbleslider",
+                appName:         "io.overplay.pubcrawler",
                 endpoint:        "control",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage
@@ -41,6 +41,10 @@ app.controller( "dsConController",
         $scope.update = function () {
             optvModel.messages = $scope.messageArray;
             optvModel.save();
+        }
+
+        $scope.del = function(index){
+            $scope.messageArray.splice(index, 1);
         }
 
 

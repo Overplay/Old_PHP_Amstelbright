@@ -461,13 +461,13 @@ function installedApps()
 
         ),
 
-        "io.overplay.bubbleslider" => array(
-            "name" => "What's Up",
+        "io.overplay.pubcrawler" => array(
+            "name" => "Pub Crawler",
             "appType" => "crawler",
-            "reverseDomainName" => "io.overplay.bubbleslider",
+            "reverseDomainName" => "io.overplay.pubcrawler",
             "buildNumber" => 1,
             "onLauncher" => true,
-            "iconLauncher" => "bubbles16x9s.png",
+            "iconLauncher" => "guinnesspub16x9.png",
             "size" => array(
                 "width" => 100,
                 "height" => 10

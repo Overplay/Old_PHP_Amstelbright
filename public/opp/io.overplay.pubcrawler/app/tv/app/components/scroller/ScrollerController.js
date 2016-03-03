@@ -29,7 +29,7 @@ app.controller( "scrollerController",
         function updateFromRemote() {
 
             optvModel.init( {
-                appName:         "io.overplay.bubbleslider",
+                appName:         "io.overplay.pubcrawler",
                 endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,

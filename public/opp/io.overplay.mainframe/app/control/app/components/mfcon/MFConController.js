@@ -71,7 +71,6 @@ app.controller( "mfConController",
         }
 
         $scope.controlForApp = function(app){
-
             return '/opp/'+app.reverseDomainName+'/app/control/index.html';
         }
 
