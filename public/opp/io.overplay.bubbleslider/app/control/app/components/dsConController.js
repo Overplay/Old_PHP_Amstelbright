@@ -26,7 +26,7 @@ app.controller( "dsConController",
         function initialize() {
 
             optvModel.init( {
-                appName:         "io.overplay.dailyspecials",
+                appName:         "io.overplay.bubbleslider",
                 endpoint:        "control",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage
@@ -35,11 +35,10 @@ app.controller( "dsConController",
         }
 
         $scope.add = function () {
-            $scope.messageArray.push( $scope.input.newMsg );
-            $scope.input.newMsg = '';
+            $scope.messageArray.push( "Enter new message" );
         }
 
-        $scope.done = function () {
+        $scope.update = function () {
             optvModel.messages = $scope.messageArray;
             optvModel.save();
         }

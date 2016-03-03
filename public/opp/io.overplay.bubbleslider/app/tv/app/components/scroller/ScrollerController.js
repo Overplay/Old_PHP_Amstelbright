@@ -13,8 +13,11 @@ app.controller( "scrollerController",
 
         function modelUpdate( data ) {
 
-            $log.info( logLead() + " got a model update: " + angular.toJson( data ) );
-            $scope.messageArray = data.messages;
+            $log.debug( logLead() + " got a model update: " + angular.toJson( data ) );
+            if ( data.messages ){
+                $scope.messageArray = data.messages;
+            }
+
 
 
         }

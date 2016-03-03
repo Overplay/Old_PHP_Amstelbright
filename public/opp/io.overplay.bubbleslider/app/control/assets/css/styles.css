@@ -16,32 +16,59 @@ html {
 
 body {
     margin: 0;
-    aabackground-color: #8ef058;
+    background-color: #303030;
     font-family: 'Dosis', sans-serif;
 
 }
 
-h1 {
-    width: 100%;
-    background-color: #001c20;
+
+.top-banner {
+
+    width: 95%;
+    height: 50px;
+    background-color: #000;
     color: white;
-    text-align: center;
     font-size: 1.5rem;
     margin-top: 0;
     padding: 5px;
+    border: 5px solid #c3a24f;
+    position: relative;
+
+}
+
+.top-banner > span {
+    position: absolute;
+    top: 12px;
+    left: 80px;
 }
 
 .msg {
     width: 100%;
-    padding: 10px;
+    padding: 20px;
+    position: relative;
 }
 
 .msg input {
     width: 90%;
     padding: 5px;
-    font-size: 1.0rem;
+    font-size: 1.2rem;
+    border-radius: 8px;
 }
 
+.delbtn {
+    float: right;
+    color: #ae8a32;
+    margin-right: 10%;
+}
+
+.btn {
+    color: lightgrey;
+    float: left;
+    padding: 10px;
+    border: 2px solid lightgrey;
+    border-radius: 15px;
+    margin: 10px;
+}
 
 .ctrl-holder {
 
@@ -75,4 +102,13 @@ h1 {
     height: 25px;
     text-align: center;
     line-height: 25px;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+    margin-right: 40px;
 }
