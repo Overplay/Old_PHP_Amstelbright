@@ -9,7 +9,7 @@ app.controller( "nowPlayingController",
 
         var loglead = "nowPlayingController: ";
 
-        $scope.ui = { isHiding: true };
+        $scope.ui = { isHiding: true, hide: false };
 
         var _hideShowPromise;
 
@@ -53,9 +53,10 @@ app.controller( "nowPlayingController",
 
         function modelUpdate( data ) {
             $log.info( loglead + " got a model update: " + angular.toJson( data ) );
-            if (data.length){
+            if (data.shows && data.shows.length){
                 $log.info( loglead + " got a USEFUL model update: " + angular.toJson( data ) );
-                $scope.shows = data;
+                $scope.shows = data.shows;
+                $scope.ui.hide = data.hide;
             }
 
         }
@@ -71,7 +72,7 @@ app.controller( "nowPlayingController",
                 endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,
-                initialValue:    $scope.shows
+                initialValue:    { shows: $scope.shows, hide: false }
             } );
 
         }
@@ -79,6 +80,13 @@ app.controller( "nowPlayingController",
         function runHideShow(){
 
             $log.debug("Hide/show...");
+            
+            if (!$scope.ui.hide){
+                $scope.ui.isHiding = false;
+                $timeout( runHideShow, 10000 );
+                return;
+            }
+            
             if ($scope.ui.isHiding){
                 //Show for 10sec
                 $scope.ui.isHiding = false;

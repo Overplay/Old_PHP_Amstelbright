@@ -8,14 +8,14 @@ app.controller( "dsConController",
         $log.info( "Loading dsConController" );
 
         var logLead = "NowPlaying Control App: ";
-        $scope.inboundMessageArray = [];
         $scope.shows = [];
+        $scope.shouldHide = false;
 
         function modelUpdate( data ) {
 
             $log.info( logLead + " got a model update: " + angular.toJson( data ) );
-            $scope.shows = data;
-
+            $scope.shows = data.shows;
+            $scope.shouldHide = data.hide;
 
         }
 
@@ -39,12 +39,16 @@ app.controller( "dsConController",
         }
 
         $scope.update = function () {
-            optvModel.model = $scope.shows;
+            optvModel.model = { shows: $scope.shows, hide: $scope.shouldHide };
             optvModel.save();
         }
 
         $scope.del = function(index){
             $scope.shows.splice(index, 1);
+        }
+
+        $scope.toggleHide = function(){
+            $scope.shouldHide = !$scope.shouldHide;
         }
 
 

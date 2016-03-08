@@ -45,7 +45,9 @@
 
 <div class="msg" style="margin-bottom: 40px;">
     <div class="btn fl" ng-click="add()">ADD SHOW</div>
-    <div class="btn fr" ng-click="update()">UPDATE TV</div>
+    <div class="btn fl" ng-click="update()">UPDATE TV</div>
+    <div class="btn fl" ng-click="toggleHide()">{{ shouldHide? "ALWAYS ON" : "POPUP" }}</div>
+
 </div>
 
 <div class="form-group">
