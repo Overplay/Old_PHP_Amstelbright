@@ -85,7 +85,7 @@ app.directive( 'leftScrollerSp', [
                 function slide(){
 
                     scope.slider.leftPos-=PIXELS_PER_FRAME;
-                    $log.info( "leftScroller: position " + scope.slider.leftPos );
+                    //$log.info( "leftScroller: position " + scope.slider.leftPos );
 
                     if ( scope.slider.leftPos < ( -1*lastLeft)){
                         restart();

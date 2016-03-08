@@ -10,8 +10,6 @@
 
 
 var app = angular.module('optvShuffConApp', [
-    'ngAnimate',
-    'ngSanitize',
     'ngOpTVApi'
 ]);
 

@@ -10,9 +10,6 @@
 
 
 var app = angular.module('optvDailySpecialsApp', [
-    'ngRoute',
-    'ngAnimate',
-    'ngSanitize',
     'ngOpTVApi'
 ]);
 
