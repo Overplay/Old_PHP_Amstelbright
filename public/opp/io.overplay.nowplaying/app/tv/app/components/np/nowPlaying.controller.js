@@ -9,7 +9,7 @@ app.controller( "nowPlayingController",
 
         var loglead = "nowPlayingController: ";
 
-        $scope.ui = { isHiding: false };
+        $scope.ui = { isHiding: true };
 
         var _hideShowPromise;
 
@@ -82,12 +82,12 @@ app.controller( "nowPlayingController",
             if ($scope.ui.isHiding){
                 //Show for 10sec
                 $scope.ui.isHiding = false;
-                $timeout(runHideShow, 5000);
+                $timeout(runHideShow, 10000);
 
             } else {
                 //Hide for 60sec
                 $scope.ui.isHiding = true;
-                $timeout( runHideShow, 60000 );
+                $timeout( runHideShow, 30000 );
 
             }
 
