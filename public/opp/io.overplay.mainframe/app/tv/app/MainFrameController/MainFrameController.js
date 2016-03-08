@@ -49,16 +49,16 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         function toggleAppPicker() {
 
             $scope.launcher.show = !$scope.launcher.show;
-            $log.debug(logLead+" toggling app picker");
-            $interval(function(){
+            $log.debug( logLead + " toggling app picker" );
+            $interval( function () {
                 showPOL( true );
-                $timeout( function(){
-                    showPOL(false);
-                }, 500);
+                $timeout( function () {
+                    showPOL( false );
+                }, 500 );
 
-            }, 60000);
+            }, 60000 );
 
-            if (!$scope.launcher.show){
+            if ( !$scope.launcher.show ) {
                 layoutAndShow();
             }
 
@@ -71,11 +71,11 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         }
 
         //Proof of life popup...
-        function showPOL( shouldShow ){
+        function showPOL( shouldShow ) {
 
-            $log.debug(logLead+" showingPOL: "+shouldShow);
+            $log.debug( logLead + " showingPOL: " + shouldShow );
 
-           if ( shouldShow ){
+            if ( shouldShow ) {
                 $scope.ui.showPOL = true;
             } else {
                 $scope.ui.showPOL = false;
@@ -171,10 +171,10 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
             if ( m.message && m.message.launchComplete ) {
 
                 $log.info( logLead + "received LAUNCH COMPLETE message" );
-                $timeout(function(){
+                $timeout( function () {
                     $scope.ui.loadingApp = false;
 
-                }, 1000);
+                }, 1000 );
 
             }
 
@@ -263,15 +263,21 @@ app.controller( "mainFrameController", function ( $scope, $timeout, $location, $
         //CATCH specifically not used for older JS
         osService.getLauncher()
             .then( setLauncher,
-            function ( err ) {
-                $log.error( "MFController: major error, no app launcher!! " + err );
-            } );
+                function ( err ) {
+                    $log.error( "MFController: major error, no app launcher!! " + err );
+                } );
 
 
         //Harmless, but also did not get rid of black box on boot
         $timeout( function () { $scope.ui.hideall = false; }, 3000 );
 
-        $timeout( function () { toggleAppPicker(); }, 60000 );
+        $timeout( function () {
+
+            if ( $scope.launcher.show ) {
+                toggleAppPicker();
+            }
+
+        }, 60000 );
 
 
     }

@@ -50,7 +50,7 @@ app.controller( "bbConController",
             $scope.input.newMsg = '';
         }
 
-        $scope.done = function () {
+        $scope.update = function () {
             optvModel.model = { messages: $scope.messageArray };
             optvModel.save();
         }
