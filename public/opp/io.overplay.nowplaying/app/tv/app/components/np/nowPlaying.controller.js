@@ -104,7 +104,7 @@ app.controller( "nowPlayingController",
 
         updateFromRemote();
         $interval( getTVInfo, 5000 );
-        runHideShow();
+        //runHideShow();
 
 
     } );
