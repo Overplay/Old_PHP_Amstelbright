@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="optvDSConApp">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>-->
+
+    <script src="assets/bower_components/angular/angular.js"></script>
+    <script src="assets/bower_components/lodash/lodash.js"></script>
+
+
+    <!-- App Main and AngularJS Routes -->
+
+
+    <script src="app/optvDSConApp.module.js"></script>
+    <script src="/js/optvAPIPHP.js"></script>
+
+    <!-- Controllers -->
+
+    <script src="app/components/dsConController.js"></script>
+
+    <!--<link href="assets/css/style.css" rel="stylesheet">-->
+    <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
+
+
+    <!-- App Specific and Overridden CSS -->
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <title>Now Playing Control</title>
+</head>
+
+<body ng-controller="dsConController">
+
+<!-- Remote Control -->
+
+<div class="top-banner">
+    <span>Now Playing</span>
+</div>
+
+<div class="msg" style="margin-bottom: 40px;">
+    <div class="btn fl" ng-click="add()">ADD SHOW</div>
+    <div class="btn fr" ng-click="update()">UPDATE TV</div>
+</div>
+
+<div class="form-group">
+    <div class="msg" ng-repeat="show in shows track by $index">
+        <div class="delbtn" ng-click="del($index)">DELETE</div>
+        <input type="text" class="form-control" ng-model="shows[$index].time">
+        <input type="text" class="form-control" ng-model="shows[$index].desc">
+
+    </div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "appType": "partial",
+  "name": "Now Playing",
+  "reverseDomainName": "io.overplay.nowplaying",
+  "buildNumber": 1,
+  "signature": "",
+  "iconLabel": "Now Playing",
+  "iconImageLarge": "nowplaying16x9.png",
+  "publisher": "Overplay TV, Inc.",
+  "show": true
+}

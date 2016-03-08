@@ -1,0 +1,82 @@
+@font-face {
+    font-family: "Dosis";
+    src: url('../fonts/Dosis-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Dosis-Bold";
+    src: url('../fonts/Dosis-ExtraBold.ttf');
+}
+
+html {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Dosis', sans-serif;
+}
+
+.op0 {
+    opacity: 0;
+}
+
+
+.applet {
+    width: 200px;
+    position: relative;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 200px;
+    height: 400px;
+}
+
+.text-overlay > h1 {
+    color: white;
+    text-align: center;
+}
+
+.now-holder {
+
+    border: 2px solid #ffffff;
+    padding: 10px;
+    margin: 10px;
+}
+
+.now-channel {
+    color: #ffbc00;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.now-show {
+    margin: 10px 20px 1px 20px;
+    text-align: center;
+    color: white;
+}
+
+
+.show-time {
+    color: #fff500;
+    text-decoration: underline;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.show-desc {
+    color: #d8fcff;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.grow {
+    transform: scale(1.2, 1.2);
+    -webkit-transform: scale(1.2, 1.2);
+    opacity: 0.8;
+}

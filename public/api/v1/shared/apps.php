@@ -508,7 +508,7 @@ function installedApps()
             "publisher" => "overplay.io"
 
         ),
-        */
+
 
         "io.overplay.darts" => array(
             "name" => "501 Darts",
@@ -524,6 +524,7 @@ function installedApps()
             "publisher" => "overplay.io"
 
         ),
+*/
 
         "io.overplay.cricket" => array(
             "name" => "Cricket",
@@ -532,6 +533,21 @@ function installedApps()
             "buildNumber" => 1,
             "onLauncher" => true,
             "iconLauncher" => "darts16x9.png",
+            "size" => array(
+                "width" => 25,
+                "height" => 40
+            ),
+            "publisher" => "overplay.io"
+
+        ),
+
+        "io.overplay.nowplaying" => array(
+            "name" => "Now Playing",
+            "appType" => "widget",
+            "reverseDomainName" => "io.overplay.nowplaying",
+            "buildNumber" => 1,
+            "onLauncher" => true,
+            "iconLauncher" => "nowplaying16x9.png",
             "size" => array(
                 "width" => 25,
                 "height" => 40

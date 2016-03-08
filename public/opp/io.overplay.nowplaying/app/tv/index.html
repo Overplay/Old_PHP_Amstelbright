@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="nowPlayingApp">
+<head lang="en">
+  <meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>-->
+  <script src="assets/bower_components/angular/angular.js"></script>
+  <script src="assets/bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="assets/bower_components/lodash/lodash.js"></script>
+
+
+  <!-- App Main and AngularJS Routes -->
+  <script src="app/nowPlaying.module.js"></script>
+  <script src="/js/optvAPIPHP.js"></script>
+
+  <!-- Controllers -->
+  <script src="app/components/np/nowPlaying.controller.js"></script>
+
+
+  <!-- Directives -->
+
+  <!--<link href="assets/css/style.css" rel="stylesheet">-->
+  <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
+
+
+  <!-- App Specific and Overridden CSS -->
+  <!--<link href="assets/css/style.css" rel="stylesheet">-->
+  <link href="assets/css/styles.css" rel="stylesheet">
+
+
+  <title>OPTV Now Playing</title>
+</head>
+
+<body>
+
+<!-- semis skeuomorph look -->
+<div class="applet" ng-controller="nowPlayingController">
+  <img src="assets/img/screen2x4.png"/>
+  <div class="text-overlay">
+    <h1>On This TV</h1>
+    <div ng-if="tvinfo" class="now-holder">
+      <div  class="now-channel">{{ tvinfo.callsign }}</div>
+      <div  class="now-show">{{ tvinfo.episodeTitle }}</div>
+    </div>
+
+    <div ng-repeat="show in shows">
+      <div class="show-time">{{ show.time }}</div>
+      <div class="show-desc">{{ show.desc }}</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
