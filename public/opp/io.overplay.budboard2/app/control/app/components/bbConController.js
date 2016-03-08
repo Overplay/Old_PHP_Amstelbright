@@ -18,7 +18,7 @@ app.controller( "bbConController",
 
             $log.info( logLead + " got a model update: " + angular.toJson( data ) );
             console.log(data);
-            $scope.messageArray = data;
+            $scope.messageArray = data.messages;
             $scope.ui.json = angular.toJson($scope.messageArray);
             console.log(data);
         }

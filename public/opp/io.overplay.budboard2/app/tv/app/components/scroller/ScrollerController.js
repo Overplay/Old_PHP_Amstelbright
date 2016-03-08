@@ -141,7 +141,7 @@ app.controller( "scrollerController",
         function modelUpdate( data ) {
 
             $log.info( logLead() + " got a model update: " + angular.toJson( data ) );
-            localMessages = data;
+            localMessages = data.messages;
             interleave();
 
 
@@ -158,7 +158,7 @@ app.controller( "scrollerController",
                 endpoint:        "tv",
                 dataCallback:    modelUpdate,
                 messageCallback: inboundMessage,
-                initialValue:    $scope.messageArray
+                initialValue:    { messages: $scope.messageArray }
             } );
 
         }
