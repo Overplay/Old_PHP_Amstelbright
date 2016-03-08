@@ -9,8 +9,12 @@ app.controller( "nowPlayingController",
 
         var loglead = "nowPlayingController: ";
 
+        $scope.ui = { isHiding: false };
+
+        var _hideShowPromise;
+
         $scope.shows = [
-            
+
             {
                 time:    "4:00 PM",
                 desc:    "Horizon League BBall Final",
@@ -72,7 +76,27 @@ app.controller( "nowPlayingController",
 
         }
 
+        function runHideShow(){
+
+            $log.debug("Hide/show...");
+            if ($scope.ui.isHiding){
+                //Show for 10sec
+                $scope.ui.isHiding = false;
+                $timeout(runHideShow, 5000);
+
+            } else {
+                //Hide for 60sec
+                $scope.ui.isHiding = true;
+                $timeout( runHideShow, 60000 );
+
+            }
+
+
+        }
+
         updateFromRemote();
         $interval( getTVInfo, 5000 );
+        runHideShow();
+
 
     } );

@@ -37,7 +37,7 @@
 <body>
 
 <!-- semis skeuomorph look -->
-<div class="applet" ng-controller="nowPlayingController">
+<div class="applet" ng-controller="nowPlayingController" ng-class="{ 'hiding': ui.isHiding}">
   <img src="assets/img/screen2x4.png"/>
   <div class="text-overlay">
     <h1>On This TV</h1>
