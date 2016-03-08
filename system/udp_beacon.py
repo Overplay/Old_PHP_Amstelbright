@@ -3,19 +3,18 @@
 
 import socket
 import sys, time
-import json
+import microjson
 
 PORT = 9090
 
-
 def loadSettings():
     with open('../public/api/v1/data/system/sysinfo.json') as config_file:
-        config = json.load(config_file)
+        content = config_file.read()
+        config = microjson.from_json(content)
         msg_data = {}
         msg_data['name'] = config['name']
         msg_data['location'] = config['location']
-        return json.dumps(msg_data)
-
+        return microjson.to_json(msg_data)
 
 if (len(sys.argv) > 1):
     interval = int(sys.argv[1])
