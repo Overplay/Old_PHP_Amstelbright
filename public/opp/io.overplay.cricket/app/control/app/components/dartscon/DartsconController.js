@@ -80,8 +80,10 @@ app.controller("dartsconController",
         }
 
         $scope.finishTurn = function () {
-            console.log($scope.player1.board)
-            console.log($scope.player2.board)
+            console.log(optvModel);
+            if(!optvModel.model.turns){
+                optvModel.model.turns = [];
+            }
             addPlayerInfoToTurns(optvModel.model.turns, $scope.player1, $scope.player2);
             optvModel.save();
             $scope.player1 = new playerInfo();
