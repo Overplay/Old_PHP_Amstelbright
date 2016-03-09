@@ -9,7 +9,7 @@ app.controller( "nowPlayingController",
 
         var loglead = "nowPlayingController: ";
 
-        $scope.ui = { isHiding: true, hide: false };
+        $scope.ui = { isHiding: false, hide: false };
 
         var _hideShowPromise;
 
