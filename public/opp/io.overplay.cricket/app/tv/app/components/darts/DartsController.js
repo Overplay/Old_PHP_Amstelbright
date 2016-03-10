@@ -127,21 +127,24 @@ app.controller("dartsController",
                     if ($scope.rows[i].p1.numHits >= 3 && $scope.rows[i].p2.numHits >= 3) {
                         $scope.rows[i].closed = true;
                     }
-                    if (!$scope.rows[i].closed && redHits > 3) {
-                        $scope.rows[i].p1.score = scoreReference[i] * (redHits - 3);
-                        $scope.score.red += $scope.rows[i].p1.score;
+                    if (!$scope.rows[i].closed && $scope.rows[i].p1.numHits > 3) {
+                        $scope.rows[i].p1.score += scoreReference[i] * (redHits < 3 ? 0 : redHits - 3);
                     }
                     $scope.rows[i].p2.numHits += turn.player2.board[i].darts.length;
                     blueHits += turn.player2.board[i].darts.length;
                     if ($scope.rows[i].p1.numHits >= 3 && $scope.rows[i].p2.numHits >= 3) {
                         $scope.rows[i].closed = true;
                     }
-                    if (!$scope.rows[i].closed && blueHits > 3) {
-                        $scope.rows[i].p2.score = scoreReference[i] * (blueHits - 3);
-                        $scope.score.blue += $scope.rows[i].p2.score
+                    if (!$scope.rows[i].closed && $scope.rows[i].p2.numHits > 3) {
+                        $scope.rows[i].p2.score += scoreReference[i] * (blueHits < 3 ? 0 : blueHits - 3);
                     }
                 }
             });
+
+            $scope.rows.forEach(function(row){
+                $scope.score.red += row.p1.score;
+                $scope.score.blue += row.p2.score;
+            })
 
             $log.debug(logLead() + "Model update callback...")
 
@@ -194,7 +197,7 @@ app.controller("dartsController",
                                 p2: {numHits: 0, score: 0},
                                 closed: false
                             }
-                        ]
+                        ], turns: []
                     }
                 }
             )
