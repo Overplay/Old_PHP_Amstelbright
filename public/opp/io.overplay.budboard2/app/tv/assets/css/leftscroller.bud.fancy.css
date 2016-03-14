@@ -1,0 +1,88 @@
+html {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+}
+
+.left-scroller-holder {
+    font-family: COOL, sans-serif;
+    width: 100%;
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    height: 100px;
+    /*background-color: #9e152c;*/
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f64c85+0,bf030c+50,a20008+51,f7313a+100 */
+    background: #f64c85; /* Old browsers */
+    background: -moz-linear-gradient(top, #f64c85 0%, #bf030c 50%, #a20008 51%, #f7313a 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #f64c85 0%, #bf030c 50%, #a20008 51%, #f7313a 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #f64c85 0%, #bf030c 50%, #a20008 51%, #f7313a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f64c85', endColorstr='#f7313a', GradientType=0); /* IE6-9 */
+
+
+    border-bottom: 3px solid #560b16;
+    border-top: 3px solid #560b16;
+
+    /*border: 1px dashed indianred;*/
+
+}
+
+
+.text-holder {
+    /*border: 1px solid mediumpurple;*/
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+    margin-left: 50px;
+
+}
+
+.text-slider {
+    /*border: 1px dashed orange;*/
+    position: relative;
+    width: 10000px;
+}
+
+.msg {
+    /*border: 1px dashed dodgerblue;*/
+    font-size: 40px;
+    color: #ffffff;
+    margin-right: 40px;
+    margin-left: 40px;
+    height: 100px;
+    line-height: 100px;
+
+}
+
+.msg-img > img {
+    height: 60px;
+    margin-top: 20px;
+    /*border: 1px dashed beige;*/
+}
+
+.left-scroller-holder .logo-holder {
+    /*border: 1px solid lightslategray;*/
+    position: absolute;
+    top: 0;
+    left: 50px;
+    width: 200px;
+    background: url(../img/bubbles.gif);
+    background-size: 200px 100px;
+    background-repeat: no-repeat;
+    height: 100px;
+}
+
+.logo {
+
+    width: 150px;
+    position: absolute;
+    top: 15px;
+    left: 20px;
+}
+
+.fl {
+    float: left;
+}
