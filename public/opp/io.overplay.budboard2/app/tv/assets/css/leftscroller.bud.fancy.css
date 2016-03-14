@@ -11,9 +11,14 @@ body {
     src: url('../fonts/Sketch Book.ttf');
 }
 
+@font-face {
+    font-family: "Flux";
+    src: url('../fonts/Flux_Architect_Bold.ttf');
+}
+
 
 .left-scroller-holder {
-    font-family: Sketch-Book, sans-serif;
+    font-family: Flux, sans-serif;
     width: 100%;
     position: relative;
     margin-left: 0;
