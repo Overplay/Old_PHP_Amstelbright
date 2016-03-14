@@ -6,8 +6,14 @@ body {
     margin: 0;
 }
 
+@font-face {
+    font-family: "Sketch-Book";
+    src: url('../fonts/Sketch Book.ttf');
+}
+
+
 .left-scroller-holder {
-    font-family: COOL, sans-serif;
+    font-family: Sketch-Book, sans-serif;
     width: 100%;
     position: relative;
     margin-left: 0;
@@ -15,7 +21,7 @@ body {
     height: 100px;
     /*background-color: #9e152c;*/
     background: url(../img/redgrad1920.png);
-    background-size: contain;
+    background-size: cover;
 
     border-bottom: 3px solid #560b16;
     border-top: 3px solid #560b16;
