@@ -19,28 +19,39 @@ body {
 }
 
 .applet {
-    width: 200px;
+    width: 1920px;
+    height: 1080px;
     text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+    position: relative;
 
+}
+
+.app-holder {
+    position: absolute;
+    top: 400px;
+    left: 700px;
 }
 
 .name-box {
     font-family: Dosis-Bold, sans-serif;
-    width: 190px;
+    width: 400px;
     padding: 10px;
     color: white;
     margin-bottom: 5px;
     text-align: center;
+    font-size: 50px;
 }
 
 .name {
     color: greenyellow;
-    font-size: 1.2rem;
+    font-size: 60px;
 
 }
 
 .lep-holder > img {
-    width: 190px;
+    width: 300px;
+    display: block;
+    margin: auto;
 }
 
 .grow {

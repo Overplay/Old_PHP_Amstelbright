@@ -448,7 +448,7 @@ function installedApps()
 
         "io.overplay.luckylep" => array(
             "name" => "Lucky Leprechaun",
-            "appType" => "widget",
+            "appType" => "fullscreen",
             "reverseDomainName" => "io.overplay.luckylep",
             "buildNumber" => 1,
             "onLauncher" => true,
