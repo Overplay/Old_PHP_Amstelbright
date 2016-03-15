@@ -85,6 +85,15 @@ body {
     padding-right: 45px;
 }
 
+.left-logo-holder {
+
+    position: absolute;
+    top: 0;
+    left: 20px;
+    padding: 5px;
+    padding-right: 45px;
+}
+
 .logo {
     height: 70px;
     /*border: 2px solid #fb7dff;*/
