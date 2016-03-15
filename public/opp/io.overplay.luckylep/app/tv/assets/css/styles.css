@@ -1,0 +1,50 @@
+
+
+@font-face {
+    font-family: "Dosis-Bold";
+    src: url('../fonts/Dosis-ExtraBold.ttf');
+}
+
+html {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Dosis', sans-serif;
+}
+
+.op0 {
+    opacity: 0;
+}
+
+.applet {
+    width: 200px;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+
+}
+
+.name-box {
+    font-family: Dosis-Bold, sans-serif;
+    width: 190px;
+    padding: 10px;
+    color: white;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.name {
+    color: greenyellow;
+    font-size: 1.2rem;
+
+}
+
+.lep-holder > img {
+    width: 190px;
+}
+
+.grow {
+    transform: scale(1.2, 1.2);
+    -webkit-transform: scale(1.2, 1.2);
+    opacity: 0.8;
+}
