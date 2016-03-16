@@ -7,6 +7,8 @@ app.controller( "scrollerController",
 
         $log.info( "Loading scrollerController (BudBoard2)" );
 
+        var bottoms = [ 229, 231, 620, 233, 249 ]
+
         var TWITTER = true;
         var _twitterAuthorized = false;
         var _tweetSearchTerm = "ESPN";
@@ -76,6 +78,10 @@ app.controller( "scrollerController",
 
         function logLead() { return "scrollerController: "; }
 
+        function slotForChannel(channel){
+
+        }
+
         function getTVInfo() {
 
             $http.get( "http://10.1.10.38:8080/tv/getTuned" )
@@ -86,12 +92,13 @@ app.controller( "scrollerController",
                         if ( !$scope.tvinfo || ($scope.tvinfo.callsign != data.data.callsign) ) {
                             $scope.tvinfo = data.data;
 
-                            if ( $scope.tvinfo.callsign.indexOf( 'beI' ) > -1 ) {
-                                optvModel.moveAppToSlot( 0 );
+                            if ( bottoms.indexOf( $scope.tvinfo.major ) > -1 ) {
+                                optvModel.moveAppToSlot( 0 ); // Bottom
                             } else {
-                                optvModel.moveAppToSlot( 1 );
-                                _tweetSearchTerm = $scope.tvinfo.title;
+                                optvModel.moveAppToSlot( 1 ); // TOP
                             }
+
+                            _tweetSearchTerm = $scope.tvinfo.title;
 
                             $scope.messageArray = [ "Looks like you switched to " + $scope.tvinfo.callsign, "Hold on while I grab some tweetage!" ];
                             $scope.updated = new Date().getTime();
