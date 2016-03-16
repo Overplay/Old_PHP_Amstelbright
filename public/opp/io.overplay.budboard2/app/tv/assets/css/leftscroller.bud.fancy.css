@@ -16,9 +16,14 @@ body {
     src: url('../fonts/Flux_Architect_Bold.ttf');
 }
 
+@font-face {
+    font-family: "Roboto";
+    src: url('../fonts/Roboto-Regular.ttf');
+}
+
 
 .left-scroller-holder {
-    font-family: Flux, sans-serif;
+    font-family: Roboto, sans-serif;
     width: 100%;
     position: relative;
     margin-left: 0;

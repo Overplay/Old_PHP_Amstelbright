@@ -86,11 +86,10 @@ app.controller( "scrollerController",
                         if ( !$scope.tvinfo || ($scope.tvinfo.callsign != data.data.callsign) ) {
                             $scope.tvinfo = data.data;
 
-                            if ( $scope.tvinfo.callsign.indexOf( 'ES' ) > -1 ) {
-                                optvModel.moveAppToSlot( 1 );
-                                _tweetSearchTerm = "ESPN";
-                            } else {
+                            if ( $scope.tvinfo.callsign.indexOf( 'beI' ) > -1 ) {
                                 optvModel.moveAppToSlot( 0 );
+                            } else {
+                                optvModel.moveAppToSlot( 1 );
                                 _tweetSearchTerm = $scope.tvinfo.title;
                             }
 
