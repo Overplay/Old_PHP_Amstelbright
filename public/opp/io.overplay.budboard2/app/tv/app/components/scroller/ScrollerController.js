@@ -89,7 +89,7 @@ app.controller( "scrollerController",
 
                         $log.debug( "Got some info from DTV!" );
 
-                        if ( !$scope.tvinfo || ($scope.tvinfo.callsign != data.data.callsign) ) {
+                        if ( !$scope.tvinfo || ($scope.tvinfo.major != data.data.major) ) {
                             $scope.tvinfo = data.data;
 
                             if ( bottoms.indexOf( $scope.tvinfo.major ) > -1 ) {
