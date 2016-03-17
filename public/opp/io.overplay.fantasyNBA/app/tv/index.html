@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="optvFantasyNBAApp">
+<meta charset="UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="assets/bower_components/angular/angular.js"></script>
+<script src="assets/bower_components/angular-route/angular-route.js"></script>
+<script src="assets/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="assets/bower_components/lodash/lodash.js"></script>
+
+
+<!-- App Main and AngularJS Routes -->
+
+
+<script src="app/components/optvFantasyNBAApp.module.js"></script>
+<script src="/js/optvAPIPHP.js"></script>
+
+<!-- Controllers -->
+
+<script src="app/components/fantasyNBA/fantasyNBAController.js"></script>
+
+<!--<link href="assets/css/style.css" rel="stylesheet">-->
+<link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
+
+
+<!-- App Specific and Overridden CSS -->
+<link href="assets/styles/styles.css" rel="stylesheet">
+<link href="assets/styles/animate.css" rel="stylesheet">
+
+<title>OPTV Fantasy NBA</title>
+</head>
+
+<body ng-controller="fantasyNBAController">
+
+<!--Darts Remote Control -->
+<div>
+    <div style="z-index: 5; width: 300px; height: 180px; border-radius: 10px; background-image: url('assets/widget-background.jpg'); color: silver">
+        <h2 style="text-align: center">Fantasy NBA</h2>
+        <h3 style="padding: 0 10px; clear: both;">
+            <p style="float: left; margin: 7px 0">Points this week:</p>
+            <p style="float: right; margin: 7px 0">{{points}}</p>
+        </h3>
+        <h3 style="padding: 0 10px; clear: both;">
+            <p style="float: left; margin: 7px 0">Top scorer:</p>
+            <p style="float: right; margin: 7px 0">{{topScorer}}</p>
+        </h3>
+        <h3 style="padding: 0 10px; clear: both;">
+            <p style="float: left; margin: 7px 0">LVP:</p>
+            <p style="float: right; margin: 7px 0">{{lowestScorer}}</p>
+        </h3>
+    </div>
+    <div style="width: 300px; height: 100px;background-color: gray; z-index: -2; position: relative" ng-show="update.animate || update.animateDone" class="animated"
+         ng-class="{'fadeInDown': update.animate && !update.animateDone, 'fadeOutUp': update.animateDone}">
+        <img src="{{update.image}}" style="float: left">
+        <p style="display: inline">{{update.message}}</p>
+    </div>
+
+</div>
+
+</body>
+</html>
+

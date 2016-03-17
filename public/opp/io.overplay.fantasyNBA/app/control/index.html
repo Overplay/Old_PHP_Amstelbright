@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="optvFantasyConApp">
+<meta charset="UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>-->
+
+<script src="assets/bower_components/angular/angular.js"></script>
+<script src="assets/bower_components/angular-route/angular-route.js"></script>
+<script src="assets/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="assets/bower_components/lodash/lodash.js"></script>
+
+
+<!-- App Main and AngularJS Routes -->
+
+
+<script src="app/optvFantasyNBAConApp.module.js"></script>
+<script src="/js/optvAPIPHP.js"></script>
+
+<!-- Controllers -->
+
+<script src="app/components/fantasycon/FantasyConController.js"></script>
+
+
+
+<!--<link href="assets/css/style.css" rel="stylesheet">-->
+<link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
+
+
+<!-- App Specific and Overridden CSS -->
+<link href="assets/css/styles.css" rel="stylesheet">
+<!--link href="assets/css/font-awesome.min.css" rel="stylesheet"-->
+<!--<link href="assets/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">-->
+
+
+<title>OPTV Fantasy Control</title>
+</head>
+
+<body ng-controller="optvFantasyConApp">
+
+<!--Darts Remote Control -->
+
+
+<h1>Fantasy NBA</h1>
+
+<h2>My Team</h2>
+<div style="height: 60vh; overflow-y: scroll">
+    <div ng-repeat="player in team" style="border: 3px solid cornflowerblue; border-radius: 8px; clear: left; overflow: auto">
+        <p style="margin-bottom: 0; margin-top: 4px; text-decoration: underline">{{player.FirstName}} {{player.LastName}}</p>
+
+        <div style="float: left">
+            <img src="{{player.PhotoUrl}}">
+        </div>
+        <p style="display: inline">Fantasy Points this season: {{player.points}}</p>
+        <dummy ng-if="player.thisWeek">
+            <p style="margin: 3px;">Fantasy Points this week: {{player.thisWeek.fantasy}}</p>
+            <p style="margin: 3px;">Points this week: {{player.thisWeek.points}}</p>
+            <p style="margin: 3px;">Assists this week: {{player.thisWeek.assists}}</p>
+
+        </dummy>
+        <!--div style="float: right; font-size: 100px">{{player.Jersey}}</div-->
+    </div>
+</div>
+<div style="width: 90vw; margin-left: 3vw; margin-right: 3vw">
+    <input type="text" placeholder="first name" ng-model="newPlayer.firstName" style="padding-top: 10px; padding-bottom: 10px; border-color: lightgray; border-radius: 5px; width: 100%;">
+    <input type="text" placeholder="last name" ng-model="newPlayer.lastName" style="padding-top: 10px; padding-bottom: 10px; border-color: lightgray; border-radius: 5px; width: 100%;">
+    <button ng-click="addNewPlayerToTeam()" style="width: 100%; padding: 10px; margin: 0 auto;">Add Player</button>
+    <button ng-click="simulateUpdate()" style="width: 100%; padding: 10px; margin: 0 auto;">Simulate Update</button>
+</div>
+
+</body>
+</html>

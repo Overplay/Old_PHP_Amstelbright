@@ -1,0 +1,6 @@
+@font-face {
+    font-family: "Kimberley";
+    src: url("../octin%20stencil%20rg.ttf")
+    format("truetype");
+}
+body { font-family: "Kimberley", sans-serif }
