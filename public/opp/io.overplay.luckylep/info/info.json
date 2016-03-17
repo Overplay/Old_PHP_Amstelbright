@@ -1,0 +1,11 @@
+{
+  "appType": "partial",
+  "name": "Lucky Leprechaun",
+  "reverseDomainName": "io.overplay.luckylep",
+  "buildNumber": 1,
+  "signature": "",
+  "iconLabel": "Lucky Leprechaun",
+  "iconImageLarge": "irish16x9.png",
+  "publisher": "Overplay TV, Inc.",
+  "show": true
+}

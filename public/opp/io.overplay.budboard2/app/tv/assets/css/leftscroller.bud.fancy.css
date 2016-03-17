@@ -6,14 +6,33 @@ body {
     margin: 0;
 }
 
+@font-face {
+    font-family: "Sketch-Book";
+    src: url('../fonts/Sketch Book.ttf');
+}
+
+@font-face {
+    font-family: "Flux";
+    src: url('../fonts/Flux_Architect_Bold.ttf');
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url('../fonts/Roboto-Regular.ttf');
+}
+
+
 .left-scroller-holder {
-    font-family: COOL, sans-serif;
+    font-family: Roboto, sans-serif;
     width: 100%;
     position: relative;
     margin-left: 0;
     margin-right: 0;
     height: 100px;
-    background-color: #B8152D;
+    /*background-color: #9e152c;*/
+    background: url(../img/redgrad1920.png);
+    background-size: cover;
+
     border-bottom: 3px solid #560b16;
     border-top: 3px solid #560b16;
 
@@ -40,7 +59,7 @@ body {
 .msg {
     /*border: 1px dashed dodgerblue;*/
     font-size: 40px;
-    color: white;
+    color: #ffffff;
     margin-right: 40px;
     margin-left: 40px;
     height: 100px;

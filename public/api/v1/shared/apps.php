@@ -446,13 +446,13 @@ function installedApps()
 
         ),
 
-        "io.overplay.dailyspecials" => array(
-            "name" => "Daily Specials",
-            "appType" => "crawler",
-            "reverseDomainName" => "io.overplay.dailyspecials",
+        "io.overplay.luckylep" => array(
+            "name" => "Lucky Leprechaun",
+            "appType" => "fullscreen",
+            "reverseDomainName" => "io.overplay.luckylep",
             "buildNumber" => 1,
             "onLauncher" => true,
-            "iconLauncher" => "special16x9s.png",
+            "iconLauncher" => "irish16x9.png",
             "size" => array(
                 "width" => 100,
                 "height" => 10

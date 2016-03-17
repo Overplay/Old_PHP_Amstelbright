@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="optvBudBoardApp">
+<html ng-app="luckyLepApp">
 <head lang="en">
   <meta charset="UTF-8">
 
@@ -9,31 +9,37 @@
   <!--<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>-->
   <script src="assets/bower_components/angular/angular.min.js"></script>
   <script src="assets/bower_components/lodash/lodash.min.js"></script>
-  <script src="app/shared/ngTweetScrape/Base64.js"></script>
-  <script src="assets/bower_components/codebird-js/codebird.js"></script>
-  <script src="app/shared/ngTweetScrape/ngTweetScrape.js"></script>
+
 
   <!-- App Main and AngularJS Routes -->
-  <script src="app/optvBudBoardApp.module.js"></script>
+  <script src="app/optvLuckyLepApp.module.js"></script>
   <script src="/js/optvAPIPHP.js"></script>
 
   <!-- Controllers -->
-  <script src="app/components/scroller/ScrollerController.js"></script>
-
+  <script src="app/components/luckylep/LuckyLepController.js"></script>
 
   <!-- App Specific and Overridden CSS -->
   <!--<link href="assets/css/style.css" rel="stylesheet">-->
-  <link href="assets/css/leftscroller.bud.fancy.css" rel="stylesheet">
+  <link href="assets/css/styles.css" rel="stylesheet">
 
 
-  <title>Budweiser Sponsored Crawler</title>
+  <title>OPTV LuckyLep</title>
 </head>
 
-<body ng-controller="scrollerController">
+<body>
 
-<!--<css-scroller message-array="messageArray"></css-scroller>-->
-<left-scroller message-array="messageArray"></left-scroller>
+<!-- semis skeuomorph look -->
+<div class="applet" ng-controller="luckyLepController" ng-class="{ 'show' : lep.show }">
+<div class="app-holder">
+  <div class="name-box" >
+    <p>Hey <span class="name">{{lep.winner}}</span> who's gonna drink?</p>
+  </div>
+  <div class="lep-holder"><img src="assets/img/lep.gif"/></div>
 
+</div>
+
+
+</div>
 
 </body>
 </html>
