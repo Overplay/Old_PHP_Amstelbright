@@ -50,6 +50,7 @@ body {
 .name {
     color: greenyellow;
     font-size: 60px;
+    text-transform: uppercase;
 
 }
 

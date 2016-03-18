@@ -26,7 +26,7 @@ app.controller( "luckyLepController",
             if ($scope.guests.length){
 
                 var rn = Math.floor( Math.random() * ($scope.guests.length) );
-                $scope.lep.winner = $scope.guests[rn].firstName;
+                $scope.lep.winner = $scope.guests[rn].firstName+" "+ $scope.guests[ rn ].lastName;
                 $scope.lep.show = true;
                 getGuests();
                 $timeout(function(){
@@ -42,6 +42,7 @@ app.controller( "luckyLepController",
         }
 
         function inboundMessage( msg ) {
+            pickVictim()
         }
 
         function updateFromRemote() {
