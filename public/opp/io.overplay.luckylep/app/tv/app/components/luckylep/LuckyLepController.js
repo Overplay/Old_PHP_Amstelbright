@@ -59,7 +59,7 @@ app.controller( "luckyLepController",
 
         updateFromRemote();
 
-        $interval(pickVictim, 3*60*1000)
+        $interval(pickVictim, 1.5*60*1000)
         getGuests()
 
     } );
