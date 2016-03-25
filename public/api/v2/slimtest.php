@@ -7,13 +7,25 @@
  */
 
 
-/** Simple test to see if this ancient version of Slim will run on NeTV hardware */
+/** Simple test to see if this ancient version of Slim will run on NeTV hardware.
+ *
+ *   http://<blah blah>/api/v2/slimptest.php/hello/Dude
+ *   Should respond in browser "Hello, Dude"
+ *
+ */
 
- require_once ('slim/Slim/Slim.php');
+require_once('slim/Slim/Slim.php');
 
- $app = new Slim();
+$app = new Slim();
 
- $app->get('/hello/:name', function ($name) {
-   echo "Hello, " . $name;
- });
- $app->run();
+/* PHP 5.2 does NOT support anon function which totally sucks, but whatever */
+
+function sayit($name)
+{
+    echo "Hello, " . $name;
+}
+
+/* Note the WONKY ASS way PHP5.2 passes functions... */
+
+$app->get('/hello/:name', 'sayit');
+$app->run();
